@@ -2,6 +2,15 @@
 
 Context for future Claude sessions working on this repo. Read once, then trust the code for specifics.
 
+## Session start — remind the user
+
+**At the start of every new Claude session in this project**, remind the user to check both search engine webmaster dashboards for new data, warnings, or indexing issues:
+
+- **Google Search Console** — https://search.google.com/search-console
+- **Bing Webmaster Tools** — https://www.bing.com/webmasters
+
+Both have jassquery.com verified and the sitemap submitted. A quick weekly check surfaces impressions/click trends, structured data warnings, and crawl errors before they become problems. Mention this once at the start of a session, not repeatedly.
+
 ## What this is
 
 Marketing site for **JASS Query**, the umbrella brand for two Amazon-reseller tools:
@@ -18,13 +27,20 @@ repo-root/
 ├── .gitignore
 ├── wrangler.toml          ← Cloudflare Workers config, points at site/
 ├── docs/                  ← internal brand sheets, color masters — NOT deployed
+│   └── og-templates/      ← SVG + Affinity (.af) source for OG social images
 └── site/                  ← everything that ships to production
     ├── index.html         ← master JASS Query landing page
     ├── queryvault.html    ← product detail page
     ├── queryforge.html    ← product detail page (waitlist-only for now)
     ├── privacy-policy.html ← unified policy with three-logo trio header
+    ├── 404.html           ← branded 404 (served by Cloudflare on unmatched routes)
+    ├── robots.txt         ← allow all, disallow /404.html, points at sitemap
+    ├── sitemap.xml        ← lists the 4 public pages (update lastmod on content passes)
+    ├── .well-known/
+    │   └── security.txt   ← RFC 9116, contact help@jassquery.com
     └── assets/
         ├── img/           ← all logos, PNGs, SVGs
+        │   └── og/        ← Open Graph social share images (1200×630 PNG, one per product)
         ├── css/           ← empty (all styles are inline in the HTML files)
         └── js/            ← empty (all scripts are inline in the HTML files)
 ```
@@ -38,7 +54,7 @@ repo-root/
 **Push to `main` on GitHub → Cloudflare Workers Builds auto-deploys in ~2 minutes.**
 
 - Hosted on Cloudflare as a **Worker with static assets** (NOT a classic Pages project). The project is named `jassqueryhome` in Cloudflare. This matters because the deploy path is `npx wrangler deploy` reading `wrangler.toml`, not the classic Pages build flow.
-- `wrangler.toml` at the repo root contains `name = "jassqueryhome"` and `[assets] directory = "./site"`. Don't change the name unless you're intentionally migrating to a new Worker.
+- `wrangler.toml` at the repo root contains `name = "jassqueryhome"` and `[assets] directory = "./site"`. It also sets `not_found_handling = "404-page"` so Cloudflare serves `site/404.html` for any unmatched route. Don't change the name unless you're intentionally migrating to a new Worker.
 - Custom domains: **both `jassquery.com` and `www.jassquery.com`** are bound to the Worker. If either stops resolving, check Cloudflare → Worker Settings → Domains & Routes first.
 - No build command runs — it's pure static HTML. `wrangler deploy` just uploads the assets in `./site`.
 
@@ -111,11 +127,44 @@ The guiding principle: **motion as reward, not obstacle.** Every effect should m
 - **Origin story matters.** Built by an 8-year Amazon/Keepa veteran, shaped by the seller community. Keep this credibility thread visible on the landing page.
 - **Help email:** `help@jassquery.com` — used in the privacy policy contact section. Do not reference `jassent.com` anywhere in the public site (deliberately removed during the April 2026 pass).
 
+## SEO and social sharing
+
+All four live pages (`index.html`, `queryvault.html`, `queryforge.html`, `privacy-policy.html`) ship with a complete SEO/social baseline. When adding new pages or editing heads, preserve this pattern:
+
+- **Canonical URL** — absolute `https://jassquery.com/...` per page
+- **Open Graph tags** — `og:type`, `og:site_name`, `og:locale`, `og:url`, `og:title`, `og:description`, `og:image` (absolute URL), `og:image:width=1200`, `og:image:height=630`, `og:image:alt`
+- **Twitter Card tags** — `twitter:card=summary_large_image`, plus `twitter:title`, `twitter:description`, `twitter:image`
+- **JSON-LD structured data** — `Organization` on index, `SoftwareApplication` on both product pages (BrowserApplication for QueryVault, BusinessApplication with `availability: PreOrder` for QueryForge). Privacy policy has no JSON-LD.
+- **Discovery files** — `robots.txt`, `sitemap.xml`, and `.well-known/security.txt` all live in `site/` and ship to prod. The 404 page is deliberately excluded from the sitemap and disallowed in robots.
+
+**Both Google Search Console and Bing Webmaster Tools are verified and receiving the sitemap.** If you change URLs, titles, or structured data, expect GSC to surface warnings within a few days — check it after significant content passes.
+
+### OG image workflow
+
+The three product OG images (`site/assets/img/og/og-jassquery.png`, `og-queryvault.png`, `og-queryforge.png`) were composited in Affinity Designer from SVG templates at `docs/og-templates/`. To update an image:
+
+1. Open the relevant `.af` file (or `.svg` template) in Affinity
+2. Edit the logo, headline, or accent — keep the 1200×630 canvas and the existing layout
+3. Export as PNG-24 to `site/assets/img/og/` with the same filename
+4. If the image URL changed, re-run the page through Facebook's OG debugger and LinkedIn's Post Inspector to force cache refresh (LinkedIn caches for ~7 days)
+
+### Keyword strategy
+
+The site targets **Amazon online arbitrage and wholesale sellers using Keepa's Product Finder** — a narrow, high-intent niche. The strategy is explicit:
+
+- **Gold (target aggressively):** `Keepa Product Finder`, `save Keepa queries`, `automate Keepa`, `online arbitrage tools`, `wholesale sourcing Amazon`. These appear in titles, H1s, meta descriptions, and body copy across the site.
+- **Silver (weave naturally):** `Chrome extension for Amazon sellers`, `Amazon FBA sourcing`, `Amazon reseller tools`. Present in body copy and structured data but not in titles.
+- **Bronze (appear, don't chase):** Broad terms like `Amazon FBA sourcing software`, `product research tool Amazon`. Let them appear in body copy if natural; don't optimize titles or H1s around them — too competitive, wrong intent match for new visitors.
+- **Do NOT target `Keepa alternative`** — the products *require* Keepa, not replace it. Ranking for this term would mismatch searcher intent, confuse real users, and risk the relationship with Keepa. Use `Keepa add-on`, `Keepa companion`, or `Keepa Product Finder tools` instead.
+
+When editing body copy, the "don't take ourselves too seriously" voice comes first. Keyword density is secondary. If a keyword insertion would make a sentence sound like marketing boilerplate, skip it.
+
 ## Known quirks and gotchas
 
 - **CRLF warnings on git add** are expected and harmless. Windows LF→CRLF conversion.
 - **Empty `main = ""` in wrangler.toml breaks wrangler 4.x** — it interprets the empty string as `"."` and fails with "points to a directory." For assets-only Workers, **omit the `main` field entirely.** The current `wrangler.toml` is correct — don't add it back.
-- **QueryForge H1 mobile clipping** — fixed by changing `clamp()` minimum from 2.8rem to 2.1rem and adding mobile-specific overrides. If you touch the queryforge hero h1, verify on a 360px viewport.
+- **QueryForge H1 is narrow on both ends** — the text column is ~616px wide on desktop (1100px container − 420px card − 4rem gap) and the h1 has explicit `<br>` breaks, so the clamp max is capped at `3.4rem` to keep "Running themselves." and "Your Keepa queries." on single lines. The `word-wrap:break-word; overflow-wrap:break-word; hyphens:auto` properties only live inside `@media(max-width:600px)` — NEVER add them to the base `.hero h1` rule, or desktop will break mid-word with hyphens. **If you touch the queryforge hero h1, verify on BOTH a 360px mobile viewport AND a 1200px+ desktop viewport** — this has regressed twice.
+- **`.well-known/security.txt` Expires field must be kept in the future.** Currently set to `2027-04-14T00:00:00.000Z`. When it gets within ~2 months of expiring, bump the date forward one year. Expired security.txt files are treated as invalid by some scanners.
 - **Local DNS caching** — when changing DNS or adding hostnames, browsers and routers can hold stale NXDOMAIN for 15+ minutes. Cellular data on a phone is the fastest way to bypass it for testing.
 - **PrivacyPolicy filename** — normalized to `privacy-policy.html` (kebab-case). Earlier versions used `PrivacyPolicy.html` or `privacypolicy.html`. All references should be the kebab-case form.
 
@@ -131,5 +180,7 @@ When QueryForge becomes an actual running service (not just a waitlist), this si
 3. **Index page CTAs** — mirror the above on index.html's product card and final CTA section
 4. **Nav CTA** — `nav-cta btn-disabled "Coming Soon"` should become a live link (currently hidden on mobile)
 5. **Coming-soon banner at top of queryforge.html** — remove the announcement bar
+6. **QueryForge JSON-LD schema** — change `availability` from `https://schema.org/PreOrder` to `https://schema.org/InStock`, add real `offers.price`, and update `og:description` / `twitter:description` / meta description to remove "Waitlist open" language
+7. **Sitemap `lastmod`** — bump `sitemap.xml` dates on any page touched during the launch pass
 
 None of these are urgent until launch is imminent.
