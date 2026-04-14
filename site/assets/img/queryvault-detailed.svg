@@ -1,0 +1,38 @@
+<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <defs>
+   <linearGradient id="c1a" x1="0" y1="0.2" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#9fd4c4"></stop>
+      <stop offset="100%" stop-color="#4a9e87"></stop>
+   </linearGradient>
+   <linearGradient id="c1b" x1="1" y1="0.2" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#6db8a2" stop-opacity="0.8"></stop>
+      <stop offset="100%" stop-color="#4a9e87" stop-opacity="0.4"></stop>
+   </linearGradient>
+   <radialGradient id="c1glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#9fd4c4" stop-opacity="0.7"></stop>
+      <stop offset="60%" stop-color="#6db8a2" stop-opacity="0.2"></stop>
+      <stop offset="100%" stop-color="#4a9e87" stop-opacity="0"></stop>
+   </radialGradient>
+   <linearGradient id="c1flare" x1="0.2" y1="0" x2="0.8" y2="0.5">
+      <stop offset="0%" stop-color="#eceae6" stop-opacity="0.4"></stop>
+      <stop offset="100%" stop-color="#9fd4c4" stop-opacity="0"></stop>
+   </linearGradient>
+   </defs>
+   <!-- Left petal / shell — cupped form wrapping left-to-centre -->
+   <path d="M180 100 C100 140, 60 220, 80 320 C100 400, 180 440, 256 420 C200 400, 160 340, 160 260 C160 180, 200 130, 180 100Z" fill="url(#c1a)"></path>
+   <!-- Right petal / shell — mirrored, overlapping -->
+   <path d="M332 100 C412 140, 452 220, 432 320 C412 400, 332 440, 256 420 C312 400, 352 340, 352 260 C352 180, 312 130, 332 100Z" fill="url(#c1b)"></path>
+   <!-- Central glow — the precious content inside -->
+   <ellipse cx="256" cy="270" rx="72" ry="90" fill="url(#c1glow)"></ellipse>
+   <!-- Inner gem / seed — bright concentrated core -->
+   <ellipse cx="256" cy="260" rx="32" ry="40" fill="#9fd4c4" opacity="0.6"></ellipse>
+   <ellipse cx="256" cy="248" rx="18" ry="22" fill="#eceae6" opacity="0.35"></ellipse>
+   <!-- Specular on left petal -->
+   <ellipse cx="155" cy="210" rx="30" ry="50" fill="url(#c1flare)" transform="rotate(15 155 210)"></ellipse>
+   <!-- Top convergence point — petals meet -->
+   <ellipse cx="256" cy="108" rx="28" ry="10" fill="#6db8a2" opacity="0.3"></ellipse>
+   <!-- Tiny sparkle dots around core -->
+   <circle cx="220" cy="230" r="5" fill="#eceae6" opacity="0.25"></circle>
+   <circle cx="296" cy="240" r="4" fill="#eceae6" opacity="0.2"></circle>
+   <circle cx="256" cy="200" r="3" fill="#eceae6" opacity="0.3"></circle>
+</svg>

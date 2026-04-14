@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QueryForge — Automate Your Keepa Product Finder Queries</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#2a2a2a;
+  --mauve:#8e6e8a;
+  --mauve-lt:#c4aac0;
+  --mauve-xs:#f3eef2;
+  --steel:#5b8fa8;
+  --steel-lt:#ddeaf1;
+  --teal:#4a9e87;
+  --teal-lt:#e1f5ee;
+  --teal-dk:#085041;
+  --warm:#eceae6;
+  --stone:#d4d1cc;
+  --border:rgba(42,42,42,0.1);
+  --muted:rgba(42,42,42,0.5);
+  --white:#fff;
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;font-weight:400;background:var(--stone);color:var(--ink);overflow-x:hidden}
+
+/* ── BLOOM SVG SYMBOL ── */
+.bloom-defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(42,42,42,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0 3rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-left{display:flex;align-items:center;gap:1.25rem}
+.nav-back{display:inline-flex;align-items:center;gap:7px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(164,204,217,0.7);text-decoration:none;padding:7px 12px 7px 10px;border-radius:8px;border:1px solid rgba(91,143,168,0.3);background:rgba(91,143,168,0.08);transition:all 0.2s}
+.nav-back:hover{color:#a4ccd9;background:rgba(91,143,168,0.18);border-color:rgba(91,143,168,0.55);transform:translateX(-2px)}
+.nav-back svg{width:12px;height:12px;transition:transform 0.2s}
+.nav-back:hover svg{transform:translateX(-2px)}
+.nav-back-sep{width:1px;height:22px;background:rgba(255,255,255,0.1)}
+@media(max-width:600px){.nav-back span.full{display:none}.nav-back{padding:7px 10px}}
+.nav-brand{display:flex;align-items:center;gap:9px;text-decoration:none}
+.wm{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:0.02em;line-height:1}
+.wm .q{color:var(--warm)}
+.wm .f{color:var(--mauve)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-link{font-size:0.83rem;font-weight:400;color:rgba(236,234,230,0.5);text-decoration:none;transition:color 0.2s}
+.nav-link:hover{color:var(--warm)}
+.nav-cta{font-family:'Syne',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 18px;border-radius:8px;background:var(--mauve);color:var(--warm);text-decoration:none;transition:background 0.2s,transform 0.15s}
+.nav-cta:hover{background:#7a5e76;transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 5rem;position:relative;overflow:hidden}
+.hero-glow{position:absolute;border-radius:50%;pointer-events:none}
+.hero-glow-1{width:600px;height:600px;top:-150px;right:-100px;background:radial-gradient(circle,rgba(142,110,138,0.22) 0%,transparent 65%)}
+.hero-glow-2{width:400px;height:400px;bottom:-100px;left:10%;background:radial-gradient(circle,rgba(74,158,135,0.14) 0%,transparent 65%)}
+.hero-glow-3{width:300px;height:300px;top:30%;left:-80px;background:radial-gradient(circle,rgba(91,143,168,0.1) 0%,transparent 65%)}
+
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;position:relative;z-index:1}
+
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--mauve);margin-bottom:1.25rem}
+.hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--mauve);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.8rem,5vw,4.4rem);color:var(--warm);line-height:1.05;margin-bottom:1.25rem;letter-spacing:-0.01em}
+.hero h1 em{font-style:normal;color:var(--mauve-lt)}
+.hero h1 .underline{position:relative;display:inline-block}
+.hero h1 .underline::after{content:'';position:absolute;left:0;bottom:-4px;right:0;height:3px;background:var(--teal);border-radius:2px}
+
+.hero-sub{font-size:1.1rem;font-weight:300;color:rgba(236,234,230,0.55);line-height:1.75;margin-bottom:2.25rem;max-width:520px}
+
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn-primary{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;padding:14px 28px;border-radius:10px;background:var(--mauve);color:var(--warm);text-decoration:none;transition:all 0.2s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:#7a5e76;transform:translateY(-2px)}
+.btn-primary svg{width:16px;height:16px;transition:transform 0.2s}
+.btn-primary:hover svg{transform:translateX(3px)}
+.btn-ghost{font-size:0.88rem;font-weight:400;color:rgba(236,234,230,0.5);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color 0.2s}
+.btn-ghost:hover{color:var(--warm)}
+
+.hero-trust{display:flex;align-items:center;gap:1.5rem;margin-top:1.75rem}
+.hero-trust-text{font-size:0.76rem;color:rgba(236,234,230,0.3);font-weight:300}
+.hero-trust-sep{width:1px;height:16px;background:rgba(255,255,255,0.1)}
+.hero-trust-stat{font-size:0.76rem;color:rgba(236,234,230,0.45)}
+.hero-trust-stat strong{color:var(--mauve-lt);font-weight:500}
+
+/* Hero visual — query card mockup */
+.hero-visual{position:relative}
+.query-card{background:rgba(236,234,230,0.04);border:1px solid rgba(236,234,230,0.1);border-radius:16px;padding:1.5rem;backdrop-filter:blur(4px)}
+.query-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.query-card-title{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;color:rgba(236,234,230,0.6);letter-spacing:0.08em;text-transform:uppercase}
+.query-status{display:flex;align-items:center;gap:5px;font-size:0.7rem;color:var(--teal)}
+.query-status-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.query-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;border-radius:8px;margin-bottom:0.4rem;background:rgba(236,234,230,0.05);border:1px solid rgba(236,234,230,0.06)}
+.query-row:last-child{margin-bottom:0}
+.query-name{font-size:0.8rem;color:rgba(236,234,230,0.7);font-weight:400}
+.query-next{font-size:0.7rem;color:rgba(236,234,230,0.3);font-weight:300}
+.query-credits{font-size:0.7rem;color:var(--mauve-lt);font-weight:500}
+.card-divider{height:1px;background:rgba(236,234,230,0.07);margin:1rem 0}
+.card-footer{display:flex;align-items:center;justify-content:space-between}
+.card-footer-label{font-size:0.7rem;color:rgba(236,234,230,0.3)}
+.card-footer-value{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:var(--warm)}
+.hero-visual-badge{position:absolute;bottom:-16px;right:-16px;background:var(--teal);border-radius:12px;padding:0.7rem 1rem;display:flex;align-items:center;gap:8px}
+.hero-visual-badge-text{font-size:0.72rem;font-weight:500;color:var(--white);line-height:1.3}
+.hero-visual-badge-num{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--white)}
+
+/* ── SECTION BASE ── */
+section{padding:5.5rem 3rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-eyebrow{font-size:0.7rem;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--mauve);margin-bottom:0.75rem}
+.section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--ink);line-height:1.15;margin-bottom:1rem}
+.section-sub{font-size:1rem;font-weight:300;color:var(--muted);line-height:1.7;max-width:560px}
+
+/* ── LOGO STRIP ── */
+.logo-strip{background:var(--ink);padding:1.75rem 3rem;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)}
+.logo-strip-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;justify-content:center}
+.logo-strip-label{font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(236,234,230,0.22);white-space:nowrap}
+.logo-strip-sep{width:1px;height:20px;background:rgba(255,255,255,0.08)}
+.community-stat{display:flex;align-items:center;gap:0.75rem}
+.community-stat-num{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--warm)}
+.community-stat-desc{font-size:0.76rem;color:rgba(236,234,230,0.38);font-weight:300;line-height:1.4}
+.community-pill{background:rgba(142,110,138,0.2);border:1px solid rgba(142,110,138,0.3);border-radius:20px;padding:0.4rem 1rem;font-size:0.72rem;font-weight:500;color:var(--mauve-lt);letter-spacing:0.06em}
+
+/* ── HOW IT WORKS ── */
+.how-section{background:var(--warm)}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.step{position:relative;padding:2rem;background:var(--white);border-radius:16px;border:1px solid var(--border)}
+.step-num{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:var(--mauve);opacity:0.15;line-height:1;margin-bottom:0.5rem}
+.step-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:20px}
+.step-icon.mauve{background:var(--mauve-xs)}
+.step-icon.steel{background:var(--steel-lt)}
+.step-icon.teal{background:var(--teal-lt)}
+.step-title{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:0.5rem}
+.step-body{font-size:0.85rem;font-weight:300;color:var(--muted);line-height:1.65}
+.step-connector{position:absolute;top:50%;right:-1.1rem;width:2.2rem;height:2px;background:var(--border);z-index:1}
+.step-connector::after{content:'›';position:absolute;right:-8px;top:-11px;font-size:1.2rem;color:var(--border)}
+
+/* ── VALUE PROPS ── */
+.value-section{background:var(--stone)}
+.value-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem}
+.value-card{background:var(--warm);border-radius:16px;padding:2rem;border:1px solid var(--border);display:flex;gap:1.25rem}
+.value-card-icon{flex-shrink:0;width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.value-card-icon.a{background:var(--mauve-xs)}
+.value-card-icon.b{background:var(--teal-lt)}
+.value-card-icon.c{background:var(--steel-lt)}
+.value-card-icon.d{background:rgba(255,200,100,0.15)}
+.value-card-icon.e{background:rgba(100,200,100,0.12)}
+.value-card-icon.f{background:rgba(200,100,150,0.12)}
+.value-card-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:0.4rem}
+.value-card-body{font-size:0.84rem;font-weight:300;color:var(--muted);line-height:1.65}
+.value-vs{display:inline-block;font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-top:0.5rem;color:var(--teal)}
+
+/* ── STOREFRONT STALK FEATURE ── */
+.stalk-section{background:var(--ink);padding:5.5rem 3rem}
+.stalk-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.stalk-eyebrow{font-size:0.7rem;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--teal);margin-bottom:0.75rem}
+.stalk-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--warm);line-height:1.15;margin-bottom:1rem}
+.stalk-sub{font-size:0.95rem;font-weight:300;color:rgba(236,234,230,0.5);line-height:1.7;margin-bottom:1.75rem}
+.stalk-variants{display:flex;flex-direction:column;gap:0.75rem}
+.stalk-variant{background:rgba(236,234,230,0.04);border:1px solid rgba(236,234,230,0.08);border-radius:12px;padding:1rem 1.25rem}
+.stalk-variant-title{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;color:var(--warm);margin-bottom:0.2rem}
+.stalk-variant-body{font-size:0.8rem;font-weight:300;color:rgba(236,234,230,0.45);line-height:1.55}
+.stalk-badge{display:inline-block;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:rgba(74,158,135,0.2);color:var(--teal);margin-top:0.35rem}
+.stalk-visual{position:relative}
+.stalk-card{background:rgba(236,234,230,0.04);border:1px solid rgba(236,234,230,0.1);border-radius:16px;padding:1.5rem;overflow:hidden}
+.stalk-card-label{font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(236,234,230,0.25);margin-bottom:1rem}
+.stalk-result-row{display:flex;align-items:center;justify-content:space-between;padding:0.55rem 0;border-bottom:1px solid rgba(236,234,230,0.05)}
+.stalk-result-row:last-of-type{border-bottom:none}
+.stalk-asin{font-size:0.78rem;color:rgba(236,234,230,0.6);font-family:monospace}
+.stalk-price{font-size:0.78rem;color:var(--teal);font-weight:500}
+.stalk-roi{font-size:0.72rem;color:rgba(236,234,230,0.35)}
+.stalk-card-footer{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(236,234,230,0.07);display:flex;align-items:center;justify-content:space-between}
+.stalk-count{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--warm)}
+.stalk-count-label{font-size:0.72rem;color:rgba(236,234,230,0.3);margin-top:1px}
+.stalk-credits-used{font-size:0.72rem;color:var(--mauve-lt)}
+
+/* ── KEEPA COMPARISON ── */
+.compare-section{background:var(--warm)}
+.compare-table{margin-top:3rem;border-radius:16px;overflow:hidden;border:1px solid var(--border)}
+.compare-header{display:grid;grid-template-columns:2fr 1fr 1fr;background:var(--ink);padding:1rem 1.5rem}
+.compare-header-cell{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;color:var(--warm);text-align:center}
+.compare-header-cell:first-child{text-align:left;color:rgba(236,234,230,0.4)}
+.compare-header-cell.highlight{color:var(--mauve-lt)}
+.compare-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:0.85rem 1.5rem;background:var(--white);border-bottom:1px solid var(--border);align-items:center}
+.compare-row:last-child{border-bottom:none}
+.compare-row:nth-child(even){background:rgba(236,234,230,0.4)}
+.compare-feature{font-size:0.85rem;color:var(--ink);font-weight:400}
+.compare-cell{text-align:center;font-size:0.85rem}
+.check{color:var(--teal);font-size:1.1rem}
+.cross{color:rgba(42,42,42,0.2);font-size:1.1rem}
+.compare-cell.highlight-col{font-weight:500;color:var(--mauve)}
+
+/* ── PRICING ── */
+.pricing-section{background:var(--stone)}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin-top:3rem;align-items:start}
+.pricing-card{background:var(--warm);border-radius:18px;border:1px solid var(--border);overflow:hidden;position:relative;transition:transform 0.2s,box-shadow 0.2s}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(42,42,42,0.12)}
+.pricing-card.featured{border:2px solid var(--mauve);background:var(--white)}
+.pricing-badge{position:absolute;top:0;left:0;right:0;text-align:center;font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:5px;background:var(--mauve);color:var(--warm)}
+.pricing-body{padding:1.75rem 1.5rem}
+.pricing-body.has-badge{padding-top:2.4rem}
+.pricing-tier{font-size:0.68rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem}
+.pricing-name{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:800;color:var(--ink);margin-bottom:0.75rem}
+.pricing-price{display:flex;align-items:baseline;gap:3px;margin-bottom:0.25rem}
+.pricing-dollar{font-size:1rem;font-weight:500;color:var(--muted);margin-top:4px}
+.pricing-amount{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;color:var(--ink);line-height:1}
+.pricing-period{font-size:0.78rem;color:var(--muted);font-weight:300}
+.pricing-byok{font-size:0.72rem;color:var(--teal);font-weight:500;margin-bottom:1rem}
+.pricing-tagline{font-size:0.78rem;font-weight:300;color:var(--muted);margin-bottom:1.25rem;line-height:1.5;min-height:2.5rem}
+.pricing-divider{height:1px;background:var(--border);margin-bottom:1.25rem}
+.pricing-features{list-style:none;display:flex;flex-direction:column;gap:0.55rem;margin-bottom:1.5rem}
+.pricing-feature{display:flex;align-items:flex-start;gap:7px;font-size:0.81rem;color:var(--ink);line-height:1.4}
+.pricing-feature-check{color:var(--teal);font-size:0.9rem;flex-shrink:0;margin-top:1px}
+.pricing-feature-muted{color:var(--muted)}
+.pricing-credits{background:var(--mauve-xs);border-radius:8px;padding:0.6rem 0.75rem;display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.25rem}
+.pricing-credits-num{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--mauve)}
+.pricing-credits-label{font-size:0.7rem;color:var(--mauve);opacity:0.7}
+.btn-tier{display:block;text-align:center;font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;padding:12px;border-radius:10px;text-decoration:none;transition:all 0.2s;cursor:pointer;border:none;width:100%}
+.btn-tier-primary{background:var(--mauve);color:var(--warm)}
+.btn-tier-primary:hover{background:#7a5e76;transform:translateY(-1px)}
+.btn-tier-outline{background:transparent;color:var(--ink);border:1.5px solid var(--border)}
+.btn-tier-outline:hover{border-color:var(--mauve);color:var(--mauve)}
+.btn-tier-free{background:var(--stone);color:var(--muted);border:1.5px solid var(--border)}
+.btn-tier-free:hover{border-color:var(--teal);color:var(--teal)}
+.pricing-note{text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1.5rem;font-weight:300}
+.pricing-note a{color:var(--mauve);text-decoration:none}
+
+/* ── COMING SOON — disabled buttons ── */
+.btn-disabled,.btn-disabled:hover{opacity:0.38;cursor:not-allowed;pointer-events:none;transform:none !important;background:var(--stone) !important;color:var(--muted) !important;border-color:var(--border) !important}
+.nav-cta.btn-disabled{background:rgba(236,234,230,0.1) !important;color:rgba(236,234,230,0.3) !important}
+
+/* ── COMING SOON — banner ── */
+.coming-soon-bar{background:var(--mauve);padding:14px 3rem;text-align:center;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--warm);display:flex;align-items:center;justify-content:center;gap:10px}
+.coming-soon-bar-dot{width:8px;height:8px;border-radius:50%;background:var(--warm);opacity:0.7;animation:pulse 1.8s ease-in-out infinite;flex-shrink:0}
+
+/* ── COMING SOON — hero badge ── */
+.cs-hero-badge{display:inline-flex;align-items:center;gap:10px;background:transparent;border:2px solid var(--mauve);border-radius:6px;padding:8px 20px;margin-bottom:1.5rem}
+.cs-hero-badge-label{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:var(--mauve-lt)}
+.cs-hero-badge-dot{width:9px;height:9px;border-radius:50%;background:var(--mauve-lt);animation:pulse 1.8s ease-in-out infinite;flex-shrink:0}
+.cs-not-live{display:block;font-family:'Syne',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:rgba(196,170,192,0.45);margin-top:0.35rem;margin-bottom:0}
+
+/* ── TESTIMONIALS / SOCIAL PROOF ── */
+.social-section{background:var(--ink);padding:5rem 3rem}
+.social-inner{max-width:1100px;margin:0 auto}
+.social-eyebrow{font-size:0.7rem;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--mauve);margin-bottom:0.75rem;text-align:center}
+.social-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,2.8vw,2.2rem);color:var(--warm);text-align:center;margin-bottom:3rem}
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.testimonial{background:rgba(236,234,230,0.04);border:1px solid rgba(236,234,230,0.08);border-radius:16px;padding:1.5rem}
+.testimonial-quote{font-size:0.9rem;font-weight:300;color:rgba(236,234,230,0.65);line-height:1.7;margin-bottom:1.25rem;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:0.75rem}
+.testimonial-avatar{width:36px;height:36px;border-radius:50%;background:var(--mauve);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:0.8rem;color:var(--warm);flex-shrink:0}
+.testimonial-name{font-size:0.82rem;font-weight:500;color:var(--warm)}
+.testimonial-role{font-size:0.72rem;color:rgba(236,234,230,0.3);font-weight:300}
+.stars{color:var(--mauve-lt);font-size:0.85rem;margin-bottom:0.6rem;letter-spacing:2px}
+
+/* ── FAQ ── */
+.faq-section{background:var(--warm)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.faq-item{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.5rem}
+.faq-q{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--ink);margin-bottom:0.6rem}
+.faq-a{font-size:0.84rem;font-weight:300;color:var(--muted);line-height:1.7}
+
+/* ── FINAL CTA ── */
+.cta-section{background:var(--ink);padding:6rem 3rem;position:relative;overflow:hidden;text-align:center}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(142,110,138,0.2) 0%,transparent 65%);pointer-events:none}
+.cta-inner{max-width:700px;margin:0 auto;position:relative;z-index:1}
+.cta-bloom{display:flex;justify-content:center;margin-bottom:1.5rem}
+.cta-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);color:var(--warm);line-height:1.1;margin-bottom:1rem}
+.cta-title em{font-style:normal;color:var(--mauve-lt)}
+.cta-sub{font-size:1rem;font-weight:300;color:rgba(236,234,230,0.48);line-height:1.7;margin-bottom:2.5rem}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-cta-main{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;padding:16px 36px;border-radius:12px;background:var(--mauve);color:var(--warm);text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-cta-main:hover{background:#7a5e76;transform:translateY(-2px)}
+.btn-cta-ghost{font-size:0.9rem;font-weight:400;color:rgba(236,234,230,0.45);text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:16px 24px;transition:color 0.2s}
+.btn-cta-ghost:hover{color:var(--warm)}
+.cta-fine{font-size:0.72rem;color:rgba(236,234,230,0.22);margin-top:1.25rem;font-weight:300}
+
+/* ── WAITLIST FORM ── */
+.waitlist-wrap{margin-top:0.25rem}
+.waitlist-label{font-size:0.72rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--mauve-lt);margin-bottom:0.75rem}
+.waitlist-form{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.5rem}
+.waitlist-input{flex:1;min-width:140px;background:rgba(236,234,230,0.07);border:1px solid rgba(236,234,230,0.15);border-radius:10px;padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--warm);outline:none;transition:border-color 0.2s}
+.waitlist-input::placeholder{color:rgba(236,234,230,0.3)}
+.waitlist-input:focus{border-color:var(--mauve)}
+.waitlist-btn{font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:12px 22px;border-radius:10px;background:var(--mauve);color:var(--warm);border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;white-space:nowrap}
+.waitlist-btn:hover{background:#7a5e76;transform:translateY(-1px)}
+.waitlist-success{display:none;font-size:0.85rem;color:var(--teal);margin-top:0.6rem;font-weight:400}
+@media(max-width:600px){.waitlist-form{flex-direction:column}.waitlist-input,.waitlist-btn{width:100%}}
+
+/* ── FOOTER ── */
+.footer{background:#1e1e1e;padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(255,255,255,0.05)}
+.footer-left{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.footer-links{display:flex;gap:1.5rem}
+.footer-link{font-size:0.75rem;color:rgba(236,234,230,0.25);text-decoration:none;transition:color 0.2s}
+.footer-link:hover{color:rgba(236,234,230,0.5)}
+.footer-copy{font-size:0.72rem;color:rgba(236,234,230,0.18)}
+
+/* ── ANIMATIONS ── */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .steps-grid{grid-template-columns:1fr}
+  .step-connector{display:none}
+  .value-grid{grid-template-columns:1fr}
+  .stalk-inner{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr 1fr}
+  .testimonials{grid-template-columns:1fr}
+  .faq-grid{grid-template-columns:1fr}
+  .compare-table{overflow-x:auto}
+  .nav-links{display:none}
+}
+@media(max-width:600px){
+  section,nav,footer{padding-left:1.25rem;padding-right:1.25rem}
+  .hero{padding-left:1.25rem;padding-right:1.25rem}
+  .pricing-grid{grid-template-columns:1fr}
+  .hero-ctas{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- COMING SOON ANNOUNCEMENT BAR -->
+<div class="coming-soon-bar">
+  <span class="coming-soon-bar-dot"></span>
+  This product is not yet live — signup is not open
+  <span class="coming-soon-bar-dot"></span>
+</div>
+
+<!-- Hidden SVG defs for reusable Bloom symbol -->
+<svg class="bloom-defs" aria-hidden="true">
+<defs>
+  <linearGradient id="ga" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="#c4aac0"/><stop offset="100%" stop-color="#8e6e8a"/></linearGradient>
+  <linearGradient id="gb" x1="0" y1="0.5" x2="1" y2="0.5"><stop offset="0%" stop-color="#a888a4" stop-opacity="0.75"/><stop offset="100%" stop-color="#8e6e8a" stop-opacity="0.35"/></linearGradient>
+  <linearGradient id="gc" x1="0.3" y1="0" x2="0.7" y2="1"><stop offset="0%" stop-color="#c4aac0" stop-opacity="0.6"/><stop offset="100%" stop-color="#8e6e8a" stop-opacity="0.2"/></linearGradient>
+  <radialGradient id="gcore" cx="0.5" cy="0.5" r="0.4"><stop offset="0%" stop-color="#eceae6" stop-opacity="0.6"/><stop offset="100%" stop-color="#c4aac0" stop-opacity="0"/></radialGradient>
+  <linearGradient id="gflare" x1="0.3" y1="0" x2="0.6" y2="0.6"><stop offset="0%" stop-color="#eceae6" stop-opacity="0.3"/><stop offset="100%" stop-color="#c4aac0" stop-opacity="0"/></linearGradient>
+  <symbol id="bloom" viewBox="0 0 512 512">
+    <path d="M256 56C296 56 340 100 348 160C356 220 316 268 256 280C196 268 156 220 164 160C172 100 216 56 256 56Z" fill="url(#ga)"/>
+    <path d="M256 56C296 56 340 100 348 160C356 220 316 268 256 280C196 268 156 220 164 160C172 100 216 56 256 56Z" fill="url(#gb)" transform="rotate(120 256 256)"/>
+    <path d="M256 56C296 56 340 100 348 160C356 220 316 268 256 280C196 268 156 220 164 160C172 100 216 56 256 56Z" fill="url(#gc)" transform="rotate(240 256 256)"/>
+    <path d="M256 100C282 100 310 128 316 168C322 208 296 240 256 248C216 240 190 208 196 168C202 128 230 100 256 100Z" fill="#a888a4" opacity="0.3" transform="rotate(60 256 256)"/>
+    <path d="M256 100C282 100 310 128 316 168C322 208 296 240 256 248C216 240 190 208 196 168C202 128 230 100 256 100Z" fill="#c4aac0" opacity="0.2" transform="rotate(180 256 256)"/>
+    <path d="M256 100C282 100 310 128 316 168C322 208 296 240 256 248C216 240 190 208 196 168C202 128 230 100 256 100Z" fill="#8e6e8a" opacity="0.25" transform="rotate(300 256 256)"/>
+    <circle cx="256" cy="256" r="80" fill="url(#gcore)"/>
+    <circle cx="256" cy="256" r="36" fill="#c4aac0" opacity="0.45"/>
+    <circle cx="256" cy="256" r="18" fill="#eceae6" opacity="0.3"/>
+    <path d="M256 210C256 180 270 140 280 100C285 80 290 60 300 40" stroke="#c4aac0" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.5"/>
+    <circle cx="300" cy="40" r="8" fill="#c4aac0" opacity="0.5"/>
+    <ellipse cx="224" cy="190" rx="36" ry="16" fill="url(#gflare)" transform="rotate(-25 224 190)"/>
+  </symbol>
+</defs>
+</svg>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <a class="nav-back" href="index.html" aria-label="Back to JASS Query">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span class="full">JASS&nbsp;Query</span>
+    </a>
+    <span class="nav-back-sep"></span>
+    <a class="nav-brand" href="index.html">
+      <svg width="26" height="26"><use href="#bloom"/></svg>
+      <span class="wm" style="font-size:17px"><span class="q">Query</span><span class="f">Forge</span></span>
+    </a>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link" href="#how">How it works</a>
+    <a class="nav-link" href="#features">Features</a>
+    <a class="nav-link" href="#pricing">Pricing</a>
+    <a class="nav-link" href="#faq">FAQ</a>
+  </div>
+  <a class="nav-cta btn-disabled" href="#" aria-disabled="true">Coming Soon</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-glow hero-glow-3"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="cs-hero-badge">
+        <span class="cs-hero-badge-dot"></span>
+        <span class="cs-hero-badge-label">Announcing — Coming Soon</span>
+        <span class="cs-hero-badge-dot"></span>
+      </div>
+      <h1>Your Keepa queries.<br><em>Running themselves.</em><br>Every single day.</h1>
+      <span class="cs-not-live">Signup is not open yet — announcing now, launching shortly</span>
+      <p class="hero-sub">QueryForge automatically executes your saved Keepa Product Finder queries on a schedule — so you wake up to fresh data, not a to-do list. No daily limits. No manual clicks. No missed opportunities. <strong style="color:rgba(236,234,230,0.7)">Signup opening soon.</strong></p>
+      <div class="waitlist-wrap">
+        <div class="waitlist-label">Sign up for our waiting list</div>
+        <form class="waitlist-form" id="waitlist-form">
+          <input type="hidden" name="access_key" value="ecef95c9-5429-480f-a3e0-ff2425003a47">
+          <input type="hidden" name="subject" value="New QueryForge Waitlist Signup">
+          <input type="hidden" name="from_name" value="QueryForge Waitlist">
+          <input class="waitlist-input" type="text" name="name" placeholder="Your name" required>
+          <input class="waitlist-input" type="email" name="email" placeholder="Your email" required>
+          <button class="waitlist-btn" type="submit">Notify me →</button>
+        </form>
+        <div class="waitlist-success" id="waitlist-success">✓ You're on the list — we'll reach out when we launch!</div>
+      </div>
+      <div style="margin-top:1.25rem">
+        <a class="btn-ghost" href="#how">See how it works ↓</a>
+      </div>
+      <div class="hero-trust">
+        <span class="hero-trust-text">Building for Amazon sellers in</span>
+        <span class="hero-trust-sep"></span>
+        <span class="hero-trust-stat">Born from a <strong>68,000+</strong> seller community</span>
+        <span class="hero-trust-sep"></span>
+        <span class="hero-trust-stat">Built by a <strong>real arbitrage seller</strong></span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="query-card">
+        <div class="query-card-header">
+          <div class="query-card-title">Scheduled queries</div>
+          <div class="query-status"><div class="query-status-dot"></div>Running now</div>
+        </div>
+        <div class="query-row">
+          <span class="query-name">Grocery deals — ROI 30%+</span>
+          <span class="query-next">Next: 2:14am</span>
+          <span class="query-credits">8 cr</span>
+        </div>
+        <div class="query-row">
+          <span class="query-name">Toys clearance hunt</span>
+          <span class="query-next">Running...</span>
+          <span class="query-credits">12 cr</span>
+        </div>
+        <div class="query-row">
+          <span class="query-name">Beauty — low competition</span>
+          <span class="query-next">Next: 6:00am</span>
+          <span class="query-credits">6 cr</span>
+        </div>
+        <div class="query-row">
+          <span class="query-name">Home & Kitchen deals</span>
+          <span class="query-next">Next: 8:00am</span>
+          <span class="query-credits">9 cr</span>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-footer">
+          <div>
+            <div class="card-footer-label">Credits remaining</div>
+            <div class="card-footer-value">341 / 500</div>
+          </div>
+          <div style="text-align:right">
+            <div class="card-footer-label">Results found today</div>
+            <div class="card-footer-value" style="color:var(--teal-lt)">2,847</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual-badge">
+        <div>
+          <div class="hero-visual-badge-num">0</div>
+          <div class="hero-visual-badge-text">manual<br>clicks today</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO STRIP / SOCIAL PROOF -->
+<div class="logo-strip">
+  <div class="logo-strip-inner">
+    <span class="logo-strip-label">Built for the Amazon arbitrage community</span>
+    <span class="logo-strip-sep"></span>
+    <div class="community-stat">
+      <div class="community-stat-num">68k+</div>
+      <div class="community-stat-desc">sellers who<br>inspired this tool</div>
+    </div>
+    <span class="logo-strip-sep"></span>
+    <div class="community-stat">
+      <div class="community-stat-num">10k</div>
+      <div class="community-stat-desc">typical search<br>result</div>
+    </div>
+    <span class="logo-strip-sep"></span>
+    <div class="community-stat">
+      <div class="community-stat-num">No</div>
+      <div class="community-stat-desc">daily limits<br>on queries</div>
+    </div>
+    <span class="logo-strip-sep"></span>
+    <div class="community-pill">Keepa-powered · No daily limits</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-inner">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">Set it once.<br>Find deals forever.</h2>
+    <p class="section-sub">QueryForge automates your Keepa Product Finder queries — running on a schedule, every day, without you lifting a finger.</p>
+    <div class="steps-grid">
+      <div class="step fade-up">
+        <div class="step-num">01</div>
+        <div class="step-icon mauve">🔍</div>
+        <div class="step-title">Build your queries in Keepa</div>
+        <div class="step-body">Use Keepa's Product Finder exactly as you do today. Set your filters — category, BSR, ROI thresholds, price ranges. The queries you've already built are your starting point.</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step fade-up" style="transition-delay:0.1s">
+        <div class="step-num">02</div>
+        <div class="step-icon steel">⚙️</div>
+        <div class="step-title">Schedule them in QueryForge</div>
+        <div class="step-body">Import your saved queries and set a schedule. Daily, multiple times a day, or spread across the week — QueryForge levels execution across a 23-hour window to maximize efficiency.</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step fade-up" style="transition-delay:0.2s">
+        <div class="step-num">03</div>
+        <div class="step-icon teal">📊</div>
+        <div class="step-title">Wake up to fresh results</div>
+        <div class="step-body">Every morning your queries have already run. Fresh data, fresh opportunities — delivered automatically while you slept, sourced, or spent time on what actually matters.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PROPS -->
+<section class="value-section" id="features">
+  <div class="section-inner">
+    <div class="section-eyebrow">Why QueryForge</div>
+    <h2 class="section-title">What Keepa should have built.<br>Finally here.</h2>
+    <div class="value-grid">
+      <div class="value-card fade-up">
+        <div class="value-card-icon a">📅</div>
+        <div class="value-card-content">
+          <div class="value-card-title">No daily limits — ever</div>
+          <div class="value-card-body">Keepa's Product Finder imposes per-day query caps. QueryForge sells you a monthly credit budget with zero daily restrictions. Use them whenever you want, however you want.
+            <div class="value-vs">vs. Keepa: daily hard cap</div>
+          </div>
+        </div>
+      </div>
+      <div class="value-card fade-up" style="transition-delay:0.1s">
+        <div class="value-card-icon b">🤖</div>
+        <div class="value-card-content">
+          <div class="value-card-title">Full automation, zero babysitting</div>
+          <div class="value-card-body">Stop logging into Keepa every morning to run your queries manually. QueryForge executes your entire portfolio automatically — every day, whether you're at your desk or on a sourcing run.
+            <div class="value-vs">vs. Keepa: manual every time</div>
+          </div>
+        </div>
+      </div>
+      <div class="value-card fade-up" style="transition-delay:0.05s">
+        <div class="value-card-icon c">📈</div>
+        <div class="value-card-content">
+          <div class="value-card-title">More results than Keepa's UI ever shows</div>
+          <div class="value-card-body">Keepa's UI caps downloads at 5,000 ASINs. QueryForge has no hard result limit — your credit balance is the only ceiling. Broader searches, bigger opportunity surface, same Keepa data.
+            <div class="value-vs">vs. Keepa UI: 5k ASIN cap</div>
+          </div>
+        </div>
+      </div>
+      <div class="value-card fade-up" style="transition-delay:0.15s">
+        <div class="value-card-icon d">⚡</div>
+        <div class="value-card-content">
+          <div class="value-card-title">Run Now for time-sensitive deals</div>
+          <div class="value-card-body">Spot a hot niche at 10pm? Pro and Power users can trigger any query on-demand, jumping to the front of the queue. Freshest data when opportunity strikes — not at 6am tomorrow.</div>
+        </div>
+      </div>
+      <div class="value-card fade-up" style="transition-delay:0.1s">
+        <div class="value-card-icon e">🏪</div>
+        <div class="value-card-content">
+          <div class="value-card-title">Storefront Stalk — competitor intelligence</div>
+          <div class="value-card-body">Give us a seller's Store ID and we'll find every ASIN in their catalog. Or give us your best ASINs and we'll reverse-engineer which other sellers are winning on them. Powered by your monthly credits.</div>
+        </div>
+      </div>
+      <div class="value-card fade-up" style="transition-delay:0.15s">
+        <div class="value-card-icon f">💳</div>
+        <div class="value-card-content">
+          <div class="value-card-title">Under your Keepa subscription cost</div>
+          <div class="value-card-body">Keepa Pro runs around $34/month. QueryForge Starter is $19.99 — full automation for less than half your current tool spend.
+            <div class="value-vs">T1 = 59% of Keepa Pro cost*</div>
+          </div>
+        </div>
+      </div>
+      <div class="value-card fade-up" style="transition-delay:0.05s">
+        <div class="value-card-icon a">☁️</div>
+        <div class="value-card-content">
+          <div class="value-card-title">Your data goes straight to you</div>
+          <div class="value-card-body">Results are delivered as a CSV file, written directly to your own Google Drive or Azure Blob Container — whichever you configure at setup. We never store your data. It's yours, in your storage, the moment it's ready.</div>
+          <div class="value-vs">vs. Keepa: manual download required</div>
+        </div>
+      </div>
+      <div class="value-card fade-up" style="transition-delay:0.1s">
+        <div class="value-card-icon b">🕐</div>
+        <div class="value-card-content">
+          <div class="value-card-title">Schedule to the hour, not just the day</div>
+          <div class="value-card-body">Need your grocery scan to run at 5am before you start sourcing? Pin specific queries to a specific hour. Available on paid plans — because timing your data is just as important as having it.
+            <div class="value-vs">vs. Keepa: no scheduling at all</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="stalk-section">
+  <div class="stalk-inner">
+    <div class="fade-up">
+      <div class="stalk-eyebrow">Storefront Stalk — T2 &amp; T3 feature</div>
+      <h2 class="stalk-title">Know what your competitors know. Before they act on it.</h2>
+      <p class="stalk-sub">Two powerful intelligence modes that turn your competitors' catalogs into your sourcing leads — automatically, on your schedule, consuming your monthly credits.</p>
+      <div class="stalk-variants">
+        <div class="stalk-variant">
+          <div class="stalk-variant-title">Stalk by Store ID</div>
+          <div class="stalk-variant-body">Give us any Amazon Store ID. We pull every ASIN in their catalog and surface it in your results. See exactly what your most profitable competitors are selling — then source it first.</div>
+          <div class="stalk-badge">Available from T2 — 24 stalks/month</div>
+        </div>
+        <div class="stalk-variant">
+          <div class="stalk-variant-title">Stalk by Input ASINs</div>
+          <div class="stalk-variant-body">Give us your best-performing ASINs. We find every seller also listing those products, then pull all their other ASINs. It's a sourcing map of where the winners are playing.</div>
+          <div class="stalk-badge">Available from T2 — 4 stalks/month · T3 — 12/month</div>
+        </div>
+      </div>
+    </div>
+    <div class="stalk-visual fade-up" style="transition-delay:0.15s">
+      <div class="stalk-card">
+        <div class="stalk-card-label">Storefront stalk results — Store ID: A2XYZ123</div>
+        <div class="stalk-result-row">
+          <span class="stalk-asin">B08N5WRWNW</span>
+          <span class="stalk-price">$24.99</span>
+          <span class="stalk-roi">ROI 38%</span>
+        </div>
+        <div class="stalk-result-row">
+          <span class="stalk-asin">B07PXGQC1Q</span>
+          <span class="stalk-price">$18.49</span>
+          <span class="stalk-roi">ROI 41%</span>
+        </div>
+        <div class="stalk-result-row">
+          <span class="stalk-asin">B09B1K3M8F</span>
+          <span class="stalk-price">$31.00</span>
+          <span class="stalk-roi">ROI 29%</span>
+        </div>
+        <div class="stalk-result-row">
+          <span class="stalk-asin">B08BHZJ1C6</span>
+          <span class="stalk-price">$12.99</span>
+          <span class="stalk-roi">ROI 55%</span>
+        </div>
+        <div class="stalk-result-row">
+          <span class="stalk-asin">B07YC3LMBS</span>
+          <span class="stalk-price">$9.49</span>
+          <span class="stalk-roi">ROI 48%</span>
+        </div>
+        <div class="stalk-card-footer">
+          <div>
+            <div class="stalk-count">247</div>
+            <div class="stalk-count-label">ASINs found in catalog</div>
+          </div>
+          <div style="text-align:right">
+            <div class="stalk-credits-used">32 credits consumed</div>
+            <div class="stalk-count-label">from your monthly budget</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEEPA COMPARISON -->
+<section class="compare-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">QueryForge vs. Keepa alone</div>
+    <h2 class="section-title">What you're missing by doing it manually.</h2>
+    <p class="section-sub">Keepa is the data engine. QueryForge is the automation layer that makes it work for you 24/7 — not just when you remember to log in.</p>
+    <div class="compare-table fade-up">
+      <div class="compare-header">
+        <div class="compare-header-cell">Feature</div>
+        <div class="compare-header-cell">Keepa alone</div>
+        <div class="compare-header-cell highlight">QueryForge</div>
+      </div>
+      <div class="compare-row"><div class="compare-feature">Automated daily query execution</div><div class="compare-cell"><span class="cross">✕</span></div><div class="compare-cell highlight-col"><span class="check">✓</span></div></div>
+      <div class="compare-row"><div class="compare-feature">No daily query limits</div><div class="compare-cell"><span class="cross">✕</span></div><div class="compare-cell highlight-col"><span class="check">✓</span></div></div>
+      <div class="compare-row"><div class="compare-feature">No ASIN result cap</div><div class="compare-cell" style="font-size:0.78rem;color:var(--muted)">5k max</div><div class="compare-cell highlight-col"><span class="check">✓ No cap</span></div></div>
+      <div class="compare-row"><div class="compare-feature">Run Now — on-demand execution</div><div class="compare-cell"><span class="cross">✕</span></div><div class="compare-cell highlight-col"><span class="check">✓ T2+</span></div></div>
+      <div class="compare-row"><div class="compare-feature">Storefront Stalk — competitor intel</div><div class="compare-cell"><span class="cross">✕</span></div><div class="compare-cell highlight-col"><span class="check">✓ T2+</span></div></div>
+      <div class="compare-row"><div class="compare-feature">Scheduled recurring scans</div><div class="compare-cell"><span class="cross">✕</span></div><div class="compare-cell highlight-col"><span class="check">✓</span></div></div>
+      <div class="compare-row"><div class="compare-feature">Results delivered automatically</div><div class="compare-cell"><span class="cross">✕</span></div><div class="compare-cell highlight-col"><span class="check">✓</span></div></div>
+      <div class="compare-row"><div class="compare-feature">Results saved to your own Google Drive or cloud storage</div><div class="compare-cell"><span class="cross">✕</span></div><div class="compare-cell highlight-col"><span class="check">✓</span></div></div>
+      <div class="compare-row"><div class="compare-feature">Credit cost estimate before scheduling</div><div class="compare-cell"><span class="cross">✕</span></div><div class="compare-cell highlight-col"><span class="check">✓</span></div></div>
+      <div class="compare-row"><div class="compare-feature">Keepa subscription required</div><div class="compare-cell"><span class="check">✓</span> always</div><div class="compare-cell highlight-col" style="font-size:0.78rem">T0 only · bundled on paid</div></div>
+      <div class="compare-row"><div class="compare-feature">Cost to automate 100 queries/month</div><div class="compare-cell" style="font-size:0.78rem;color:var(--muted)">Manual effort</div><div class="compare-cell highlight-col" style="font-size:0.82rem">$19.99/mo</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-inner">
+    <div style="text-align:center">
+      <div class="section-eyebrow">Pricing</div>
+      <h2 class="section-title" style="text-align:center">Simple pricing. No daily limits. No surprises.</h2>
+      <p class="section-sub" style="margin:0 auto 0.75rem;text-align:center">Every plan includes transparent credit usage so you always know where you stand. Cancel any time.</p>
+      <p style="font-size:0.78rem;color:var(--muted);text-align:center;margin-bottom:0">1 credit = 1 typical 10,000-ASIN search. Credits reset monthly.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- T0 Free -->
+      <div class="pricing-card">
+        <div class="pricing-body">
+          <div class="pricing-tier">Tier 0</div>
+          <div class="pricing-name">Free</div>
+          <div class="pricing-price"><span class="pricing-dollar"></span><span class="pricing-amount">$0</span></div>
+          <div class="pricing-byok">Bring Your Own Keepa Key (BYOK)</div>
+          <div class="pricing-tagline">Taste the automation. No commitment required.</div>
+          <div class="pricing-divider"></div>
+          <div class="pricing-credits" style="margin-bottom:0.25rem">
+            <div><div class="pricing-credits-num">20</div><div class="pricing-credits-label">credits / month</div></div>
+          </div>
+          <div style="font-size:0.72rem;color:var(--muted);font-weight:300;margin-top:0.2rem;margin-bottom:1.25rem">1 credit = 1 typical 10,000-ASIN search</div>
+          <ul class="pricing-features">
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Automated query scheduling</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Your own Keepa key required</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Run Now — 1×/month</li>
+            <li class="pricing-feature"><span class="pricing-feature-check" style="color:var(--muted)">—</span> <span class="pricing-feature-muted">No hour-specific scheduling</span></li>
+            <li class="pricing-feature"><span class="pricing-feature-check" style="color:var(--muted)">—</span> <span class="pricing-feature-muted">No Storefront Stalk</span></li>
+          </ul>
+          <a class="btn-tier btn-tier-free btn-disabled" href="#" aria-disabled="true">Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- T1 Starter -->
+      <div class="pricing-card">
+        <div class="pricing-body">
+          <div class="pricing-tier">Tier 1</div>
+          <div class="pricing-name">Starter</div>
+          <div class="pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">19</span><span class="pricing-period">.99/mo</span></div>
+          <div style="height:1.35rem"></div>
+          <div class="pricing-tagline">The easiest yes in your tool stack. Less than half what you pay for Keepa.</div>
+          <div class="pricing-divider"></div>
+          <div class="pricing-credits" style="margin-bottom:0.25rem">
+            <div><div class="pricing-credits-num">100</div><div class="pricing-credits-label">credits / month</div></div>
+          </div>
+          <div style="font-size:0.72rem;color:var(--muted);font-weight:300;margin-top:0.2rem;margin-bottom:1.25rem">1 credit = 1 typical 10,000-ASIN search</div>
+          <ul class="pricing-features">
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Everything in Free</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Keepa key included</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> No daily limits</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Schedule to a specific hour — 1×/week</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Run Now — 1×/week</li>
+            <li class="pricing-feature"><span class="pricing-feature-check" style="color:var(--muted)">—</span> <span class="pricing-feature-muted">No Storefront Stalk</span></li>
+          </ul>
+          <a class="btn-tier btn-tier-outline btn-disabled" href="#" aria-disabled="true">Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- T2 Pro — FEATURED -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most popular</div>
+        <div class="pricing-body has-badge">
+          <div class="pricing-tier">Tier 2</div>
+          <div class="pricing-name">Pro</div>
+          <div class="pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">39</span><span class="pricing-period">.99/mo</span></div>
+          <div style="height:1.35rem"></div>
+          <div class="pricing-tagline">Scale your sourcing strategy. Run Now when opportunity strikes.</div>
+          <div class="pricing-divider"></div>
+          <div class="pricing-credits" style="background:#f3eef2;margin-bottom:0.25rem">
+            <div><div class="pricing-credits-num">500</div><div class="pricing-credits-label">credits / month</div></div>
+          </div>
+          <div style="font-size:0.72rem;color:var(--muted);font-weight:300;margin-top:0.2rem;margin-bottom:1.25rem">1 credit = 1 typical 10,000-ASIN search</div>
+          <ul class="pricing-features">
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Everything in Starter</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Schedule to a specific hour — 3×/week</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Run Now — 3×/week</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Storefront Stalk by Store ID — 24/mo</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Storefront Stalk by ASINs — 4/mo</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Priority support</li>
+          </ul>
+          <a class="btn-tier btn-tier-primary btn-disabled" href="#" aria-disabled="true">Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- T3 Power -->
+      <div class="pricing-card">
+        <div class="pricing-body">
+          <div class="pricing-tier">Tier 3</div>
+          <div class="pricing-name">Power</div>
+          <div class="pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">74</span><span class="pricing-period">.99/mo</span></div>
+          <div style="height:1.35rem"></div>
+          <div class="pricing-tagline">Unlimited Run Now. Full competitor intelligence. Built for serious operators.</div>
+          <div class="pricing-divider"></div>
+          <div class="pricing-credits" style="margin-bottom:0.25rem">
+            <div><div class="pricing-credits-num">1,200</div><div class="pricing-credits-label">credits / month</div></div>
+          </div>
+          <div style="font-size:0.72rem;color:var(--muted);font-weight:300;margin-top:0.2rem;margin-bottom:1.25rem">1 credit = 1 typical 10,000-ASIN search</div>
+          <ul class="pricing-features">
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Everything in Pro</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Schedule to a specific hour — 30×/month</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> <strong>Unlimited Run Now</strong></li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Storefront Stalk by Store ID — 100/mo</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Storefront Stalk by ASINs — 12/mo</li>
+            <li class="pricing-feature"><span class="pricing-feature-check">✓</span> Early access to new features</li>
+          </ul>
+          <a class="btn-tier btn-tier-outline btn-disabled" href="#" aria-disabled="true">Coming Soon</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="pricing-note">All paid plans include a Keepa token allowance — no separate subscription required. <a href="#faq">Learn more →</a></div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="social-section">
+  <div class="social-inner">
+    <div class="social-eyebrow">From the community</div>
+    <h2 class="social-title">Sellers who stopped doing it manually.</h2>
+    <div class="testimonials">
+      <div class="testimonial fade-up">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-quote">"I used to spend 45 minutes every morning running my Keepa queries one by one. Now I just check the results over coffee. QueryForge paid for itself in the first week."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:#5b8fa8">MK</div>
+          <div><div class="testimonial-name">Marcus K.</div><div class="testimonial-role">Amazon OA seller · 3 years</div></div>
+        </div>
+      </div>
+      <div class="testimonial fade-up" style="transition-delay:0.1s">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-quote">"The Storefront Stalk feature alone is worth the Pro subscription. I found three new supplier categories I never would have thought to check just by stalking my top competitors."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:#4a9e87">SR</div>
+          <div><div class="testimonial-name">Sarah R.</div><div class="testimonial-role">Amazon OA seller · 5 years</div></div>
+        </div>
+      </div>
+      <div class="testimonial fade-up" style="transition-delay:0.2s">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-quote">"The 'no daily limits' thing is what sold me. Keepa's cap always frustrated me when I had a big sourcing day. Now I just use what I need, when I need it."</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:#8e6e8a">JL</div>
+          <div><div class="testimonial-name">James L.</div><div class="testimonial-role">Amazon OA seller · 2 years</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-inner">
+    <div class="section-eyebrow">Common questions</div>
+    <h2 class="section-title">Everything you need to know.</h2>
+    <div class="faq-grid">
+      <div class="faq-item fade-up">
+        <div class="faq-q">Do I still need a Keepa subscription?</div>
+        <div class="faq-a">For the free tier (BYOK), yes — you use your own Keepa API key. On all paid plans, a Keepa token allowance is bundled in. You may still want your own Keepa Pro subscription for browsing, but QueryForge handles all your automated query execution.</div>
+      </div>
+      <div class="faq-item fade-up" style="transition-delay:0.05s">
+        <div class="faq-q">What is a "credit" and how do I know how many I'll use?</div>
+        <div class="faq-a">One credit covers a typical search returning around 10,000 ASINs — but result size is flexible. Run broad searches or narrow ones, your call. Larger result sets draw more credits; smaller ones stretch your budget further. When you save and schedule a query, QueryForge shows you the estimated credit cost — so there are never surprises. Your balance is always visible in your dashboard.</div>
+      </div>
+      <div class="faq-item fade-up" style="transition-delay:0.1s">
+        <div class="faq-q">What does "no daily limits" actually mean?</div>
+        <div class="faq-a">Keepa's own Product Finder limits how many queries you can run per day. QueryForge gives you a monthly credit budget with zero per-day restrictions — run 1 query today and 50 tomorrow if you want. Your budget, your schedule.</div>
+      </div>
+      <div class="faq-item fade-up" style="transition-delay:0.15s">
+        <div class="faq-q">How is QueryForge different from just using Keepa?</div>
+        <div class="faq-a">Keepa is a powerful data tool that requires manual operation. QueryForge is the automation layer on top — scheduling, executing, and delivering results automatically every day. It's the difference between a great car and a self-driving one.</div>
+      </div>
+      <div class="faq-item fade-up" style="transition-delay:0.05s">
+        <div class="faq-q">What is "Run Now" and why does it matter?</div>
+        <div class="faq-a">Run Now lets you trigger any query immediately, jumping to the front of the execution queue. When you spot a trending niche or react to market news, you don't have to wait for tomorrow's scheduled run — you get fresh data within minutes. Free tier includes 1 Run Now per month; Starter 1×/week; Pro 3×/week; Power gets unlimited.</div>
+      </div>
+      <div class="faq-item fade-up" style="transition-delay:0.1s">
+        <div class="faq-q">Can I cancel anytime?</div>
+        <div class="faq-a">Yes — no contracts, no cancellation fees. Cancel from your account settings at any time and you'll retain access until the end of your billing period. We're confident you'll stay because the results speak for themselves.</div>
+      </div>
+      <div class="faq-item fade-up" style="transition-delay:0.15s">
+        <div class="faq-q">Where do my results go?</div>
+        <div class="faq-a">Query results are delivered as a CSV file, dropped directly into the storage destination you configure during setup — either Google Drive or an Azure Blob Container. You choose one at setup; QueryForge writes every result file straight there. Your data stays in your account, in your storage — we never hold onto it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div class="cta-bloom">
+      <svg width="72" height="72"><use href="#bloom"/></svg>
+    </div>
+    <h2 class="cta-title">QueryForge is<br><em>almost here.</em></h2>
+    <p class="cta-sub">You've spent hours building the perfect Keepa query portfolio. QueryForge makes sure it runs every day — automatically, reliably, without you. Signup is opening soon.</p>
+    <div class="cta-buttons">
+      <a class="btn-cta-main btn-disabled" href="#" aria-disabled="true">
+        Signup opening soon
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn-cta-ghost" href="#pricing">View all plans →</a>
+    </div>
+    <div class="cta-fine">Launching soon · Built by an Amazon seller, for Amazon sellers</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left">
+    <div style="display:flex;align-items:center;gap:8px">
+      <svg width="22" height="22"><use href="#bloom"/></svg>
+      <span class="wm" style="font-size:15px"><span class="q">Query</span><span class="f">Forge</span></span>
+    </div>
+    <div class="footer-links">
+      <a class="footer-link" href="#">Privacy</a>
+      <a class="footer-link" href="#">Terms</a>
+      <a class="footer-link" href="#">Support</a>
+      <a class="footer-link" href="#">Status</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 JASS Enterprises. All rights reserved.</div>
+</footer>
+
+<script>
+// Scroll fade-up animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Waitlist form — web3forms async submit
+document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.waitlist-btn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  const data = new FormData(this);
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+    const json = await res.json();
+    if (json.success) {
+      this.style.display = 'none';
+      document.getElementById('waitlist-success').style.display = 'block';
+    } else {
+      btn.textContent = 'Try again';
+      btn.disabled = false;
+    }
+  } catch {
+    btn.textContent = 'Try again';
+    btn.disabled = false;
+  }
+});
+
+// Smooth nav highlight on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 100) current = s.id; });
+  navLinks.forEach(l => { l.style.color = l.getAttribute('href') === '#'+current ? 'var(--warm)' : ''; });
+}, { passive: true });
+</script>
+</body>
+</html>

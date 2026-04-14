@@ -1,0 +1,43 @@
+<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <defs>
+   <linearGradient id="b1a" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#c4aac0"></stop>
+      <stop offset="100%" stop-color="#8e6e8a"></stop>
+   </linearGradient>
+   <linearGradient id="b1b" x1="0" y1="0.5" x2="1" y2="0.5">
+      <stop offset="0%" stop-color="#a888a4" stop-opacity="0.75"></stop>
+      <stop offset="100%" stop-color="#8e6e8a" stop-opacity="0.35"></stop>
+   </linearGradient>
+   <linearGradient id="b1c" x1="0.3" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#c4aac0" stop-opacity="0.6"></stop>
+      <stop offset="100%" stop-color="#8e6e8a" stop-opacity="0.2"></stop>
+   </linearGradient>
+   <radialGradient id="b1core" cx="0.5" cy="0.5" r="0.4">
+      <stop offset="0%" stop-color="#eceae6" stop-opacity="0.6"></stop>
+      <stop offset="100%" stop-color="#c4aac0" stop-opacity="0"></stop>
+   </radialGradient>
+   <linearGradient id="b1flare" x1="0.3" y1="0" x2="0.6" y2="0.6">
+      <stop offset="0%" stop-color="#eceae6" stop-opacity="0.3"></stop>
+      <stop offset="100%" stop-color="#c4aac0" stop-opacity="0"></stop>
+   </linearGradient>
+   </defs>
+   <!-- Petal 1 — top, largest -->
+   <path d="M256 56 C296 56, 340 100, 348 160 C356 220, 316 268, 256 280 C196 268, 156 220, 164 160 C172 100, 216 56, 256 56Z" fill="url(#b1a)"></path>
+   <!-- Petal 2 — bottom-left, rotated -->
+   <path d="M256 56 C296 56, 340 100, 348 160 C356 220, 316 268, 256 280 C196 268, 156 220, 164 160 C172 100, 216 56, 256 56Z" fill="url(#b1b)" transform="rotate(120 256 256)"></path>
+   <!-- Petal 3 — bottom-right, rotated -->
+   <path d="M256 56 C296 56, 340 100, 348 160 C356 220, 316 268, 256 280 C196 268, 156 220, 164 160 C172 100, 216 56, 256 56Z" fill="url(#b1c)" transform="rotate(240 256 256)"></path>
+   <!-- Second layer — smaller, offset rotation for depth -->
+   <path d="M256 100 C282 100, 310 128, 316 168 C322 208, 296 240, 256 248 C216 240, 190 208, 196 168 C202 128, 230 100, 256 100Z" fill="#a888a4" opacity="0.3" transform="rotate(60 256 256)"></path>
+   <path d="M256 100 C282 100, 310 128, 316 168 C322 208, 296 240, 256 248 C216 240, 190 208, 196 168 C202 128, 230 100, 256 100Z" fill="#c4aac0" opacity="0.2" transform="rotate(180 256 256)"></path>
+   <path d="M256 100 C282 100, 310 128, 316 168 C322 208, 296 240, 256 248 C216 240, 190 208, 196 168 C202 128, 230 100, 256 100Z" fill="#8e6e8a" opacity="0.25" transform="rotate(300 256 256)"></path>
+   <!-- Core glow -->
+   <circle cx="256" cy="256" r="80" fill="url(#b1core)"></circle>
+   <circle cx="256" cy="256" r="36" fill="#c4aac0" opacity="0.45"></circle>
+   <circle cx="256" cy="256" r="18" fill="#eceae6" opacity="0.3"></circle>
+   <!-- Rising energy line — the "forge" output -->
+   <path d="M256 210 C256 180, 270 140, 280 100 C285 80, 290 60, 300 40" stroke="#c4aac0" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.5"></path>
+   <circle cx="300" cy="40" r="8" fill="#c4aac0" opacity="0.5"></circle>
+   <!-- Specular -->
+   <ellipse cx="224" cy="190" rx="36" ry="16" fill="url(#b1flare)" transform="rotate(-25 224 190)"></ellipse>
+</svg>

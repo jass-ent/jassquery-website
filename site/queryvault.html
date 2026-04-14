@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QueryVault — Your Keepa Queries Are Business Assets</title>
+  <meta name="description" content="Save, organize, and instantly restore your Keepa Product Finder queries. Free Chrome extension for Amazon sellers who treat their searches like the assets they are." />
+  <link rel="icon" href="icon-final.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal:    #2a2a2a;
+      --dark-grey:   #3d3d3d;
+      --body-grey:   #d4d1cc;
+      --focus-white: #eceae6;
+      --teal-core:   #4a9e87;
+      --teal-mid:    #6db8a2;
+      --teal-pale:   #9fd4c4;
+      --text-dark:   #1a1a1a;
+      --text-muted:  rgba(42,42,42,0.6);
+      --radius:      12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--body-grey);
+      color: var(--charcoal);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── GRAIN TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 2.5rem;
+      background: rgba(42,42,42,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(74,158,135,0.15);
+    }
+    .nav-left { display: flex; align-items: center; gap: 1.25rem; }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(164,204,217,0.7); text-decoration: none;
+      padding: 7px 12px 7px 10px; border-radius: 8px;
+      border: 1px solid rgba(91,143,168,0.3);
+      background: rgba(91,143,168,0.08);
+      transition: all 0.2s;
+    }
+    .nav-back:hover {
+      color: #a4ccd9;
+      background: rgba(91,143,168,0.18);
+      border-color: rgba(91,143,168,0.55);
+      transform: translateX(-2px);
+    }
+    .nav-back svg { width: 12px; height: 12px; transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-2px); }
+    .nav-back-sep { width: 1px; height: 22px; background: rgba(255,255,255,0.1); }
+    @media (max-width: 600px) {
+      .nav-back span.full { display: none; }
+      .nav-back { padding: 7px 10px; }
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none;
+    }
+    .nav-brand img, .nav-brand svg { width: 30px; height: 30px; }
+    .nav-brand-text {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 1.05rem; letter-spacing: 0.02em;
+    }
+    .nav-brand-text .q { color: var(--focus-white); }
+    .nav-brand-text .v { color: var(--teal-core); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.85rem; color: rgba(236,234,230,0.55);
+      text-decoration: none; font-weight: 400;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--focus-white); }
+    .nav-cta {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+      background: var(--teal-core); color: #fff;
+      padding: 0.55rem 1.3rem; border-radius: 7px;
+      text-decoration: none; transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .nav-cta:hover { background: var(--teal-mid); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      overflow: hidden;
+      background: var(--charcoal);
+    }
+    .hero-glow {
+      position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,158,135,0.14) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; bottom: -200px; right: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(159,212,196,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-cocoon {
+      position: relative; z-index: 1;
+      width: 110px; height: 110px;
+      margin-bottom: 2rem;
+      animation: floatCocoon 6s ease-in-out infinite;
+    }
+    @keyframes floatCocoon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .hero-tagline {
+      position: relative; z-index: 1;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(74,158,135,0.12);
+      border: 1px solid rgba(74,158,135,0.25);
+      color: var(--teal-pale);
+      font-size: 0.78rem; font-weight: 500;
+      padding: 0.35rem 1rem; border-radius: 999px;
+      margin-bottom: 1.8rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .hero h1 {
+      position: relative; z-index: 1;
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      line-height: 1.1;
+      max-width: 780px;
+      color: var(--focus-white);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--teal-core);
+    }
+    .hero .sub {
+      position: relative; z-index: 1;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: rgba(236,234,230,0.5);
+      max-width: 540px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      position: relative; z-index: 1;
+      display: flex; gap: 1rem;
+      flex-wrap: wrap; justify-content: center;
+      flex-direction: column; align-items: center;
+    }
+    .hero-store-buttons {
+      display: flex; gap: 1rem;
+      flex-wrap: wrap; justify-content: center;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--teal-core); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+      padding: 0.9rem 2.2rem; border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(74,158,135,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--teal-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 36px rgba(74,158,135,0.35);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent; color: var(--focus-white);
+      font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem;
+      padding: 0.9rem 2.2rem; border-radius: var(--radius);
+      border: 1px solid rgba(236,234,230,0.15);
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--teal-core);
+      transform: translateY(-2px);
+    }
+
+    /* ── SCREENSHOT ── */
+    .screenshot-wrap {
+      position: relative; z-index: 1;
+      margin-top: 3.5rem;
+      max-width: 880px; width: 100%;
+    }
+    .screenshot-wrap::before {
+      content: '';
+      position: absolute; inset: -2px; border-radius: 16px;
+      background: linear-gradient(135deg, var(--teal-core), transparent 60%);
+      z-index: 0;
+    }
+    .screenshot-wrap img {
+      position: relative; z-index: 1;
+      width: 100%; border-radius: 14px; display: block;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; padding: 6rem 2rem; }
+    .container { max-width: 1060px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal-core);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      line-height: 1.15; margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+    h2 em { font-style: normal; color: var(--teal-core); }
+    .section-intro {
+      color: var(--text-muted);
+      font-size: 1.05rem; line-height: 1.75;
+      max-width: 580px; margin-bottom: 3rem;
+    }
+
+    /* ── ASSET MANIFESTO ── */
+    .manifesto {
+      background: var(--focus-white);
+      border-top: 3px solid var(--teal-core);
+    }
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
+    }
+    .manifesto-text h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 1.5rem;
+    }
+    .manifesto-text .big-quote {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--teal-core);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      padding-left: 1.25rem;
+      border-left: 3px solid var(--teal-mid);
+    }
+    .manifesto-text p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+    .manifesto-visual {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .pain-card {
+      background: var(--body-grey);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .pain-icon {
+      font-size: 1.4rem; flex-shrink: 0; margin-top: 2px;
+    }
+    .pain-card strong {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+    .pain-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── GET / REGISTER / USE ── */
+    .journey-section { background: var(--charcoal); }
+    .journey-section .section-label { color: var(--teal-pale); }
+    .journey-section h2 { color: var(--focus-white); }
+    .journey-section .section-intro { color: rgba(236,234,230,0.45); }
+    .journey-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      counter-reset: step;
+    }
+    .journey-step {
+      position: relative;
+      background: var(--dark-grey);
+      border: 1px solid rgba(74,158,135,0.15);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .journey-step:hover {
+      border-color: var(--teal-core);
+      transform: translateY(-4px);
+    }
+    .step-number {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 3rem; line-height: 1;
+      color: var(--teal-core); opacity: 0.25;
+      position: absolute; top: 1rem; right: 1.25rem;
+    }
+    .step-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: rgba(74,158,135,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .journey-step h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.15rem; color: var(--focus-white);
+      margin-bottom: 0.5rem;
+    }
+    .journey-step h3 em {
+      font-style: normal; color: var(--teal-core);
+    }
+    .journey-step p {
+      font-size: 0.9rem; color: rgba(236,234,230,0.45);
+      line-height: 1.65;
+    }
+    .journey-step .step-cta {
+      display: inline-block; margin-top: 1.25rem;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--teal-core);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .journey-step .step-cta:hover { color: var(--teal-pale); }
+    .journey-step .step-cta::after { content: ' →'; }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .feature-card {
+      background: var(--focus-white);
+      border: 1px solid rgba(42,42,42,0.06);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .feature-card:hover {
+      border-color: var(--teal-core);
+      transform: translateY(-3px);
+    }
+    .feature-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: rgba(74,158,135,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.95rem; margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+    .feature-card p {
+      color: var(--text-muted); font-size: 0.88rem; line-height: 1.65;
+    }
+
+    /* ── WHO IT'S FOR ── */
+    .personas-section { background: var(--focus-white); }
+    .personas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .persona {
+      background: var(--body-grey);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex; align-items: flex-start; gap: 0.9rem;
+    }
+    .persona-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .persona strong {
+      display: block; margin-bottom: 0.25rem;
+      font-family: 'Syne', sans-serif; font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+    .persona p {
+      color: var(--text-muted); font-size: 0.88rem; line-height: 1.6;
+    }
+
+    /* ── PRIVACY ── */
+    .privacy-section {
+      background: linear-gradient(135deg, rgba(74,158,135,0.06) 0%, transparent 50%);
+      border-top: 1px solid rgba(42,42,42,0.08);
+      border-bottom: 1px solid rgba(42,42,42,0.08);
+    }
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .privacy-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 1.25rem;
+      background: var(--focus-white);
+      border: 1px solid rgba(42,42,42,0.06);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+    }
+    .privacy-item .check {
+      color: var(--teal-core);
+      font-size: 1.1rem; flex-shrink: 0; margin-top: 2px;
+      font-weight: 700;
+    }
+    .privacy-item strong {
+      display: block; margin-bottom: 0.2rem;
+      font-size: 0.92rem; color: var(--text-dark);
+    }
+    .privacy-item p {
+      color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;
+    }
+
+    /* ── PRICING ── */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 820px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    .tier-card {
+      background: var(--focus-white);
+      border: 2px solid rgba(42,42,42,0.08);
+      border-radius: 16px; padding: 2.5rem;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+    .tier-card:hover { transform: translateY(-3px); }
+    .tier-card.featured {
+      border-color: var(--teal-core);
+      box-shadow: 0 8px 48px rgba(74,158,135,0.15);
+      position: relative;
+    }
+    .tier-card.featured::after {
+      content: 'RECOMMENDED';
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--teal-core); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.65rem; letter-spacing: 0.12em;
+      padding: 0.3rem 1rem; border-radius: 999px;
+    }
+    @media (max-width: 640px) {
+      .tier-grid { grid-template-columns: 1fr; }
+    }
+    .tier-badge {
+      display: inline-block;
+      background: var(--teal-core); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.85rem; border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+    .tier-card h3 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 1.5rem; margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+    .tier-card .price {
+      font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800;
+      color: var(--teal-core); line-height: 1; margin: 1rem 0 0.25rem;
+    }
+    .tier-card .price-sub {
+      color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.75rem;
+    }
+    .tier-features {
+      list-style: none; text-align: left; margin-bottom: 2rem;
+    }
+    .tier-features li {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(42,42,42,0.06);
+      font-size: 0.93rem; color: var(--text-muted);
+    }
+    .tier-features li:last-child { border-bottom: none; }
+    .tier-features li::before {
+      content: '\2713'; color: var(--teal-core);
+      font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── FINAL CTA ── */
+    .cta-banner {
+      background: var(--charcoal);
+      border-radius: 20px;
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(74,158,135,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-banner h2 { color: var(--focus-white); position: relative; z-index: 1; margin-bottom: 1rem; }
+    .cta-banner p {
+      color: rgba(236,234,230,0.45); position: relative; z-index: 1;
+      margin-bottom: 2rem; font-size: 1.05rem;
+    }
+    .cta-banner .btn-primary { position: relative; z-index: 1; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      border-top: 1px solid rgba(74,158,135,0.1);
+      padding: 2.5rem 2rem; text-align: center;
+      color: rgba(236,234,230,0.4); font-size: 0.85rem;
+    }
+    footer a { color: var(--teal-core); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links {
+      display: flex; gap: 1.5rem;
+      justify-content: center; flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-cocoon, .hero-tagline, .hero h1, .hero .sub, .hero-actions {
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-cocoon  { animation-delay: 0.05s; }
+    .hero-tagline { animation-delay: 0.15s; }
+    .hero h1      { animation-delay: 0.25s; }
+    .hero .sub    { animation-delay: 0.38s; }
+    .hero-actions { animation-delay: 0.5s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .manifesto-grid { grid-template-columns: 1fr; }
+      .journey-steps { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 0.8rem 1.25rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7rem 1.25rem 3rem; }
+      section { padding: 4rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+  <a class="nav-back" href="index.html" aria-label="Back to JASS Query">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span class="full">JASS&nbsp;Query</span>
+  </a>
+  <span class="nav-back-sep"></span>
+  <a class="nav-brand" href="index.html">
+    <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QueryVault logo">
+      <defs>
+      <linearGradient id="c1a" x1="0" y1="0.2" x2="0.8" y2="1">
+         <stop offset="0%" stop-color="#9fd4c4"></stop>
+         <stop offset="100%" stop-color="#4a9e87"></stop>
+      </linearGradient>
+      <linearGradient id="c1b" x1="1" y1="0.2" x2="0.2" y2="1">
+         <stop offset="0%" stop-color="#6db8a2" stop-opacity="0.8"></stop>
+         <stop offset="100%" stop-color="#4a9e87" stop-opacity="0.4"></stop>
+      </linearGradient>
+      <radialGradient id="c1glow" cx="0.5" cy="0.5" r="0.5">
+         <stop offset="0%" stop-color="#9fd4c4" stop-opacity="0.7"></stop>
+         <stop offset="60%" stop-color="#6db8a2" stop-opacity="0.2"></stop>
+         <stop offset="100%" stop-color="#4a9e87" stop-opacity="0"></stop>
+      </radialGradient>
+      <linearGradient id="c1flare" x1="0.2" y1="0" x2="0.8" y2="0.5">
+         <stop offset="0%" stop-color="#eceae6" stop-opacity="0.4"></stop>
+         <stop offset="100%" stop-color="#9fd4c4" stop-opacity="0"></stop>
+      </linearGradient>
+      </defs>
+      <path d="M180 100 C100 140, 60 220, 80 320 C100 400, 180 440, 256 420 C200 400, 160 340, 160 260 C160 180, 200 130, 180 100Z" fill="url(#c1a)"></path>
+      <path d="M332 100 C412 140, 452 220, 432 320 C412 400, 332 440, 256 420 C312 400, 352 340, 352 260 C352 180, 312 130, 332 100Z" fill="url(#c1b)"></path>
+      <ellipse cx="256" cy="270" rx="72" ry="90" fill="url(#c1glow)"></ellipse>
+      <ellipse cx="256" cy="260" rx="32" ry="40" fill="#9fd4c4" opacity="0.6"></ellipse>
+      <ellipse cx="256" cy="248" rx="18" ry="22" fill="#eceae6" opacity="0.35"></ellipse>
+      <ellipse cx="155" cy="210" rx="30" ry="50" fill="url(#c1flare)" transform="rotate(15 155 210)"></ellipse>
+      <ellipse cx="256" cy="108" rx="28" ry="10" fill="#6db8a2" opacity="0.3"></ellipse>
+      <circle cx="220" cy="230" r="5" fill="#eceae6" opacity="0.25"></circle>
+      <circle cx="296" cy="240" r="4" fill="#eceae6" opacity="0.2"></circle>
+      <circle cx="256" cy="200" r="3" fill="#eceae6" opacity="0.3"></circle>
+    </svg>
+    <span class="nav-brand-text"><span class="q">Query</span><span class="v">Vault</span></span>
+  </a>
+  </div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#pricing">Pricing</a>
+    <a class="nav-cta" href="https://chromewebstore.google.com/detail/jass-keepa-query-saver/bamoopkicdgjcjomhoimhlanonbbmoop" target="_blank">Get It Free (Chrome)</a>
+    <a class="nav-cta" href="https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp" target="_blank">Get It Free (Edge)</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+
+  <svg class="hero-cocoon" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QueryVault — The Cocoon">
+    <defs>
+    <linearGradient id="c2a" x1="0" y1="0.2" x2="0.8" y2="1">
+       <stop offset="0%" stop-color="#9fd4c4"></stop>
+       <stop offset="100%" stop-color="#4a9e87"></stop>
+    </linearGradient>
+    <linearGradient id="c2b" x1="1" y1="0.2" x2="0.2" y2="1">
+       <stop offset="0%" stop-color="#6db8a2" stop-opacity="0.8"></stop>
+       <stop offset="100%" stop-color="#4a9e87" stop-opacity="0.4"></stop>
+    </linearGradient>
+    <radialGradient id="c2glow" cx="0.5" cy="0.5" r="0.5">
+       <stop offset="0%" stop-color="#9fd4c4" stop-opacity="0.7"></stop>
+       <stop offset="60%" stop-color="#6db8a2" stop-opacity="0.2"></stop>
+       <stop offset="100%" stop-color="#4a9e87" stop-opacity="0"></stop>
+    </radialGradient>
+    <linearGradient id="c2flare" x1="0.2" y1="0" x2="0.8" y2="0.5">
+       <stop offset="0%" stop-color="#eceae6" stop-opacity="0.4"></stop>
+       <stop offset="100%" stop-color="#9fd4c4" stop-opacity="0"></stop>
+    </linearGradient>
+    </defs>
+    <path d="M180 100 C100 140, 60 220, 80 320 C100 400, 180 440, 256 420 C200 400, 160 340, 160 260 C160 180, 200 130, 180 100Z" fill="url(#c2a)"></path>
+    <path d="M332 100 C412 140, 452 220, 432 320 C412 400, 332 440, 256 420 C312 400, 352 340, 352 260 C352 180, 312 130, 332 100Z" fill="url(#c2b)"></path>
+    <ellipse cx="256" cy="270" rx="72" ry="90" fill="url(#c2glow)"></ellipse>
+    <ellipse cx="256" cy="260" rx="32" ry="40" fill="#9fd4c4" opacity="0.6"></ellipse>
+    <ellipse cx="256" cy="248" rx="18" ry="22" fill="#eceae6" opacity="0.35"></ellipse>
+    <ellipse cx="155" cy="210" rx="30" ry="50" fill="url(#c2flare)" transform="rotate(15 155 210)"></ellipse>
+    <ellipse cx="256" cy="108" rx="28" ry="10" fill="#6db8a2" opacity="0.3"></ellipse>
+    <circle cx="220" cy="230" r="5" fill="#eceae6" opacity="0.25"></circle>
+    <circle cx="296" cy="240" r="4" fill="#eceae6" opacity="0.2"></circle>
+    <circle cx="256" cy="200" r="3" fill="#eceae6" opacity="0.3"></circle>
+  </svg>
+
+  <div class="hero-tagline">Your queries are business assets</div>
+
+  <h1>Stop <em>rebuilding.</em><br/>Start <em>protecting</em> your searches.</h1>
+
+  <p class="sub">You spend hours crafting the perfect Keepa Product Finder query. One wrong click and it's gone. QueryVault saves every filter, every range, every setting — and brings it back in seconds.</p>
+
+  <div class="hero-actions">
+    <div class="hero-store-buttons">
+      <a class="btn-primary" href="https://chromewebstore.google.com/detail/jass-keepa-query-saver/bamoopkicdgjcjomhoimhlanonbbmoop" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8v8M8 12h8"/></svg>
+        Add to Chrome — It's Free
+      </a>
+      <a class="btn-primary" href="https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8v8M8 12h8"/></svg>
+        Add to Edge — It's Free
+      </a>
+    </div>
+    <a class="btn-secondary" href="#how-it-works">See How It Works</a>
+  </div>
+
+  <div class="screenshot-wrap">
+    <img src="assets/img/screenshot1.png" alt="QueryVault in action — saving a Keepa Product Finder query" />
+  </div>
+</section>
+
+<!-- ASSET MANIFESTO -->
+<section class="manifesto">
+  <div class="container">
+    <div class="manifesto-grid">
+      <div class="manifesto-text">
+        <div class="section-label">The Problem</div>
+        <h2>Your queries are worth <em>more than you think.</em></h2>
+        <div class="big-quote">A great Keepa query isn't just a search — it's competitive intelligence. It's hours of research crystallized into a single set of filters. Treat it that way.</div>
+        <p>Every time you manually rebuild a Product Finder query, you're burning time and risking mistakes. Missed a range? Forgot a checkbox? That's money left on the table. Your queries deserve the same protection as any other business asset.</p>
+      </div>
+      <div class="manifesto-visual">
+        <div class="pain-card">
+          <span class="pain-icon">&#9200;</span>
+          <div>
+            <strong>15+ minutes lost per rebuild</strong>
+            <p>Complex Product Finder queries have dozens of fields. Rebuilding from memory wastes time you could spend sourcing.</p>
+          </div>
+        </div>
+        <div class="pain-card">
+          <span class="pain-icon">&#9888;&#65039;</span>
+          <div>
+            <strong>One wrong filter = missed products</strong>
+            <p>Forget a single checkbox or range? Your results are silently wrong — and you won't know until it's too late.</p>
+          </div>
+        </div>
+        <div class="pain-card">
+          <span class="pain-icon">&#128240;</span>
+          <div>
+            <strong>Screenshots aren't a strategy</strong>
+            <p>If your "backup" is a screenshot or a sticky note, you're one browser crash away from starting over.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GET IT · REGISTER IT · USE IT -->
+<section class="journey-section" id="how-it-works">
+  <div class="container">
+    <div class="section-label">How It Works</div>
+    <h2>Get it. Save it. <em>Own it.</em></h2>
+    <p class="section-intro">Three steps. Under sixty seconds. Your queries are protected forever.</p>
+    <div class="journey-steps">
+
+      <div class="journey-step">
+        <div class="step-number">01</div>
+        <div class="step-icon">&#128229;</div>
+        <h3><em>Get</em> QueryVault</h3>
+        <p>Install the free browser extension. No account, no email, no sign-up. Just click "Add to Chrome" or "Add to Edge" and you're ready.</p>
+        <a class="step-cta" href="https://chromewebstore.google.com/detail/jass-keepa-query-saver/bamoopkicdgjcjomhoimhlanonbbmoop" target="_blank">Install for Chrome</a>
+        <a class="step-cta" href="https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp" target="_blank">Install for Edge</a>
+      </div>
+
+      <div class="journey-step">
+        <div class="step-number">02</div>
+        <div class="step-icon">&#128190;</div>
+        <h3><em>Save</em> your queries</h3>
+        <p>Dial in your Product Finder search. Click "Save Query" in the side panel. Every filter, range, and checkbox is captured instantly. Name it, star it, organize it.</p>
+        <a class="step-cta" href="#features">See all features</a>
+      </div>
+
+      <div class="journey-step">
+        <div class="step-number">03</div>
+        <div class="step-icon">&#9889;</div>
+        <h3><em>Use</em> them forever</h3>
+        <p>Load any saved query with one click. Every field restores exactly as you left it — in under 2 seconds. Run the same search daily, weekly, or whenever opportunity strikes.</p>
+        <a class="step-cta" href="#pricing">Get started</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-label">Features</div>
+    <h2>Everything you need.<br/><em>Nothing you don't.</em></h2>
+    <p class="section-intro">Built specifically for Keepa's Product Finder — handles every form control so nothing gets lost.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#128190;</div>
+        <h3>One-Click Save</h3>
+        <p>Save any Product Finder query as a favorite with a single click. Every filter captured instantly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9889;</div>
+        <h3>Instant Restore</h3>
+        <p>Load a favorite and watch every field fill in automatically. Back in your search in under 2 seconds.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9998;&#65039;</div>
+        <h3>Rename &amp; Organize</h3>
+        <p>Give your favorites descriptive names and star your most-used ones so they always appear at the top.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128260;</div>
+        <h3>Update Anytime</h3>
+        <p>Refined your search criteria? Update an existing favorite in place without losing your naming.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#127891;</div>
+        <h3>Handles 500+ Fields</h3>
+        <p>Supports ALL Product Finder form controls — number ranges, checkboxes, dropdowns, date pickers, autocomplete and more.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128204;</div>
+        <h3>Side Panel Design</h3>
+        <p>Lives in a clean side panel right next to Keepa. Stays open as you navigate between pages.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="personas-section">
+  <div class="container">
+    <div class="section-label">Built For</div>
+    <h2>Amazon sellers who <em>take sourcing seriously.</em></h2>
+    <p class="section-intro">If you run recurring product searches on Keepa, QueryVault saves you time every single day.</p>
+    <div class="personas">
+      <div class="persona">
+        <div class="persona-icon">&#128230;</div>
+        <div>
+          <strong>Wholesale &amp; Arbitrage Sellers</strong>
+          <p>Run the same sourcing searches day after day without rebuilding from scratch.</p>
+        </div>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">&#128300;</div>
+        <div>
+          <strong>Private Label Researchers</strong>
+          <p>Track competitor categories with saved searches you can revisit on your schedule.</p>
+        </div>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">&#129309;</div>
+        <div>
+          <strong>Virtual Assistants</strong>
+          <p>Manage multiple client search strategies with named, organized favorites.</p>
+        </div>
+      </div>
+      <div class="persona">
+        <div class="persona-icon">&#9881;&#65039;</div>
+        <div>
+          <strong>Anyone Using Keepa Regularly</strong>
+          <p>If you've ever taken a screenshot of your filters just to remember them — this is for you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="privacy-section">
+  <div class="container">
+    <div class="section-label">Your Data</div>
+    <h2>Your data <em>stays yours.</em></h2>
+    <p class="section-intro">No servers. No accounts. No tracking. All your favorites are stored locally in your browser.</p>
+    <div class="privacy-grid">
+      <div class="privacy-item">
+        <span class="check">&#10003;</span>
+        <div><strong>Local Storage Only</strong><p>Everything stays in your browser. Nothing is sent to any external server.</p></div>
+      </div>
+      <div class="privacy-item">
+        <span class="check">&#10003;</span>
+        <div><strong>No Account Required</strong><p>Install it and use it immediately. No sign-up, no login, no email.</p></div>
+      </div>
+      <div class="privacy-item">
+        <span class="check">&#10003;</span>
+        <div><strong>No Tracking</strong><p>We don't track your searches, your behavior, or anything about how you use the extension.</p></div>
+      </div>
+      <div class="privacy-item">
+        <span class="check">&#10003;</span>
+        <div><strong>No Analytics</strong><p>Zero third-party analytics or data collection of any kind.</p></div>
+      </div>
+    </div>
+    <p style="margin-top:1.5rem; font-size:0.85rem; color: var(--text-muted);">
+      Read our full <a href="PrivacyPolicy.html" style="color:var(--teal-core);">Privacy Policy</a>.
+    </p>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-label" style="text-align:center;">Pricing</div>
+    <h2 style="text-align:center; margin-bottom: 0.5rem;">Always <em>free.</em></h2>
+    <p class="section-intro" style="margin: 0 auto 3rem; text-align:center;">No credit card. No trial period. No catch.</p>
+    <div class="tier-grid">
+      <div class="tier-card">
+        <div class="tier-badge" style="background: var(--dark-grey);">Community</div>
+        <h3>QueryVault</h3>
+        <div class="price">$0</div>
+        <div class="price-sub">Free forever</div>
+        <ul class="tier-features">
+          <li>Save up to 10 favorite queries</li>
+          <li>Full save &amp; restore of all form fields</li>
+          <li>Star &amp; organize your favorites</li>
+          <li>Rename favorites anytime</li>
+          <li>Works with ALL Product Finder controls</li>
+          <li>No account required</li>
+          <li>100% local — no data leaves your browser</li>
+        </ul>
+        <a class="btn-primary" style="width:100%; justify-content:center;" href="https://chromewebstore.google.com/detail/jass-keepa-query-saver/bamoopkicdgjcjomhoimhlanonbbmoop" target="_blank">Get Started (Chrome)</a>
+        <a class="btn-primary" style="width:100%; justify-content:center; margin-top:0.5rem;" href="https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp" target="_blank">Get Started (Edge)</a>
+      </div>
+
+      <div class="tier-card featured">
+        <div class="tier-badge">Registered</div>
+        <h3>QueryVault+</h3>
+        <div class="price">$0</div>
+        <div class="price-sub">Free forever — just register</div>
+        <ul class="tier-features">
+          <li>Everything in Community</li>
+          <li>Save up to <strong>30</strong> favorite queries</li>
+          <li>Export your queries as a backup file</li>
+          <li>Import queries from a file</li>
+          <li>Merge queries across devices or teammates</li>
+          <li>Register in-app with just name &amp; email</li>
+          <li>100% local — registration unlocks features, not data access</li>
+        </ul>
+        <a class="btn-primary" style="width:100%; justify-content:center;" href="https://chromewebstore.google.com/detail/jass-keepa-query-saver/bamoopkicdgjcjomhoimhlanonbbmoop" target="_blank">Get It Free &amp; Register (Chrome)</a>
+        <a class="btn-primary" style="width:100%; justify-content:center; margin-top:0.5rem;" href="https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp" target="_blank">Get It Free &amp; Register (Edge)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section>
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Your queries are <em>assets.</em><br/>Start protecting them.</h2>
+      <p>Install QueryVault in under 10 seconds. Save your first query in under 5. That's time and money back in your pocket, every single day.</p>
+      <div class="hero-store-buttons">
+        <a class="btn-primary" href="https://chromewebstore.google.com/detail/jass-keepa-query-saver/bamoopkicdgjcjomhoimhlanonbbmoop" target="_blank">Add to Chrome — It's Free</a>
+        <a class="btn-primary" href="https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp" target="_blank">Add to Edge — It's Free</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="https://chromewebstore.google.com/detail/jass-keepa-query-saver/bamoopkicdgjcjomhoimhlanonbbmoop" target="_blank">Chrome Web Store</a>
+    <a href="https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp" target="_blank">Edge Add-ons</a>
+    <a href="https://github.com/jass-ent/keepa-query-saver/issues/new?template=bug_report.md" target="_blank">Report a Bug</a>
+    <a href="https://github.com/jass-ent/keepa-query-saver/issues/new?template=feature_request.md" target="_blank">Request a Feature</a>
+    <a href="https://github.com/jass-ent/keepa-query-saver/discussions" target="_blank">Discussions</a>
+    <a href="PrivacyPolicy.html">Privacy Policy</a>
+  </div>
+  <p>&copy; 2026 JASS Enterprises &middot; <a href="https://jassent.com">jassent.com</a> &middot; Built for Keepa power users.</p>
+</footer>
+
+</body>
+</html>

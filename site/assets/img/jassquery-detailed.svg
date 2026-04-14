@@ -1,0 +1,28 @@
+<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="JASS Query">
+  <defs>
+    <linearGradient id="jq-a" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#a4ccd9"/>
+      <stop offset="100%" stop-color="#5b8fa8"/>
+    </linearGradient>
+    <linearGradient id="jq-b" x1="0" y1="0.5" x2="1" y2="0.5">
+      <stop offset="0%" stop-color="#7aaec4" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#5b8fa8" stop-opacity="0.35"/>
+    </linearGradient>
+    <radialGradient id="jq-core" cx="0.5" cy="0.5" r="0.45">
+      <stop offset="0%" stop-color="#eceae6" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#a4ccd9" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Outer ring — the ecosystem -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="url(#jq-a)" stroke-width="6" opacity="0.35"/>
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#jq-b)" stroke-width="4" opacity="0.45"/>
+  <!-- Central seed — the query -->
+  <path d="M256 120 C320 120, 360 180, 360 256 C360 332, 320 392, 256 392 C192 392, 152 332, 152 256 C152 180, 192 120, 256 120Z" fill="url(#jq-a)" opacity="0.55"/>
+  <ellipse cx="256" cy="256" rx="52" ry="92" fill="#7aaec4" opacity="0.45"/>
+  <circle cx="256" cy="256" r="54" fill="url(#jq-core)"/>
+  <circle cx="256" cy="256" r="22" fill="#eceae6" opacity="0.4"/>
+  <!-- Orbit dots for sub-products -->
+  <circle cx="256" cy="36" r="14" fill="#a4ccd9" opacity="0.6"/>
+  <circle cx="102" cy="340" r="10" fill="#6db8a2" opacity="0.75"/>
+  <circle cx="410" cy="340" r="10" fill="#a888a4" opacity="0.75"/>
+</svg>

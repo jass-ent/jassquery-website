@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JASSQuery — Color Refinement</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #d4d1cc;
+    color: #2a2a2a;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0 0 64px;
+  }
+
+  /* PAGE HEADER */
+  .page-header-block {
+    background: #2a2a2a;
+    padding: 40px 48px 36px;
+  }
+  .page-title {
+    font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
+    color: rgba(255,255,255,0.28); margin-bottom: 8px;
+  }
+  .page-heading {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 26px;
+    color: #eceae6; margin-bottom: 6px;
+  }
+  .page-sub { font-size: 13px; color: rgba(255,255,255,0.32); font-weight: 300; }
+
+  /* NEUTRALS STRIP */
+  .neutrals-strip {
+    background: #3d3d3d;
+    padding: 28px 48px;
+    display: flex; align-items: flex-end; gap: 32px; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    margin-bottom: 48px;
+  }
+  .neutrals-strip-label {
+    font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: rgba(255,255,255,0.22); margin-bottom: 14px;
+  }
+  .neutrals-note {
+    font-size: 12px; color: rgba(255,255,255,0.25); font-weight: 300;
+    max-width: 220px; line-height: 1.65; align-self: center;
+  }
+
+  /* CONTENT */
+  .content-area { padding: 0 48px; }
+
+  /* COLOR THEORY NOTE */
+  .theory-note {
+    background: #eceae6;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .theory-note-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .theory-note-text { font-size: 13px; line-height: 1.7; color: rgba(42,42,42,0.7); font-weight: 300; }
+  .theory-note-text strong { color: #2a2a2a; font-weight: 500; }
+
+  /* DIRECTION BLOCK */
+  .direction-block {
+    margin-bottom: 32px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.12);
+  }
+
+  .dir-header {
+    background: #2a2a2a;
+    padding: 18px 28px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .dir-number { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.22); }
+  .dir-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; color: #eceae6; }
+  .dir-mood { font-size: 12px; color: rgba(255,255,255,0.28); font-weight: 300; margin-left: auto; }
+
+  .dir-body {
+    background: #d4d1cc;
+    padding: 28px;
+    display: flex; gap: 28px; flex-wrap: wrap;
+  }
+
+  /* SWATCHES */
+  .swatch-col { display: flex; flex-direction: column; gap: 20px; min-width: 220px; }
+  .swatch-group-label {
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(42,42,42,0.38); margin-bottom: 8px;
+  }
+  .swatch-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .swatch { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+  .sw-lg  { width: 72px; height: 72px; border-radius: 10px; }
+  .sw-md  { width: 54px; height: 54px; border-radius: 9px; }
+  .sw-sm  { width: 40px; height: 40px; border-radius: 7px; }
+  .sw-label { font-size: 9px; color: rgba(42,42,42,0.45); text-align: center; }
+  .sw-hex   { font-size: 9px; color: rgba(42,42,42,0.28); font-family: monospace; text-align: center; }
+
+  /* color theory wheel visual */
+  .wheel-hint {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 8px;
+    font-size: 11px;
+    color: rgba(42,42,42,0.55);
+    margin-top: 8px;
+  }
+  .wheel-dot {
+    width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  }
+  .wheel-arrow { opacity: 0.3; font-size: 14px; }
+
+  /* PREVIEW CARD */
+  .preview-card {
+    flex: 1; min-width: 280px;
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.14);
+  }
+  .preview-header { background: #2a2a2a; padding: 20px 22px 18px; }
+  .preview-mid    { background: #d4d1cc; padding: 16px 22px; }
+  .preview-focus  { background: #eceae6; padding: 16px 22px 20px; }
+
+  .preview-logo {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px;
+    letter-spacing: 0.02em; line-height: 1; margin-bottom: 3px;
+  }
+  .preview-tagline {
+    font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+    opacity: 0.45; margin-bottom: 16px;
+  }
+  .preview-sub-row { display: flex; gap: 8px; }
+  .preview-sub { flex: 1; border-radius: 7px; padding: 11px 13px; }
+  .preview-sub-name {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px;
+    letter-spacing: 0.01em; margin-bottom: 3px;
+  }
+  .preview-sub-badge {
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5;
+  }
+  .preview-body-text {
+    font-size: 12px; font-weight: 300; line-height: 1.65; color: rgba(42,42,42,0.6);
+  }
+  .preview-focus-label {
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(42,42,42,0.32); margin-bottom: 6px;
+  }
+  .preview-focus-text {
+    font-size: 12px; font-weight: 500; color: rgba(42,42,42,0.72); line-height: 1.5;
+  }
+
+  /* FULL MOCKUP SECTION */
+  .mockup-section {
+    margin-top: 40px;
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+  }
+  .mockup-nav {
+    background: #2a2a2a;
+    padding: 14px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .mockup-nav-logo {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px;
+    color: #eceae6; letter-spacing: 0.02em;
+  }
+  .mockup-nav-links {
+    display: flex; gap: 24px;
+  }
+  .mockup-nav-link {
+    font-size: 12px; color: rgba(255,255,255,0.72); font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+  .mockup-nav-link.active { color: #eceae6; font-weight: 600; }
+  .mockup-nav-cta {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 7px 16px; border-radius: 6px;
+    background: #4a9e87; color: #fff;
+  }
+  .mockup-body {
+    background: #d4d1cc;
+    padding: 32px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .mockup-card {
+    background: #eceae6;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  }
+  .mockup-card-label {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(42,42,42,0.58); margin-bottom: 8px; font-weight: 500;
+  }
+  .mockup-card-title {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px;
+    color: #111111; margin-bottom: 7px; line-height: 1.3;
+  }
+  .mockup-card-meta {
+    font-size: 12.5px; color: #484848; font-weight: 400; line-height: 1.5;
+  }
+  .mockup-card-tag {
+    display: inline-block; margin-top: 10px;
+    font-size: 11px; letter-spacing: 0.08em; font-weight: 600;
+    padding: 5px 14px; border-radius: 20px;
+  }
+  .tag-vault { background: rgba(74,158,135,0.18); color: #3a8f78; border: 1px solid rgba(74,158,135,0.35); }
+  .tag-forge { background: rgba(142,110,138,0.18); color: #7a5476; border: 1px solid rgba(142,110,138,0.35); }
+  .mockup-footer {
+    background: #3d3d3d;
+    padding: 16px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .mockup-footer-text {
+    font-size: 11px; color: rgba(255,255,255,0.6); font-weight: 400;
+  }
+  .mockup-footer-brand {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px;
+    color: rgba(255,255,255,0.3); letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 680px) {
+    .content-area, .neutrals-strip, .page-header-block { padding-left: 20px; padding-right: 20px; }
+    .dir-body { flex-direction: column; }
+    .dir-mood { display: none; }
+    .mockup-body { grid-template-columns: 1fr; }
+    .mockup-nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<div class="page-header-block">
+  <div class="page-title">JASSQuery · Color Refinement</div>
+  <div class="page-heading">Three Colour Groups · The Full Family</div>
+  <div class="page-sub">JASSQuery Steel Blue · QueryVault Sage Teal · QueryForge Dusty Mauve · Shared Neutrals</div>
+</div>
+
+<!-- NEUTRALS -->
+<div class="neutrals-strip">
+  <div>
+    <div class="neutrals-strip-label">Shared Neutrals</div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <div class="swatch">
+        <div class="sw-lg" style="background:#2a2a2a;"></div>
+        <div class="sw-label" style="color:rgba(255,255,255,0.4);">Charcoal</div>
+        <div class="sw-hex" style="color:rgba(255,255,255,0.22);">#2a2a2a</div>
+      </div>
+      <div class="swatch">
+        <div class="sw-lg" style="background:#3d3d3d;"></div>
+        <div class="sw-label" style="color:rgba(255,255,255,0.4);">Dark Grey</div>
+        <div class="sw-hex" style="color:rgba(255,255,255,0.22);">#3d3d3d</div>
+      </div>
+      <div class="swatch">
+        <div class="sw-lg" style="background:#d4d1cc; border:1px solid rgba(255,255,255,0.1)"></div>
+        <div class="sw-label" style="color:rgba(255,255,255,0.4);">Body Grey</div>
+        <div class="sw-hex" style="color:rgba(255,255,255,0.22);">#d4d1cc</div>
+      </div>
+      <div class="swatch">
+        <div class="sw-lg" style="background:#eceae6; border:1px solid rgba(255,255,255,0.15)"></div>
+        <div class="sw-label" style="color:rgba(255,255,255,0.4);">Focus White</div>
+        <div class="sw-hex" style="color:rgba(255,255,255,0.22);">#eceae6</div>
+      </div>
+    </div>
+  </div>
+  <div class="neutrals-note">Headers dark · Body mid-grey · Focus areas soft white. Unchanged from previous — the accent colors are all that shifts.</div>
+</div>
+
+<div class="content-area">
+
+  <!-- COLOR THEORY NOTE -->
+  <div class="theory-note">
+    <div class="theory-note-icon">🎨</div>
+    <div class="theory-note-text">
+      <strong>Why this pairing works:</strong> Sage-teal (blue-green) and dusty mauve-plum (red-violet) sit roughly opposite each other on the color wheel — a near-complementary relationship. Both have been desaturated to the same "chalky" level, so they feel like family rather than competitors. The result is <strong>clear product distinction without visual conflict</strong> — users instantly know which product they're in, but the brand still feels unified.
+    </div>
+  </div>
+
+  <!-- PALETTE BLOCK -->
+  <div class="direction-block">
+    <div class="dir-header">
+      <div class="dir-number">The Combination</div>
+      <div class="dir-name">Steel Blue + Sage-Teal + Dusty Mauve</div>
+      <div class="dir-mood">Near-complementary · Chalky · Unified</div>
+    </div>
+    <div class="dir-body">
+      <div class="swatch-col">
+
+        <div>
+          <div class="swatch-group-label">JASSQuery — Steel Blue (master brand)</div>
+          <div class="swatch-row">
+            <div class="swatch">
+              <div class="sw-lg" style="background:#5b8fa8;"></div>
+              <div class="sw-label">Blue Core</div>
+              <div class="sw-hex">#5b8fa8</div>
+            </div>
+            <div class="swatch">
+              <div class="sw-md" style="background:#7aaec4;"></div>
+              <div class="sw-label">Blue Mid</div>
+              <div class="sw-hex">#7aaec4</div>
+            </div>
+            <div class="swatch">
+              <div class="sw-sm" style="background:#a4ccd9; border:1px solid rgba(42,42,42,0.1)"></div>
+              <div class="sw-label">Blue Pale</div>
+              <div class="sw-hex">#a4ccd9</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="swatch-group-label">QueryVault — Sage Teal (bumped saturation)</div>
+          <div class="swatch-row">
+            <div class="swatch">
+              <div class="sw-lg" style="background:#4a9e87;"></div>
+              <div class="sw-label">Teal Core</div>
+              <div class="sw-hex">#4a9e87</div>
+            </div>
+            <div class="swatch">
+              <div class="sw-md" style="background:#6db8a2;"></div>
+              <div class="sw-label">Teal Mid</div>
+              <div class="sw-hex">#6db8a2</div>
+            </div>
+            <div class="swatch">
+              <div class="sw-sm" style="background:#9fd4c4; border:1px solid rgba(42,42,42,0.1)"></div>
+              <div class="sw-label">Teal Pale</div>
+              <div class="sw-hex">#9fd4c4</div>
+            </div>
+          </div>
+          <div class="wheel-hint">
+            <div class="wheel-dot" style="background:#4a9e87;"></div>
+            <span>Sage-teal — blue-green family</span>
+            <span class="wheel-arrow">↔</span>
+            <div class="wheel-dot" style="background:#8e6e8a;"></div>
+            <span>Near-complementary to mauve-plum</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="swatch-group-label">QueryForge — Dusty Mauve-Plum (contrast)</div>
+          <div class="swatch-row">
+            <div class="swatch">
+              <div class="sw-lg" style="background:#8e6e8a;"></div>
+              <div class="sw-label">Mauve Core</div>
+              <div class="sw-hex">#8e6e8a</div>
+            </div>
+            <div class="swatch">
+              <div class="sw-md" style="background:#a888a4;"></div>
+              <div class="sw-label">Plum Mid</div>
+              <div class="sw-hex">#a888a4</div>
+            </div>
+            <div class="swatch">
+              <div class="sw-sm" style="background:#c4aac0; border:1px solid rgba(42,42,42,0.1)"></div>
+              <div class="sw-label">Plum Pale</div>
+              <div class="sw-hex">#c4aac0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pairing preview strip -->
+        <div>
+          <div class="swatch-group-label">Side by Side — All three families</div>
+          <div style="display:flex; gap:0; border-radius:10px; overflow:hidden; height:48px;">
+            <div style="flex:1; background:#5b8fa8;"></div>
+            <div style="flex:1; background:#7aaec4;"></div>
+            <div style="flex:1; background:#a4ccd9;"></div>
+            <div style="flex:1; background:#d4d1cc;"></div>
+            <div style="flex:1; background:#9fd4c4;"></div>
+            <div style="flex:1; background:#6db8a2;"></div>
+            <div style="flex:1; background:#4a9e87;"></div>
+            <div style="flex:1; background:#d4d1cc;"></div>
+            <div style="flex:1; background:#c4aac0;"></div>
+            <div style="flex:1; background:#a888a4;"></div>
+            <div style="flex:1; background:#8e6e8a;"></div>
+          </div>
+          <div style="font-size:10px; color:rgba(42,42,42,0.35); margin-top:8px; text-align:center; letter-spacing:0.1em;">JASSQuery → Neutral → Vault → Neutral → Forge · Harmonious family</div>
+        </div>
+
+      </div>
+
+      <!-- PREVIEW CARD -->
+      <div class="preview-card">
+        <div class="preview-header">
+          <div class="preview-logo" style="color:#eceae6;">JASS<span style="color:#5b8fa8;">Query</span></div>
+          <div class="preview-tagline" style="color:#5b8fa8;">Your queries are assets</div>
+          <div class="preview-sub-row">
+            <div class="preview-sub" style="background:rgba(74,158,135,0.15); border:1px solid rgba(74,158,135,0.3);">
+              <div class="preview-sub-name"><span style="color:#4a9e87;">Query</span><span style="color:#6db8a2;">Vault</span></div>
+              <div class="preview-sub-badge" style="color:#6db8a2;">Free Extension</div>
+            </div>
+            <div class="preview-sub" style="background:rgba(142,110,138,0.15); border:1px solid rgba(142,110,138,0.3);">
+              <div class="preview-sub-name"><span style="color:#8e6e8a;">Query</span><span style="color:#a888a4;">Forge</span></div>
+              <div class="preview-sub-badge" style="color:#a888a4;">Pro SaaS</div>
+            </div>
+          </div>
+        </div>
+        <div class="preview-mid">
+          <div class="preview-body-text">Stop rebuilding your Keepa queries from scratch. QueryVault saves your best searches — reload any of them with a single click. Upgrade to QueryForge and let them run on autopilot.</div>
+        </div>
+        <div class="preview-focus">
+          <div class="preview-focus-label">Featured Template</div>
+          <div class="preview-focus-text">📦 Top ROI — Toys &amp; Games <span style="color:#4a9e87; font-size:11px; font-weight:400;">by JASS Community</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FULL MOCKUP -->
+  <div style="margin-top: 8px; margin-bottom: 12px;">
+    <div style="font-size:10px; letter-spacing:0.35em; text-transform:uppercase; color:rgba(42,42,42,0.3); margin-bottom:16px;">Full Interface Mockup — Palette in Context</div>
+  </div>
+  <div class="mockup-section">
+    <div class="mockup-nav">
+      <div class="mockup-nav-logo">JASS<span style="color:#4a9e87;">Query</span></div>
+      <div class="mockup-nav-links">
+        <div class="mockup-nav-link active">Dashboard</div>
+        <div class="mockup-nav-link">QueryVault</div>
+        <div class="mockup-nav-link">QueryForge</div>
+        <div class="mockup-nav-link">Templates</div>
+      </div>
+      <div class="mockup-nav-cta">Upgrade to Forge</div>
+    </div>
+    <div class="mockup-body">
+      <div class="mockup-card">
+        <div class="mockup-card-label">Saved Query</div>
+        <div class="mockup-card-title">Toys &amp; Games — High ROI Filter</div>
+        <div class="mockup-card-meta">Last run: 2 days ago · 847 results</div>
+        <div class="mockup-card-tag tag-vault">QueryVault</div>
+      </div>
+      <div class="mockup-card">
+        <div class="mockup-card-label">Scheduled Query</div>
+        <div class="mockup-card-title">Electronics — BSR Drop Alert</div>
+        <div class="mockup-card-meta">Runs every Monday · Auto-delivered</div>
+        <div class="mockup-card-tag tag-forge">QueryForge</div>
+      </div>
+      <div class="mockup-card">
+        <div class="mockup-card-label">Community Template</div>
+        <div class="mockup-card-title">Sports &amp; Outdoors — Q4 Prep</div>
+        <div class="mockup-card-meta">By JASS Community · 312 installs</div>
+        <div class="mockup-card-tag tag-vault">QueryVault</div>
+      </div>
+      <div class="mockup-card">
+        <div class="mockup-card-label">Scheduled Query</div>
+        <div class="mockup-card-title">Home &amp; Kitchen — Seasonal Leads</div>
+        <div class="mockup-card-meta">Runs daily · Last result: 6h ago</div>
+        <div class="mockup-card-tag tag-forge">QueryForge</div>
+      </div>
+      <div class="mockup-card">
+        <div class="mockup-card-label">Saved Query</div>
+        <div class="mockup-card-title">Books — Low Competition Bundle</div>
+        <div class="mockup-card-meta">Last run: today · 214 results</div>
+        <div class="mockup-card-tag tag-vault">QueryVault</div>
+      </div>
+      <div class="mockup-card">
+        <div class="mockup-card-label">Scheduled Query</div>
+        <div class="mockup-card-title">Baby — Keepa Drop Monitor</div>
+        <div class="mockup-card-meta">Runs 3x weekly · Auto-delivered</div>
+        <div class="mockup-card-tag tag-forge">QueryForge</div>
+      </div>
+    </div>
+    <div class="mockup-footer">
+      <div class="mockup-footer-text">6 queries · 2 scheduled · 0 errors</div>
+      <div class="mockup-footer-brand">JASS<span style="color:#4a9e87;">Query</span> · by JASS</div>
+    </div>
+  </div>
+
+</div><!-- /content-area -->
+
+<div style="text-align:center; padding:48px 0 0;">
+  <div style="font-size:10px; letter-spacing:0.4em; text-transform:uppercase; color:rgba(42,42,42,0.2);">JASS Query · Color Refinement · 2026</div>
+</div>
+
+</body>
+</html>
