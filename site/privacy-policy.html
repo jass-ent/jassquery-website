@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — JASS Query</title>
+  <meta name="description" content="Privacy policy for JASS Query, QueryVault, and QueryForge. How we handle your data across our website and products.">
+  <link rel="icon" href="assets/img/jassquery.detailed.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --ink:#2a2a2a;
+      --stone:#d4d1cc;
+      --warm:#eceae6;
+      --white:#fff;
+      --steel:#5b8fa8;
+      --steel-mid:#7aaec4;
+      --steel-lt:#a4ccd9;
+      --steel-xs:#e4eef3;
+      --teal:#4a9e87;
+      --teal-lt:#9fd4c4;
+      --mauve:#8e6e8a;
+      --mauve-lt:#c4aac0;
+      --text:#2c3e50;
+      --text-muted:#52748e;
+      --border:#e2e6ea;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      line-height:1.7;
+      color:var(--text);
+      background:#f8f9fa;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* ── TOP NAV / BACK ── */
+    .topbar{
+      background:var(--ink);
+      padding:0.9rem 2rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .topbar-back{
+      display:inline-flex;align-items:center;gap:8px;
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+      color:rgba(164,204,217,0.75);text-decoration:none;
+      padding:8px 14px 8px 12px;border-radius:8px;
+      border:1px solid rgba(91,143,168,0.3);
+      background:rgba(91,143,168,0.08);
+      transition:all 0.2s;
+    }
+    .topbar-back:hover{
+      color:var(--steel-lt);
+      background:rgba(91,143,168,0.18);
+      border-color:rgba(91,143,168,0.55);
+      transform:translateX(-2px);
+    }
+    .topbar-back svg{width:13px;height:13px;transition:transform 0.2s}
+    .topbar-back:hover svg{transform:translateX(-2px)}
+    .topbar-brand{
+      font-family:'Syne',sans-serif;font-weight:800;
+      font-size:0.95rem;letter-spacing:0.02em;
+    }
+    .topbar-brand .j{color:var(--warm)}
+    .topbar-brand .q{color:var(--steel-mid)}
+
+    /* ── CONTAINER ── */
+    .container{
+      max-width:760px;
+      margin:0 auto;
+      padding:56px 24px 72px;
+    }
+
+    /* ── HEADER / TRIO ── */
+    header{
+      text-align:center;
+      margin-bottom:40px;
+      padding-bottom:32px;
+      border-bottom:2px solid var(--border);
+    }
+    .brand-trio{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:1.5rem;
+      margin-bottom:1.75rem;
+      flex-wrap:wrap;
+    }
+    .brand-trio-item{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:0.5rem;
+    }
+    .brand-trio-item img{
+      display:block;
+    }
+    .brand-trio-item.vault img{width:72px;height:72px}
+    .brand-trio-item.forge img{width:72px;height:72px}
+    .brand-trio-item.master img{width:108px;height:108px}
+    .brand-trio-label{
+      font-family:'Syne',sans-serif;
+      font-size:0.62rem;
+      font-weight:700;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+    }
+    .brand-trio-item.vault .brand-trio-label{color:var(--teal)}
+    .brand-trio-item.master .brand-trio-label{color:var(--steel)}
+    .brand-trio-item.forge .brand-trio-label{color:var(--mauve)}
+    .brand-trio-connector{
+      width:24px;height:1px;background:var(--border);
+      align-self:center;margin-top:-0.5rem;
+    }
+
+    h1{
+      font-family:'Syne',sans-serif;font-weight:800;
+      font-size:32px;
+      color:#1a2a3a;
+      letter-spacing:-0.01em;
+      margin-bottom:6px;
+    }
+    .subtitle{
+      font-size:15px;
+      color:var(--text-muted);
+      font-weight:500;
+    }
+    .dates{
+      margin-top:18px;
+      font-size:12px;
+      color:#8a9bae;
+      letter-spacing:0.04em;
+    }
+    .dates span{display:block}
+
+    /* ── CONTENT ── */
+    .intro{
+      font-size:15px;
+      color:#4a5568;
+      margin-bottom:36px;
+      padding:20px 24px;
+      background:var(--white);
+      border-radius:10px;
+      border:1px solid var(--border);
+      border-left:3px solid var(--steel);
+    }
+
+    h2{
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:19px;
+      color:#1a2a3a;
+      margin-top:36px;
+      margin-bottom:14px;
+      display:flex;
+      align-items:baseline;
+      gap:12px;
+    }
+    h2 .num{
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:0.16em;
+      color:var(--steel);
+      font-family:'Syne',sans-serif;
+    }
+
+    /* section-scoped product pills */
+    .product-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-family:'Syne',sans-serif;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      padding:4px 10px;
+      border-radius:20px;
+      margin-left:auto;
+      vertical-align:middle;
+    }
+    .product-pill.vault{background:rgba(74,158,135,0.12);color:#2e7a5f;border:1px solid rgba(74,158,135,0.35)}
+    .product-pill.forge{background:rgba(142,110,138,0.12);color:#6a4e66;border:1px solid rgba(142,110,138,0.35)}
+    .product-pill.site{background:rgba(91,143,168,0.12);color:#3a6378;border:1px solid rgba(91,143,168,0.35)}
+    .product-pill-dot{width:5px;height:5px;border-radius:50%}
+    .product-pill.vault .product-pill-dot{background:var(--teal)}
+    .product-pill.forge .product-pill-dot{background:var(--mauve)}
+    .product-pill.site .product-pill-dot{background:var(--steel)}
+
+    p{
+      font-size:15px;
+      color:#4a5568;
+      margin-bottom:14px;
+    }
+    ul{
+      margin:8px 0 14px 22px;
+      font-size:15px;
+      color:#4a5568;
+    }
+    ul li{margin-bottom:7px}
+    .highlight{
+      font-weight:600;
+      color:#1a2a3a;
+    }
+    code{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:0.9em;
+      background:#f0f3f5;
+      padding:1px 6px;
+      border-radius:4px;
+      color:#3a6378;
+    }
+    .contact-link{
+      color:var(--steel);
+      text-decoration:none;
+      font-weight:500;
+      border-bottom:1px solid rgba(91,143,168,0.3);
+      transition:border-color 0.2s;
+    }
+    .contact-link:hover{border-bottom-color:var(--steel)}
+
+    /* per-section product wrappers */
+    .product-section{
+      background:var(--white);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:1.5rem 1.75rem;
+      margin:1rem 0 1.5rem;
+    }
+    .product-section.vault{border-left:3px solid var(--teal)}
+    .product-section.forge{border-left:3px solid var(--mauve)}
+    .product-section.site{border-left:3px solid var(--steel)}
+    .product-section h3{
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:15px;
+      color:#1a2a3a;
+      margin:1rem 0 0.5rem;
+    }
+    .product-section h3:first-child{margin-top:0}
+    .product-section p{font-size:14.5px;margin-bottom:10px}
+    .product-section ul{font-size:14.5px;margin-bottom:10px}
+
+    footer{
+      margin-top:56px;
+      padding-top:28px;
+      border-top:1px solid var(--border);
+      text-align:center;
+      font-size:13px;
+      color:#8a9bae;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    footer img{opacity:0.6;transition:opacity 0.2s ease}
+    footer:hover img{opacity:0.9}
+    footer a{
+      color:var(--steel);
+      text-decoration:none;
+    }
+    footer a:hover{text-decoration:underline}
+
+    @media (max-width:600px){
+      .container{padding:40px 18px 56px}
+      h1{font-size:26px}
+      .brand-trio{gap:1rem}
+      .brand-trio-item.master img{width:88px;height:88px}
+      .brand-trio-item.vault img,.brand-trio-item.forge img{width:56px;height:56px}
+      h2{flex-wrap:wrap}
+      .product-pill{margin-left:0}
+      .topbar{padding:0.75rem 1.25rem}
+      .topbar-brand{font-size:0.85rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="topbar">
+  <a class="topbar-back" href="index.html" aria-label="Back to JASS Query">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    JASS&nbsp;Query
+  </a>
+  <span class="topbar-brand"><span class="j">JASS</span>&nbsp;<span class="q">Query</span></span>
+</div>
+
+<div class="container">
+
+  <!-- HEADER with trio -->
+  <header>
+    <div class="brand-trio" aria-label="JASS Query family">
+      <div class="brand-trio-item vault">
+        <img src="assets/img/queryvault-detailed.svg" alt="QueryVault">
+        <div class="brand-trio-label">QueryVault</div>
+      </div>
+      <div class="brand-trio-item master">
+        <img src="assets/img/jassquery.detailed.png" alt="JASS Query">
+        <div class="brand-trio-label">JASS Query</div>
+      </div>
+      <div class="brand-trio-item forge">
+        <img src="assets/img/queryforge-detailed.svg" alt="QueryForge">
+        <div class="brand-trio-label">QueryForge</div>
+      </div>
+    </div>
+    <h1>Privacy Policy</h1>
+    <div class="subtitle">JASS Query and its products</div>
+    <div class="dates">
+      <span>Effective Date: February 18, 2026</span>
+      <span>Last Updated: April 14, 2026</span>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <div class="intro">
+    JASS Query is JASS Enterprises' suite of tools for Amazon resellers working with Keepa. This policy describes how we handle your information across <span class="highlight">the JASS Query website</span>, <span class="highlight">QueryVault</span> (our free browser extension), and <span class="highlight">QueryForge</span> (our forthcoming automation service, currently accepting waitlist signups). Our philosophy is simple: collect as little as possible, keep as much as possible on your own device, and never sell or share what we do collect.
+  </div>
+
+  <!-- 1. OVERVIEW -->
+  <h2><span class="num">01</span> What This Policy Covers</h2>
+  <p>This single policy applies to three things:</p>
+  <ul>
+    <li><span class="highlight">The JASS Query website</span> — the marketing pages at this domain, including this page, the product pages, and the waitlist form.</li>
+    <li><span class="highlight">QueryVault</span> — our free browser extension for saving Keepa Product Finder queries (Chrome and Edge).</li>
+    <li><span class="highlight">QueryForge</span> — a forthcoming automation service. At the time of writing, QueryForge is not yet available. Only its waitlist signup is active. When QueryForge launches as a service, this policy will be updated to describe how it handles account data, API keys, and results.</li>
+  </ul>
+
+  <!-- 2. WEBSITE -->
+  <h2><span class="num">02</span> The JASS Query Website <span class="product-pill site"><span class="product-pill-dot"></span>Website</span></h2>
+  <div class="product-section site">
+    <h3>What we collect</h3>
+    <p>Essentially nothing directly. We do not set cookies, we do not run third-party analytics, and we do not embed tracking pixels or advertising scripts. The only information collected by us on the website is what you voluntarily submit to the QueryForge waitlist form (see Section 04 below).</p>
+    <h3>Hosting and request logs</h3>
+    <p>Our website is hosted by Cloudflare Pages. Cloudflare automatically maintains standard request logs (IP address, timestamp, user agent, requested URL) for security, abuse prevention, and basic traffic statistics. We do not access or analyze these logs for marketing purposes. Cloudflare's handling of this data is governed by <a href="https://www.cloudflare.com/privacypolicy/" class="contact-link" target="_blank" rel="noopener">Cloudflare's privacy policy</a>.</p>
+    <h3>Fonts</h3>
+    <p>The site loads web fonts (Syne and DM Sans) from Google Fonts. When you view the site, your browser requests the font files from <code>fonts.googleapis.com</code>. Google may log these requests per its own privacy policy.</p>
+  </div>
+
+  <!-- 3. QUERYVAULT -->
+  <h2><span class="num">03</span> QueryVault (Browser Extension) <span class="product-pill vault"><span class="product-pill-dot"></span>QueryVault</span></h2>
+  <div class="product-section vault">
+    <h3>What QueryVault stores locally in your browser</h3>
+    <ul>
+      <li>Saved Keepa Product Finder query configurations (form field names and values)</li>
+      <li>Query metadata (names, creation/update timestamps, favorite status)</li>
+      <li>Extension preferences (license expiration date, UI preferences)</li>
+      <li>If you choose to register for the optional free upgraded tier: your name, email address, and registration timestamp</li>
+    </ul>
+
+    <h3>What QueryVault does NOT do</h3>
+    <p>QueryVault does <span class="highlight">not</span> collect, store, or transmit your browsing history, cookies, or activity on any website. It runs no analytics, no telemetry, and no usage tracking.</p>
+
+    <h3>External network requests</h3>
+    <p>QueryVault makes exactly one type of external network request: if you choose to register for the free upgraded tier, your name and email address are transmitted via HTTPS to Web3Forms (<code>web3forms.com</code>), a form handling service, to record your registration. This is the only external network request the extension makes. This data is not sold or shared with any third party.</p>
+    <p>During license activation (comped or internal access only), an email address is entered to validate a license key. This email is used solely for cryptographic validation within the browser and is immediately discarded. It is never saved, stored, or transmitted anywhere.</p>
+
+    <h3>How the stored data is used</h3>
+    <p>Your saved queries are used exclusively to:</p>
+    <ul>
+      <li>Store your Keepa Product Finder search configurations on your device</li>
+      <li>Restore saved configurations when you load a query</li>
+      <li>Sync your favorite query references across devices (via Chrome Sync)</li>
+    </ul>
+
+    <h3>Storage technology</h3>
+    <p>Query definitions are stored locally in your browser using the browser's built-in Extension Storage API (<code>chrome.storage.local</code> and <code>chrome.storage.sync</code>). Chrome Sync data (favorite query references only — not full query data) is handled by Google's Chrome Sync infrastructure and is subject to Google's privacy practices.</p>
+  </div>
+
+  <!-- 4. QUERYFORGE WAITLIST -->
+  <h2><span class="num">04</span> QueryForge Waitlist <span class="product-pill forge"><span class="product-pill-dot"></span>QueryForge</span></h2>
+  <div class="product-section forge">
+    <h3>What we collect</h3>
+    <p>If you sign up for the QueryForge waitlist (on the JASS Query home page or the QueryForge product page), we collect your name and email address. That's the entire waitlist data set.</p>
+    <h3>How it's collected and stored</h3>
+    <p>The waitlist form transmits your submission via HTTPS directly to Web3Forms (<code>web3forms.com</code>), a form handling service that delivers submissions to our inbox. Web3Forms acts as a delivery service; your data is not used by Web3Forms for advertising and is retained according to <a href="https://web3forms.com/privacy" class="contact-link" target="_blank" rel="noopener">Web3Forms' privacy policy</a>.</p>
+    <h3>How it's used</h3>
+    <p>We use waitlist data only to notify you when QueryForge launches and, occasionally, to send substantive updates about its development. We do not sell this list. We do not rent this list. We do not share this list with any third party for any purpose. You can request removal at any time by emailing the contact address in Section 11.</p>
+    <h3>QueryForge as a service (future)</h3>
+    <p>QueryForge is not yet operating as a service. When it launches, it will collect additional data necessary to provide the service (for example, account credentials, Keepa API keys you choose to provide, scheduled job history, and results). This policy will be updated before QueryForge's launch to describe that data handling in detail, and the "Last Updated" date below will reflect the change.</p>
+  </div>
+
+  <!-- 5. THIRD PARTY -->
+  <h2><span class="num">05</span> Third-Party Sharing</h2>
+  <p>We do not sell, trade, or share your data with third parties for advertising or commercial purposes. The only third parties that receive any data from our products and website are:</p>
+  <ul>
+    <li><span class="highlight">Web3Forms</span> — receives name and email submissions from the QueryVault optional-registration flow and the QueryForge waitlist form, solely to deliver those submissions to us.</li>
+    <li><span class="highlight">Cloudflare</span> — hosts the website and maintains standard request logs as described in Section 02.</li>
+    <li><span class="highlight">Google Fonts</span> — serves the web fonts used on the website.</li>
+    <li><span class="highlight">Google Chrome Sync</span> — syncs QueryVault favorite references across your own devices when you are signed into Chrome Sync. This data never reaches us.</li>
+  </ul>
+  <p>We have no analytics services, no advertising networks, and no tracking scripts anywhere in our products or on our website.</p>
+
+  <!-- 6. YOUR RIGHTS -->
+  <h2><span class="num">06</span> Your Rights and Control</h2>
+  <p>You have full control over your data:</p>
+  <ul>
+    <li>View all saved queries directly in the QueryVault side panel</li>
+    <li>Delete any or all saved queries at any time</li>
+    <li>Uninstall QueryVault to remove all stored data from your browser</li>
+    <li>Deactivate your QueryVault license at any time from the Settings page</li>
+    <li>Request removal from the QueryForge waitlist at any time by emailing the contact address below</li>
+  </ul>
+
+  <!-- 7. RETENTION -->
+  <h2><span class="num">07</span> Data Retention</h2>
+  <p>QueryVault query data and preferences persist in your browser until you delete them or uninstall the extension — we have no copy and cannot access or remove them remotely. Name and email addresses submitted through QueryVault registration or the QueryForge waitlist are retained in our inbox and by Web3Forms according to <a href="https://web3forms.com/privacy" class="contact-link" target="_blank" rel="noopener">Web3Forms' privacy policy</a>, plus whatever we keep in our own records to contact you at launch or with updates you've explicitly signed up for.</p>
+
+  <!-- 8. CHILDREN -->
+  <h2><span class="num">08</span> Children's Privacy</h2>
+  <p>Our products and website are designed for Amazon resellers running a business. We do not knowingly collect information from children under 13.</p>
+
+  <!-- 9. CHANGES -->
+  <h2><span class="num">09</span> Changes to This Policy</h2>
+  <p>We may update this policy from time to time — most notably when QueryForge launches as a service and we need to describe its data handling. Changes will be reflected in the "Last Updated" date at the top of this page. Continued use of our products or website after changes constitutes acceptance of the updated policy.</p>
+
+  <!-- 10. JURISDICTION -->
+  <h2><span class="num">10</span> Jurisdiction</h2>
+  <p>JASS Query is operated by JASS Enterprises, a United States business. This policy is written to comply with applicable U.S. privacy laws. If you are accessing our products or website from outside the United States, you acknowledge that any information you provide is transmitted to and processed in the United States.</p>
+
+  <!-- 11. CONTACT -->
+  <h2><span class="num">11</span> Contact</h2>
+  <p>If you have questions about this privacy policy, or you want to request removal of your information, please contact us at: <a href="mailto:help@jassquery.com" class="contact-link">help@jassquery.com</a></p>
+
+  <footer>
+    <img src="assets/img/jassent-detailed.580.png" alt="JASS Enterprises" width="40" height="40">
+    &copy; 2026 JASS Enterprises · Built for Keepa power users
+  </footer>
+
+</div>
+</body>
+</html>

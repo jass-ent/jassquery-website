@@ -558,6 +558,12 @@
       justify-content: center; flex-wrap: wrap;
       margin-bottom: 1rem;
     }
+    .footer-copy {
+      display: inline-flex; align-items: center; gap: 8px;
+      justify-content: center;
+    }
+    .footer-copy img { opacity: 0.6; transition: opacity 0.2s ease; }
+    .footer-copy:hover img { opacity: 0.9; }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -881,7 +887,7 @@
       </div>
     </div>
     <p style="margin-top:1.5rem; font-size:0.85rem; color: var(--text-muted);">
-      Read our full <a href="PrivacyPolicy.html" style="color:var(--teal-core);">Privacy Policy</a>.
+      Read our full <a href="privacy-policy.html" style="color:var(--teal-core);">Privacy Policy</a>.
     </p>
   </div>
 </section>
@@ -954,9 +960,9 @@
     <a href="https://github.com/jass-ent/keepa-query-saver/issues/new?template=bug_report.md" target="_blank">Report a Bug</a>
     <a href="https://github.com/jass-ent/keepa-query-saver/issues/new?template=feature_request.md" target="_blank">Request a Feature</a>
     <a href="https://github.com/jass-ent/keepa-query-saver/discussions" target="_blank">Discussions</a>
-    <a href="PrivacyPolicy.html">Privacy Policy</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
   </div>
-  <p>&copy; 2026 JASS Enterprises &middot; <a href="https://jassent.com">jassent.com</a> &middot; Built for Keepa power users.</p>
+  <p class="footer-copy"><img src="assets/img/jassent-detailed.580.png" alt="JASS Enterprises" width="40" height="40">&copy; 2026 JASS Enterprises &middot; Built for Keepa power users</p>
 </footer>
 
 </body>

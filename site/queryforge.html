@@ -292,7 +292,9 @@ section{padding:5.5rem 3rem}
 .footer-links{display:flex;gap:1.5rem}
 .footer-link{font-size:0.75rem;color:rgba(236,234,230,0.25);text-decoration:none;transition:color 0.2s}
 .footer-link:hover{color:rgba(236,234,230,0.5)}
-.footer-copy{font-size:0.72rem;color:rgba(236,234,230,0.18)}
+.footer-copy{font-size:0.72rem;color:rgba(236,234,230,0.18);display:inline-flex;align-items:center;gap:8px}
+.footer-copy img{opacity:0.55;transition:opacity 0.2s ease}
+.footer-copy:hover img{opacity:0.85}
 
 /* ── ANIMATIONS ── */
 .fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
@@ -897,13 +899,13 @@ section{padding:5.5rem 3rem}
       <span class="wm" style="font-size:15px"><span class="q">Query</span><span class="f">Forge</span></span>
     </div>
     <div class="footer-links">
-      <a class="footer-link" href="#">Privacy</a>
+      <a class="footer-link" href="privacy-policy.html">Privacy</a>
       <a class="footer-link" href="#">Terms</a>
       <a class="footer-link" href="#">Support</a>
       <a class="footer-link" href="#">Status</a>
     </div>
   </div>
-  <div class="footer-copy">© 2026 JASS Enterprises. All rights reserved.</div>
+  <div class="footer-copy"><img src="assets/img/jassent-detailed.580.png" alt="JASS Enterprises" width="36" height="36">© 2026 JASS Enterprises · Built for Keepa power users</div>
 </footer>
 
 <script>
