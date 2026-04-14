@@ -1,6 +1,5 @@
 name = "jassqueryhome"
 compatibility_date = "2026-04-06"
-main = ""
 
 [assets]
 directory = "./site"
