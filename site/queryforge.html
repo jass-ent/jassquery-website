@@ -277,6 +277,41 @@ section{padding:5.5rem 3rem}
 .btn-tier-free:hover{border-color:var(--teal);color:var(--teal)}
 .pricing-note{text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1.5rem;font-weight:300}
 .pricing-note a{color:var(--mauve);text-decoration:none}
+/* billing toggle — segmented control */
+.billing-toggle{display:flex;align-items:center;justify-content:center;gap:0;margin:2rem auto 0}
+.billing-seg{display:inline-flex;background:var(--warm);border:2px solid var(--border);border-radius:14px;padding:4px;gap:2px;box-shadow:0 2px 12px rgba(42,42,42,0.08)}
+.billing-seg-btn{font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:10px 26px;border-radius:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;transition:background 0.22s cubic-bezier(0.2,0.8,0.2,1),color 0.22s,box-shadow 0.22s;position:relative;white-space:nowrap}
+.billing-seg-btn.active{background:var(--mauve);color:#fff;box-shadow:0 4px 14px rgba(142,110,138,0.45)}
+.billing-seg-btn:not(.active):hover{color:var(--ink)}
+.billing-save-badge{display:inline-flex;align-items:center;background:rgba(142,110,138,0.13);color:var(--mauve);border-radius:20px;padding:4px 12px;font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;margin-left:10px;opacity:0;transform:translateX(-4px);transition:opacity 0.25s cubic-bezier(0.2,0.8,0.2,1),transform 0.25s cubic-bezier(0.2,0.8,0.2,1)}
+.billing-save-badge.visible{opacity:1;transform:translateX(0)}
+/* annual price display */
+.price-monthly{transition:opacity 0.18s,transform 0.18s cubic-bezier(0.2,0.8,0.2,1)}
+.price-annual{display:none;opacity:0;transform:translateY(4px);transition:opacity 0.18s,transform 0.18s cubic-bezier(0.2,0.8,0.2,1)}
+body.annual-mode .price-monthly{display:none;opacity:0}
+body.annual-mode .price-annual{display:flex;opacity:1;transform:translateY(0)}
+/* price hover zone — wraps annual price + monthly-eq line */
+.pricing-price-zone{position:relative;cursor:default}
+.pricing-monthly-eq{font-size:0.73rem;color:var(--muted);font-weight:400;margin-bottom:1rem;display:none}
+body.annual-mode .pricing-monthly-eq{display:block}
+/* flyover card */
+.price-flyover{position:absolute;left:0;top:calc(100% + 8px);z-index:20;background:var(--ink);border-radius:14px;padding:14px 16px;width:210px;box-shadow:0 12px 40px rgba(42,42,42,0.28),0 0 0 1px rgba(255,255,255,0.06);opacity:0;pointer-events:none;transform:translateY(-6px) scale(0.97);transition:opacity 0.22s cubic-bezier(0.2,0.8,0.2,1),transform 0.22s cubic-bezier(0.2,0.8,0.2,1);transform-origin:top left}
+.pricing-price-zone:hover .price-flyover{opacity:1;transform:translateY(0) scale(1);pointer-events:none}
+.flyover-label{font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(236,234,230,0.38);margin-bottom:8px}
+.flyover-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.flyover-row:last-child{margin-bottom:0}
+.flyover-monthly-val{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:rgba(236,234,230,0.35);position:relative;display:inline-flex;align-items:center;gap:6px}
+.flyover-strike{position:absolute;left:-2px;right:-2px;top:50%;height:2px;background:rgba(196,170,192,0.7);transform:translateY(-50%) rotate(-5deg);border-radius:2px}
+.flyover-no{width:18px;height:18px;border-radius:50%;border:2px solid rgba(196,170,192,0.55);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.flyover-no svg{width:10px;height:10px;stroke:rgba(196,170,192,0.7);fill:none;stroke-width:2.5;stroke-linecap:round}
+.flyover-divider{height:1px;background:rgba(236,234,230,0.08);margin:8px 0}
+.flyover-annual-row{display:flex;align-items:center;justify-content:space-between}
+.flyover-annual-val{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:var(--mauve-lt)}
+.flyover-annual-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--mauve-lt);opacity:0.7}
+.flyover-saving{font-size:0.68rem;font-weight:600;color:rgba(159,212,196,0.85);margin-top:6px;text-align:right}
+@media(prefers-reduced-motion:reduce){
+  .billing-seg-btn,.billing-save-badge,.price-monthly,.price-annual,.price-flyover{transition:none}
+}
 
 /* ── COMING SOON — disabled buttons ── */
 .btn-disabled,.btn-disabled:hover{opacity:0.38;cursor:not-allowed;pointer-events:none;transform:none !important;background:var(--stone) !important;color:var(--muted) !important;border-color:var(--border) !important}
@@ -759,6 +794,13 @@ section{padding:5.5rem 3rem}
       <p class="section-sub" style="margin:0 auto 0.75rem;text-align:center">Every plan includes transparent credit usage so you always know where you stand. Cancel any time.</p>
       <p style="font-size:0.78rem;color:var(--muted);text-align:center;margin-bottom:0">1 credit = 1 typical 10,000-ASIN search. Credits reset monthly.</p>
     </div>
+    <div class="billing-toggle" role="group" aria-label="Billing period">
+      <div class="billing-seg">
+        <button class="billing-seg-btn" id="btn-monthly" aria-pressed="false">Monthly</button>
+        <button class="billing-seg-btn active" id="btn-annual" aria-pressed="true">Annual</button>
+      </div>
+      <span class="billing-save-badge visible" id="save-badge">Up to 20% off</span>
+    </div>
     <div class="pricing-grid">
 
       <!-- T0 Free -->
@@ -790,8 +832,25 @@ section{padding:5.5rem 3rem}
         <div class="pricing-body">
           <div class="pricing-tier">Tier 1</div>
           <div class="pricing-name">Starter</div>
-          <div class="pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">19</span><span class="pricing-period">.99/mo</span></div>
-          <div style="height:1.35rem"></div>
+          <div class="pricing-price-zone">
+            <div class="price-monthly pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">19</span><span class="pricing-period">.99/mo</span></div>
+            <div class="price-annual pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">192</span><span class="pricing-period">/yr</span></div>
+            <div class="pricing-monthly-eq">$16/mo &middot; billed annually</div>
+            <div class="price-flyover">
+              <div class="flyover-label">If billed monthly</div>
+              <div class="flyover-row">
+                <span class="flyover-monthly-val">$19.99/mo<span class="flyover-strike"></span></span>
+                <span class="flyover-no"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>
+              </div>
+              <div class="flyover-divider"></div>
+              <div class="flyover-annual-row">
+                <span class="flyover-annual-val">$16/mo</span>
+                <span class="flyover-annual-tag">Annual</span>
+              </div>
+              <div class="flyover-saving">You save $47.88/year</div>
+            </div>
+          </div>
+          <div style="height:1.35rem" class="price-monthly"></div>
           <div class="pricing-tagline">The easiest yes in your tool stack. Less than half what you pay for Keepa.</div>
           <div class="pricing-divider"></div>
           <div class="pricing-credits" style="margin-bottom:0.25rem">
@@ -816,8 +875,25 @@ section{padding:5.5rem 3rem}
         <div class="pricing-body has-badge">
           <div class="pricing-tier">Tier 2</div>
           <div class="pricing-name">Pro</div>
-          <div class="pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">39</span><span class="pricing-period">.99/mo</span></div>
-          <div style="height:1.35rem"></div>
+          <div class="pricing-price-zone">
+            <div class="price-monthly pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">39</span><span class="pricing-period">.99/mo</span></div>
+            <div class="price-annual pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">396</span><span class="pricing-period">/yr</span></div>
+            <div class="pricing-monthly-eq">$33/mo &middot; billed annually</div>
+            <div class="price-flyover">
+              <div class="flyover-label">If billed monthly</div>
+              <div class="flyover-row">
+                <span class="flyover-monthly-val">$39.99/mo<span class="flyover-strike"></span></span>
+                <span class="flyover-no"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>
+              </div>
+              <div class="flyover-divider"></div>
+              <div class="flyover-annual-row">
+                <span class="flyover-annual-val">$33/mo</span>
+                <span class="flyover-annual-tag">Annual</span>
+              </div>
+              <div class="flyover-saving">You save $83.88/year</div>
+            </div>
+          </div>
+          <div style="height:1.35rem" class="price-monthly"></div>
           <div class="pricing-tagline">Scale your sourcing strategy. Run Now when opportunity strikes.</div>
           <div class="pricing-divider"></div>
           <div class="pricing-credits" style="background:#f3eef2;margin-bottom:0.25rem">
@@ -841,8 +917,25 @@ section{padding:5.5rem 3rem}
         <div class="pricing-body">
           <div class="pricing-tier">Tier 3</div>
           <div class="pricing-name">Power</div>
-          <div class="pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">74</span><span class="pricing-period">.99/mo</span></div>
-          <div style="height:1.35rem"></div>
+          <div class="pricing-price-zone">
+            <div class="price-monthly pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">74</span><span class="pricing-period">.99/mo</span></div>
+            <div class="price-annual pricing-price"><span class="pricing-dollar">$</span><span class="pricing-amount">744</span><span class="pricing-period">/yr</span></div>
+            <div class="pricing-monthly-eq">$62/mo &middot; billed annually</div>
+            <div class="price-flyover">
+              <div class="flyover-label">If billed monthly</div>
+              <div class="flyover-row">
+                <span class="flyover-monthly-val">$74.99/mo<span class="flyover-strike"></span></span>
+                <span class="flyover-no"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg></span>
+              </div>
+              <div class="flyover-divider"></div>
+              <div class="flyover-annual-row">
+                <span class="flyover-annual-val">$62/mo</span>
+                <span class="flyover-annual-tag">Annual</span>
+              </div>
+              <div class="flyover-saving">You save $155.88/year</div>
+            </div>
+          </div>
+          <div style="height:1.35rem" class="price-monthly"></div>
           <div class="pricing-tagline">Unlimited Run Now. Full competitor intelligence. Built for serious operators.</div>
           <div class="pricing-divider"></div>
           <div class="pricing-credits" style="margin-bottom:0.25rem">
@@ -1004,6 +1097,25 @@ document.getElementById('waitlist-form').addEventListener('submit', async functi
     btn.disabled = false;
   }
 });
+
+// Billing toggle — segmented control, defaults to Annual
+(function() {
+  const btnMonthly = document.getElementById('btn-monthly');
+  const btnAnnual = document.getElementById('btn-annual');
+  const saveBadge = document.getElementById('save-badge');
+  function setAnnual(annual) {
+    document.body.classList.toggle('annual-mode', annual);
+    btnMonthly.classList.toggle('active', !annual);
+    btnAnnual.classList.toggle('active', annual);
+    btnMonthly.setAttribute('aria-pressed', !annual);
+    btnAnnual.setAttribute('aria-pressed', annual);
+    saveBadge.classList.toggle('visible', annual);
+  }
+  btnMonthly.addEventListener('click', () => setAnnual(false));
+  btnAnnual.addEventListener('click', () => setAnnual(true));
+  // default to annual on load (no transition flash — class set before paint)
+  setAnnual(true);
+})();
 
 // Smooth nav highlight on scroll
 const sections = document.querySelectorAll('section[id]');
