@@ -74,7 +74,7 @@
   --warm:#eceae6;
   --stone:#d4d1cc;
   --border:rgba(42,42,42,0.1);
-  --muted:rgba(42,42,42,0.5);
+  --muted:rgba(42,42,42,0.72);
   --white:#fff;
 }
 html{font-size:16px;scroll-behavior:smooth}
@@ -97,7 +97,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;background:var(--stone);co
 .wm .q{color:var(--warm)}
 .wm .f{color:var(--mauve)}
 .nav-links{display:flex;align-items:center;gap:2rem}
-.nav-link{font-size:0.83rem;font-weight:400;color:rgba(236,234,230,0.5);text-decoration:none;transition:color 0.2s}
+.nav-link{font-size:0.83rem;font-weight:400;color:rgba(236,234,230,0.7);text-decoration:none;transition:color 0.2s}
 .nav-link:hover{color:var(--warm)}
 .nav-cta{font-family:'Syne',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 18px;border-radius:8px;background:var(--mauve);color:var(--warm);text-decoration:none;transition:background 0.2s,transform 0.15s}
 .nav-cta:hover{background:#7a5e76;transform:translateY(-1px)}
@@ -128,20 +128,20 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;background:var(--stone);co
 .hero h1 .underline{position:relative;display:inline-block}
 .hero h1 .underline::after{content:'';position:absolute;left:0;bottom:-4px;right:0;height:3px;background:var(--teal);border-radius:2px}
 
-.hero-sub{font-size:1.1rem;font-weight:300;color:rgba(236,234,230,0.55);line-height:1.75;margin-bottom:2.25rem;max-width:520px}
+.hero-sub{font-size:1.1rem;font-weight:400;color:rgba(236,234,230,0.78);line-height:1.75;margin-bottom:2.25rem;max-width:520px}
 
 .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
 .btn-primary{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;padding:14px 28px;border-radius:10px;background:var(--mauve);color:var(--warm);text-decoration:none;transition:all 0.2s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .btn-primary:hover{background:#7a5e76;transform:translateY(-2px)}
 .btn-primary svg{width:16px;height:16px;transition:transform 0.2s}
 .btn-primary:hover svg{transform:translateX(3px)}
-.btn-ghost{font-size:0.88rem;font-weight:400;color:rgba(236,234,230,0.5);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color 0.2s}
+.btn-ghost{font-size:0.88rem;font-weight:400;color:rgba(236,234,230,0.7);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:color 0.2s}
 .btn-ghost:hover{color:var(--warm)}
 
 .hero-trust{display:flex;align-items:center;gap:1.5rem;margin-top:1.75rem}
-.hero-trust-text{font-size:0.76rem;color:rgba(236,234,230,0.3);font-weight:300}
+.hero-trust-text{font-size:0.76rem;color:rgba(236,234,230,0.6);font-weight:400}
 .hero-trust-sep{width:1px;height:16px;background:rgba(255,255,255,0.1)}
-.hero-trust-stat{font-size:0.76rem;color:rgba(236,234,230,0.45)}
+.hero-trust-stat{font-size:0.76rem;color:rgba(236,234,230,0.7)}
 .hero-trust-stat strong{color:var(--mauve-lt);font-weight:500}
 
 /* Hero visual — query card mockup */
@@ -185,11 +185,11 @@ section{padding:5.5rem 3rem}
 /* ── LOGO STRIP ── */
 .logo-strip{background:var(--ink);padding:1.75rem 3rem;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)}
 .logo-strip-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;justify-content:center}
-.logo-strip-label{font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(236,234,230,0.22);white-space:nowrap}
-.logo-strip-sep{width:1px;height:20px;background:rgba(255,255,255,0.08)}
+.logo-strip-label{font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(236,234,230,0.65);font-weight:500;white-space:nowrap}
+.logo-strip-sep{width:1px;height:20px;background:rgba(255,255,255,0.12)}
 .community-stat{display:flex;align-items:center;gap:0.75rem}
 .community-stat-num{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--warm)}
-.community-stat-desc{font-size:0.76rem;color:rgba(236,234,230,0.38);font-weight:300;line-height:1.4}
+.community-stat-desc{font-size:0.78rem;color:rgba(236,234,230,0.72);font-weight:400;line-height:1.4}
 .community-pill{background:rgba(142,110,138,0.2);border:1px solid rgba(142,110,138,0.3);border-radius:20px;padding:0.4rem 1rem;font-size:0.72rem;font-weight:500;color:var(--mauve-lt);letter-spacing:0.06em}
 
 /* ── HOW IT WORKS ── */
@@ -226,11 +226,11 @@ section{padding:5.5rem 3rem}
 .stalk-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
 .stalk-eyebrow{font-size:0.7rem;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--teal);margin-bottom:0.75rem}
 .stalk-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--warm);line-height:1.15;margin-bottom:1rem}
-.stalk-sub{font-size:0.95rem;font-weight:300;color:rgba(236,234,230,0.5);line-height:1.7;margin-bottom:1.75rem}
+.stalk-sub{font-size:0.95rem;font-weight:400;color:rgba(236,234,230,0.75);line-height:1.7;margin-bottom:1.75rem}
 .stalk-variants{display:flex;flex-direction:column;gap:0.75rem}
 .stalk-variant{background:rgba(236,234,230,0.04);border:1px solid rgba(236,234,230,0.08);border-radius:12px;padding:1rem 1.25rem}
 .stalk-variant-title{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;color:var(--warm);margin-bottom:0.2rem}
-.stalk-variant-body{font-size:0.8rem;font-weight:300;color:rgba(236,234,230,0.45);line-height:1.55}
+.stalk-variant-body{font-size:0.8rem;font-weight:400;color:rgba(236,234,230,0.72);line-height:1.55}
 .stalk-badge{display:inline-block;font-size:0.65rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:rgba(74,158,135,0.2);color:var(--teal);margin-top:0.35rem}
 .stalk-visual{position:relative}
 .stalk-card{background:rgba(236,234,230,0.04);border:1px solid rgba(236,234,230,0.1);border-radius:16px;padding:1.5rem;overflow:hidden}
@@ -250,7 +250,7 @@ section{padding:5.5rem 3rem}
 .compare-table{margin-top:3rem;border-radius:16px;overflow:hidden;border:1px solid var(--border)}
 .compare-header{display:grid;grid-template-columns:2fr 1fr 1fr;background:var(--ink);padding:1rem 1.5rem}
 .compare-header-cell{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;color:var(--warm);text-align:center}
-.compare-header-cell:first-child{text-align:left;color:rgba(236,234,230,0.4)}
+.compare-header-cell:first-child{text-align:left;color:rgba(236,234,230,0.7)}
 .compare-header-cell.highlight{color:var(--mauve-lt)}
 .compare-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:0.85rem 1.5rem;background:var(--white);border-bottom:1px solid var(--border);align-items:center}
 .compare-row:last-child{border-bottom:none}
@@ -332,7 +332,7 @@ body.annual-mode .pricing-monthly-eq{display:block}
 
 /* ── COMING SOON — disabled buttons ── */
 .btn-disabled,.btn-disabled:hover{opacity:0.38;cursor:not-allowed;pointer-events:none;transform:none !important;background:var(--stone) !important;color:var(--muted) !important;border-color:var(--border) !important}
-.nav-cta.btn-disabled{background:rgba(236,234,230,0.1) !important;color:rgba(236,234,230,0.3) !important}
+.nav-cta.btn-disabled{background:rgba(236,234,230,0.12) !important;color:rgba(236,234,230,0.6) !important}
 
 /* ── COMING SOON — banner ── */
 .coming-soon-bar{background:var(--mauve);padding:14px 3rem;text-align:center;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--warm);display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
@@ -351,11 +351,11 @@ body.annual-mode .pricing-monthly-eq{display:block}
 .social-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.6rem,2.8vw,2.2rem);color:var(--warm);text-align:center;margin-bottom:3rem}
 .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
 .testimonial{background:rgba(236,234,230,0.04);border:1px solid rgba(236,234,230,0.08);border-radius:16px;padding:1.5rem}
-.testimonial-quote{font-size:0.9rem;font-weight:300;color:rgba(236,234,230,0.65);line-height:1.7;margin-bottom:1.25rem;font-style:italic}
+.testimonial-quote{font-size:0.9rem;font-weight:400;color:rgba(236,234,230,0.82);line-height:1.7;margin-bottom:1.25rem;font-style:italic}
 .testimonial-author{display:flex;align-items:center;gap:0.75rem}
 .testimonial-avatar{width:36px;height:36px;border-radius:50%;background:var(--mauve);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:0.8rem;color:var(--warm);flex-shrink:0}
 .testimonial-name{font-size:0.82rem;font-weight:500;color:var(--warm)}
-.testimonial-role{font-size:0.72rem;color:rgba(236,234,230,0.3);font-weight:300}
+.testimonial-role{font-size:0.72rem;color:rgba(236,234,230,0.6);font-weight:400}
 .stars{color:var(--mauve-lt);font-size:0.85rem;margin-bottom:0.6rem;letter-spacing:2px}
 
 /* ── FAQ ── */
@@ -372,21 +372,22 @@ body.annual-mode .pricing-monthly-eq{display:block}
 .cta-bloom{display:flex;justify-content:center;margin-bottom:1.5rem}
 .cta-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);color:var(--warm);line-height:1.1;margin-bottom:1rem}
 .cta-title em{font-style:normal;color:var(--mauve-lt)}
-.cta-sub{font-size:1rem;font-weight:300;color:rgba(236,234,230,0.48);line-height:1.7;margin-bottom:2.5rem}
+.cta-sub{font-size:1rem;font-weight:400;color:rgba(236,234,230,0.75);line-height:1.7;margin-bottom:2.5rem}
 .cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 .btn-cta-main{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;padding:16px 36px;border-radius:12px;background:var(--mauve);color:var(--warm);text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
 .btn-cta-main:hover{background:#7a5e76;transform:translateY(-2px)}
-.btn-cta-ghost{font-size:0.9rem;font-weight:400;color:rgba(236,234,230,0.45);text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:16px 24px;transition:color 0.2s}
+.btn-cta-ghost{font-size:0.9rem;font-weight:400;color:rgba(236,234,230,0.7);text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:16px 24px;transition:color 0.2s}
 .btn-cta-ghost:hover{color:var(--warm)}
-.cta-fine{font-size:0.72rem;color:rgba(236,234,230,0.22);margin-top:1.25rem;font-weight:300}
+.cta-fine{font-size:0.72rem;color:rgba(236,234,230,0.55);margin-top:1.25rem;font-weight:400}
 
 /* ── WAITLIST FORM ── */
 .waitlist-wrap{margin-top:0.25rem}
 .waitlist-label{font-size:0.72rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--mauve-lt);margin-bottom:0.75rem}
 .waitlist-form{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.5rem}
-.waitlist-input{flex:1;min-width:140px;background:rgba(236,234,230,0.07);border:1px solid rgba(236,234,230,0.15);border-radius:10px;padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--warm);outline:none;transition:border-color 0.2s}
-.waitlist-input::placeholder{color:rgba(236,234,230,0.3)}
-.waitlist-input:focus{border-color:var(--mauve)}
+.waitlist-input{flex:1;min-width:140px;background:rgba(20,18,22,0.6);border:1px solid rgba(196,170,192,0.35);border-radius:10px;padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--warm);outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);transition:border-color 0.2s,background 0.2s,box-shadow 0.2s}
+.waitlist-input::placeholder{color:rgba(236,234,230,0.55)}
+.waitlist-input:hover{border-color:rgba(196,170,192,0.55);background:rgba(20,18,22,0.75)}
+.waitlist-input:focus{border-color:var(--mauve-mid);background:rgba(20,18,22,0.85);box-shadow:inset 0 1px 0 rgba(255,255,255,0.04),0 0 0 3px rgba(142,110,138,0.22)}
 .waitlist-btn{font-family:'Syne',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:12px 22px;border-radius:10px;background:var(--mauve);color:var(--warm);border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;white-space:nowrap}
 .waitlist-btn:hover{background:#7a5e76;transform:translateY(-1px)}
 .waitlist-success{display:none;font-size:0.85rem;color:var(--teal);margin-top:0.6rem;font-weight:400}
@@ -396,9 +397,9 @@ body.annual-mode .pricing-monthly-eq{display:block}
 .footer{background:#1e1e1e;padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(255,255,255,0.05)}
 .footer-left{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
 .footer-links{display:flex;gap:1.5rem}
-.footer-link{font-size:0.75rem;color:rgba(236,234,230,0.25);text-decoration:none;transition:color 0.2s}
-.footer-link:hover{color:rgba(236,234,230,0.5)}
-.footer-copy{font-size:0.72rem;color:rgba(236,234,230,0.18);display:inline-flex;align-items:center;gap:8px}
+.footer-link{font-size:0.75rem;color:rgba(236,234,230,0.6);text-decoration:none;transition:color 0.2s}
+.footer-link:hover{color:rgba(236,234,230,0.85)}
+.footer-copy{font-size:0.72rem;color:rgba(236,234,230,0.55);display:inline-flex;align-items:center;gap:8px}
 .footer-copy img{opacity:0.55;transition:opacity 0.2s ease}
 .footer-copy:hover img{opacity:0.85}
 
@@ -637,7 +638,7 @@ body.annual-mode .pricing-monthly-eq{display:block}
       </div>
       <h1>Your Keepa queries.<br><em>Running themselves.</em><br>Every single day.</h1>
       <span class="cs-not-live">Signup is not open yet — announcing now, launching shortly</span>
-      <p class="hero-sub">QueryForge automatically executes your saved Keepa Product Finder queries on a schedule — so you wake up to fresh data, not a to-do list. No daily limits. No manual clicks. No missed opportunities. <strong style="color:rgba(236,234,230,0.7)">Signup opening soon.</strong></p>
+      <p class="hero-sub">QueryForge automatically executes your saved Keepa Product Finder queries on a schedule — so you wake up to fresh data, not a to-do list. No daily limits. No manual clicks. No missed opportunities. <strong style="color:rgba(236,234,230,0.95);font-weight:500">Signup opening soon.</strong></p>
       <div class="waitlist-wrap">
         <div class="waitlist-label">Sign up for our waiting list</div>
         <form class="waitlist-form" id="waitlist-form">
