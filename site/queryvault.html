@@ -630,6 +630,175 @@
     .hero .sub    { animation-delay: 0.38s; }
     .hero-actions { animation-delay: 0.5s; }
 
+    /* ── SCROLL FADE-UPS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── PAIN CARDS ── */
+    .pain-card {
+      transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1),
+                  border-color 0.4s ease,
+                  box-shadow 0.4s ease;
+      border: 1px solid rgba(74,158,135,0.08);
+    }
+    .pain-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(74,158,135,0.35);
+      box-shadow: 0 16px 40px -14px rgba(74,158,135,0.32),
+                  0 0 0 1px rgba(74,158,135,0.12);
+    }
+    .pain-icon {
+      transition: transform 0.45s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .pain-card:hover .pain-icon {
+      transform: scale(1.15) rotate(-6deg);
+    }
+
+    /* ── JOURNEY STEPS (upgrade) ── */
+    .journey-step {
+      overflow: hidden;
+    }
+    .journey-step::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(74,158,135,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      border-radius: var(--radius);
+    }
+    .journey-step:hover {
+      border-color: rgba(74,158,135,0.55);
+      transform: translateY(-5px);
+      box-shadow: 0 18px 44px -16px rgba(74,158,135,0.4),
+                  0 0 0 1px rgba(74,158,135,0.18);
+    }
+    .journey-step:hover::after { opacity: 1; }
+    .step-icon {
+      transition: background 0.4s ease, transform 0.5s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .journey-step:hover .step-icon {
+      background: rgba(74,158,135,0.22);
+      transform: scale(1.1) rotate(-5deg);
+    }
+    .journey-step h3 {
+      transition: color 0.35s ease;
+    }
+    .journey-step:hover h3 { color: var(--teal-pale); }
+
+    /* ── FEATURE CARDS (upgrade) ── */
+    .feature-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal-core), var(--teal-pale));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .feature-card:hover {
+      border-color: rgba(74,158,135,0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px -12px rgba(74,158,135,0.28),
+                  0 0 0 1px rgba(74,158,135,0.12);
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-icon {
+      transition: background 0.4s ease, transform 0.5s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .feature-card:hover .feature-icon {
+      background: rgba(74,158,135,0.22);
+      transform: scale(1.1) rotate(-4deg);
+    }
+    .feature-card h3 {
+      transition: color 0.35s ease;
+    }
+    .feature-card:hover h3 { color: var(--teal-core); }
+
+    /* ── PERSONAS ── */
+    .persona {
+      transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1),
+                  border-color 0.4s ease,
+                  box-shadow 0.4s ease;
+      border: 1px solid rgba(74,158,135,0.08);
+    }
+    .persona:hover {
+      transform: translateY(-4px);
+      border-color: rgba(74,158,135,0.35);
+      box-shadow: 0 14px 36px -12px rgba(74,158,135,0.28),
+                  0 0 0 1px rgba(74,158,135,0.12);
+    }
+    .persona-icon {
+      transition: transform 0.45s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .persona:hover .persona-icon { transform: scale(1.18) rotate(-6deg); }
+    .persona strong {
+      transition: color 0.35s ease;
+    }
+    .persona:hover strong { color: var(--teal-core); }
+
+    /* ── PRIVACY ITEMS ── */
+    .privacy-item {
+      transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1),
+                  border-color 0.4s ease,
+                  box-shadow 0.4s ease;
+    }
+    .privacy-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(74,158,135,0.4);
+      box-shadow: 0 12px 30px -10px rgba(74,158,135,0.26),
+                  0 0 0 1px rgba(74,158,135,0.12);
+    }
+    .privacy-item .check {
+      transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .privacy-item:hover .check { transform: scale(1.2); }
+    .privacy-item strong {
+      transition: color 0.35s ease;
+    }
+    .privacy-item:hover strong { color: var(--teal-core); }
+
+    /* ── TIER CARDS (upgrade) ── */
+    .tier-card {
+      transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1),
+                  border-color 0.4s ease,
+                  box-shadow 0.4s ease;
+    }
+    .tier-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(74,158,135,0.4);
+      box-shadow: 0 20px 50px -16px rgba(74,158,135,0.3),
+                  0 0 0 1px rgba(74,158,135,0.14);
+    }
+    .tier-card.featured:hover {
+      border-color: var(--teal-mid);
+      box-shadow: 0 20px 50px -16px rgba(74,158,135,0.4),
+                  0 0 0 1px rgba(74,158,135,0.25);
+    }
+
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      .pain-card, .persona, .privacy-item, .feature-card,
+      .journey-step, .tier-card, .fade-up {
+        transition: none;
+        animation: none;
+      }
+      .fade-up { opacity: 1; transform: none; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       .manifesto-grid { grid-template-columns: 1fr; }
@@ -770,21 +939,21 @@
         <p>Every time you manually rebuild a Product Finder query, you're burning time and risking mistakes. Missed a range? Forgot a checkbox? That's money left on the table. Your queries deserve the same protection as any other business asset.</p>
       </div>
       <div class="manifesto-visual">
-        <div class="pain-card">
+        <div class="pain-card fade-up">
           <span class="pain-icon">&#9200;</span>
           <div>
             <strong>15+ minutes lost per rebuild</strong>
             <p>Complex Product Finder queries have dozens of fields. Rebuilding from memory wastes time you could spend sourcing.</p>
           </div>
         </div>
-        <div class="pain-card">
+        <div class="pain-card fade-up" style="transition-delay:0.1s">
           <span class="pain-icon">&#9888;&#65039;</span>
           <div>
             <strong>One wrong filter = missed products</strong>
             <p>Forget a single checkbox or range? Your results are silently wrong — and you won't know until it's too late.</p>
           </div>
         </div>
-        <div class="pain-card">
+        <div class="pain-card fade-up" style="transition-delay:0.2s">
           <span class="pain-icon">&#128240;</span>
           <div>
             <strong>Screenshots aren't a strategy</strong>
@@ -840,32 +1009,32 @@
     <h2>Everything you need.<br/><em>Nothing you don't.</em></h2>
     <p class="section-intro">Built specifically for Keepa's Product Finder — handles every form control so nothing gets lost.</p>
     <div class="features-grid">
-      <div class="feature-card">
+      <div class="feature-card fade-up">
         <div class="feature-icon">&#128190;</div>
         <h3>One-Click Save</h3>
         <p>Save any Product Finder query as a favorite with a single click. Every filter captured instantly.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card fade-up" style="transition-delay:0.07s">
         <div class="feature-icon">&#9889;</div>
         <h3>Instant Restore</h3>
         <p>Load a favorite and watch every field fill in automatically. Back in your search in under 2 seconds.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card fade-up" style="transition-delay:0.14s">
         <div class="feature-icon">&#9998;&#65039;</div>
         <h3>Rename &amp; Organize</h3>
         <p>Give your favorites descriptive names and star your most-used ones so they always appear at the top.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card fade-up" style="transition-delay:0.07s">
         <div class="feature-icon">&#128260;</div>
         <h3>Update Anytime</h3>
         <p>Refined your search criteria? Update an existing favorite in place without losing your naming.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card fade-up" style="transition-delay:0.14s">
         <div class="feature-icon">&#127891;</div>
         <h3>Handles 500+ Fields</h3>
         <p>Supports ALL Product Finder form controls — number ranges, checkboxes, dropdowns, date pickers, autocomplete and more.</p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card fade-up" style="transition-delay:0.21s">
         <div class="feature-icon">&#128204;</div>
         <h3>Side Panel Design</h3>
         <p>Lives in a clean side panel right next to Keepa. Stays open as you navigate between pages.</p>
@@ -881,28 +1050,28 @@
     <h2>Amazon sellers who <em>take sourcing seriously.</em></h2>
     <p class="section-intro">If you run recurring product searches on Keepa, QueryVault saves you time every single day.</p>
     <div class="personas">
-      <div class="persona">
+      <div class="persona fade-up">
         <div class="persona-icon">&#128230;</div>
         <div>
           <strong>Wholesale &amp; Arbitrage Sellers</strong>
           <p>Run the same sourcing searches day after day without rebuilding from scratch.</p>
         </div>
       </div>
-      <div class="persona">
+      <div class="persona fade-up" style="transition-delay:0.08s">
         <div class="persona-icon">&#128300;</div>
         <div>
           <strong>Private Label Researchers</strong>
           <p>Track competitor categories with saved searches you can revisit on your schedule.</p>
         </div>
       </div>
-      <div class="persona">
+      <div class="persona fade-up" style="transition-delay:0.16s">
         <div class="persona-icon">&#129309;</div>
         <div>
           <strong>Virtual Assistants</strong>
           <p>Manage multiple client search strategies with named, organized favorites.</p>
         </div>
       </div>
-      <div class="persona">
+      <div class="persona fade-up" style="transition-delay:0.24s">
         <div class="persona-icon">&#9881;&#65039;</div>
         <div>
           <strong>Anyone Using Keepa Regularly</strong>
@@ -920,19 +1089,19 @@
     <h2>Your data <em>stays yours.</em></h2>
     <p class="section-intro">No servers. No accounts. No tracking. All your favorites are stored locally in your browser.</p>
     <div class="privacy-grid">
-      <div class="privacy-item">
+      <div class="privacy-item fade-up">
         <span class="check">&#10003;</span>
         <div><strong>Local Storage Only</strong><p>Everything stays in your browser. Nothing is sent to any external server.</p></div>
       </div>
-      <div class="privacy-item">
+      <div class="privacy-item fade-up" style="transition-delay:0.08s">
         <span class="check">&#10003;</span>
         <div><strong>No Account Required</strong><p>Install it and use it immediately. No sign-up, no login, no email.</p></div>
       </div>
-      <div class="privacy-item">
+      <div class="privacy-item fade-up" style="transition-delay:0.16s">
         <span class="check">&#10003;</span>
         <div><strong>No Tracking</strong><p>We don't track your searches, your behavior, or anything about how you use the extension.</p></div>
       </div>
-      <div class="privacy-item">
+      <div class="privacy-item fade-up" style="transition-delay:0.24s">
         <span class="check">&#10003;</span>
         <div><strong>No Analytics</strong><p>Zero third-party analytics or data collection of any kind.</p></div>
       </div>
@@ -950,7 +1119,7 @@
     <h2 style="text-align:center; margin-bottom: 0.5rem;">Always <em>free.</em></h2>
     <p class="section-intro" style="margin: 0 auto 3rem; text-align:center;">No credit card. No trial period. No catch.</p>
     <div class="tier-grid">
-      <div class="tier-card">
+      <div class="tier-card fade-up">
         <div class="tier-badge" style="background: var(--dark-grey);">Community</div>
         <h3>QueryVault</h3>
         <div class="price">$0</div>
@@ -968,7 +1137,7 @@
         <a class="btn-primary" style="width:100%; justify-content:center; margin-top:0.5rem;" href="https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp" target="_blank">Get Started (Edge)</a>
       </div>
 
-      <div class="tier-card featured">
+      <div class="tier-card featured fade-up" style="transition-delay:0.1s">
         <div class="tier-badge">Registered</div>
         <h3>QueryVault+</h3>
         <div class="price">$0</div>
@@ -1016,5 +1185,12 @@
   <p class="footer-copy"><img src="assets/img/jassent-detailed.580.png" alt="JASS Enterprises" width="40" height="40">&copy; 2026 JASS Enterprises &middot; Built for Keepa power users</p>
 </footer>
 
+<script>
+// Scroll fade-up
+const _vObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); _vObserver.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => _vObserver.observe(el));
+</script>
 </body>
 </html>
