@@ -274,6 +274,49 @@
       position: relative; z-index: 1;
       width: 100%; border-radius: 14px; display: block;
       box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+      cursor: zoom-in;
+      transition: transform 0.25s cubic-bezier(0.2,0.8,0.2,1),
+                  box-shadow 0.25s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .screenshot-wrap:hover img {
+      transform: translateY(-4px) scale(1.005);
+      box-shadow: 0 40px 96px rgba(0,0,0,0.6), 0 0 0 1px rgba(74,158,135,0.3);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .screenshot-wrap img { transition: none; }
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(26,26,26,0.92);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      padding: 3.5vmin;
+    }
+    .lightbox-overlay.open { display: flex; }
+    .lightbox-overlay img {
+      max-width: 100%; max-height: 100%;
+      border-radius: 10px;
+      box-shadow: 0 48px 120px rgba(0,0,0,0.8);
+      cursor: zoom-out;
+    }
+    .lightbox-close {
+      position: fixed; top: 1.5rem; right: 1.75rem;
+      width: 2.5rem; height: 2.5rem;
+      background: rgba(42,42,42,0.85);
+      border: 1px solid rgba(74,158,135,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--focus-white);
+      font-size: 1.1rem; line-height: 1;
+      transition: background 0.18s, border-color 0.18s, transform 0.18s;
+    }
+    .lightbox-close:hover {
+      background: rgba(74,158,135,0.25);
+      border-color: var(--teal-core);
+      transform: scale(1.1);
     }
 
     /* ── SECTIONS ── */
@@ -1185,12 +1228,42 @@
   <p class="footer-copy"><img src="assets/img/jassent-detailed.580.png" alt="JASS Enterprises" width="40" height="40">&copy; 2026 JASS Enterprises &middot; Built for Keepa power users</p>
 </footer>
 
+<div class="lightbox-overlay" id="screenshotLightbox" role="dialog" aria-modal="true" aria-label="Screenshot enlarged">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&#x2715;</button>
+  <img id="lightboxImg" src="" alt="" />
+</div>
+
 <script>
 // Scroll fade-up
 const _vObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); _vObserver.unobserve(e.target); } });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-up').forEach(el => _vObserver.observe(el));
+
+// Screenshot lightbox
+(function () {
+  const overlay = document.getElementById('screenshotLightbox');
+  const lbImg   = document.getElementById('lightboxImg');
+  const closeBtn = document.getElementById('lightboxClose');
+  const trigger  = document.querySelector('.screenshot-wrap img');
+
+  function open() {
+    lbImg.src = trigger.src;
+    lbImg.alt = trigger.alt;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  trigger.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  lbImg.addEventListener('click', close);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();
 </script>
 </body>
 </html>
