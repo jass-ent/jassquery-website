@@ -169,12 +169,31 @@
       width: 700px; height: 700px; border-radius: 50%;
       background: radial-gradient(circle, rgba(74,158,135,0.14) 0%, transparent 65%);
       pointer-events: none;
+      will-change: transform, filter;
+      animation: breathe-teal-v 3.2s ease-in-out infinite;
+      animation-play-state: paused;
     }
     .hero-glow-2 {
       position: absolute; bottom: -200px; right: -100px;
       width: 500px; height: 500px; border-radius: 50%;
       background: radial-gradient(circle, rgba(159,212,196,0.08) 0%, transparent 70%);
       pointer-events: none;
+      will-change: transform, filter;
+      animation: breathe-teal-v2 2.8s ease-in-out infinite;
+      animation-play-state: paused;
+    }
+    @keyframes breathe-teal-v {
+      0%,100% { transform: translateX(-50%) scale(0.85); }
+      50%      { transform: translateX(-50%) scale(1.18); }
+    }
+    @keyframes breathe-teal-v2 {
+      0%,100% { transform: scale(0.82); }
+      50%      { transform: scale(1.22); }
+    }
+    .hero-glow.active   { animation-play-state: running; filter: saturate(1.5) brightness(1.2); }
+    .hero-glow-2.active { animation-play-state: running; filter: saturate(1.4) brightness(1.15); }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-glow, .hero-glow-2 { animation: none !important; }
     }
     .hero-cocoon {
       position: relative; z-index: 1;
@@ -1239,6 +1258,31 @@ const _vObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); _vObserver.unobserve(e.target); } });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-up').forEach(el => _vObserver.observe(el));
+
+// Hero glows — per-glow hover via geometric hit test
+(function(){
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const glows = hero.querySelectorAll('.hero-glow, .hero-glow-2');
+  let raf = null;
+  hero.addEventListener('mousemove', (e) => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      glows.forEach(g => {
+        const r = g.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const threshold = r.width * 0.42;
+        if (Math.hypot(e.clientX - cx, e.clientY - cy) < threshold) g.classList.add('active');
+        else g.classList.remove('active');
+      });
+      raf = null;
+    });
+  });
+  hero.addEventListener('mouseleave', () => {
+    glows.forEach(g => g.classList.remove('active'));
+  });
+})();
 
 // Screenshot lightbox
 (function () {

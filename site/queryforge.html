@@ -104,10 +104,18 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;background:var(--stone);co
 
 /* ── HERO ── */
 .hero{min-height:100vh;background:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 5rem;position:relative;overflow:hidden}
-.hero-glow{position:absolute;border-radius:50%;pointer-events:none}
-.hero-glow-1{width:600px;height:600px;top:-150px;right:-100px;background:radial-gradient(circle,rgba(142,110,138,0.22) 0%,transparent 65%)}
-.hero-glow-2{width:400px;height:400px;bottom:-100px;left:10%;background:radial-gradient(circle,rgba(74,158,135,0.14) 0%,transparent 65%)}
-.hero-glow-3{width:300px;height:300px;top:30%;left:-80px;background:radial-gradient(circle,rgba(91,143,168,0.1) 0%,transparent 65%)}
+.hero-glow{position:absolute;border-radius:50%;pointer-events:none;will-change:transform,filter;transition:filter 0.5s ease}
+.hero-glow-1{width:600px;height:600px;top:-150px;right:-100px;background:radial-gradient(circle,rgba(142,110,138,0.22) 0%,transparent 65%);animation:breathe-mauve-f 2.6s ease-in-out infinite;animation-play-state:paused}
+.hero-glow-2{width:400px;height:400px;bottom:-100px;left:10%;background:radial-gradient(circle,rgba(74,158,135,0.14) 0%,transparent 65%);animation:breathe-teal-f 3.4s ease-in-out infinite;animation-play-state:paused}
+.hero-glow-3{width:300px;height:300px;top:30%;left:-80px;background:radial-gradient(circle,rgba(91,143,168,0.1) 0%,transparent 65%);animation:breathe-steel-f 3.0s ease-in-out infinite;animation-play-state:paused}
+@keyframes breathe-mauve-f{0%,100%{transform:scale(0.82)}50%{transform:scale(1.22)}}
+@keyframes breathe-teal-f{0%,100%{transform:scale(0.85)}50%{transform:scale(1.18)}}
+@keyframes breathe-steel-f{0%,100%{transform:scale(0.88)}50%{transform:scale(1.15)}}
+.hero-glow.active{animation-play-state:running}
+.hero-glow-1.active{filter:saturate(1.6) brightness(1.25)}
+.hero-glow-2.active{filter:saturate(1.5) brightness(1.2)}
+.hero-glow-3.active{filter:saturate(1.4) brightness(1.15)}
+@media(prefers-reduced-motion:reduce){.hero-glow{animation:none !important}}
 
 .hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;position:relative;z-index:1}
 
@@ -138,24 +146,34 @@ body{font-family:'DM Sans',sans-serif;font-weight:400;background:var(--stone);co
 
 /* Hero visual — query card mockup */
 .hero-visual{position:relative}
-.query-card{background:rgba(236,234,230,0.04);border:1px solid rgba(236,234,230,0.1);border-radius:16px;padding:1.5rem;backdrop-filter:blur(4px)}
+.query-card{background:rgba(236,234,230,0.04);border:1px solid rgba(236,234,230,0.1);border-radius:16px;padding:1.5rem;backdrop-filter:blur(4px);animation:cardFloat 7s ease-in-out infinite;animation-play-state:paused}
+@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.query-card{transition:border-color 0.4s ease,box-shadow 0.4s ease}
+.query-card:hover{animation-play-state:running;border-color:rgba(142,110,138,0.45);box-shadow:0 20px 60px -16px rgba(142,110,138,0.4),0 0 0 1px rgba(142,110,138,0.18)}
 .query-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
 .query-card-title{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;color:rgba(236,234,230,0.6);letter-spacing:0.08em;text-transform:uppercase}
 .query-status{display:flex;align-items:center;gap:5px;font-size:0.7rem;color:var(--teal)}
 .query-status-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 1.4s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-.query-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;border-radius:8px;margin-bottom:0.4rem;background:rgba(236,234,230,0.05);border:1px solid rgba(236,234,230,0.06)}
+.query-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.75rem;border-radius:8px;margin-bottom:0.4rem;background:rgba(236,234,230,0.05);border:1px solid rgba(236,234,230,0.06);position:relative;overflow:hidden}
 .query-row:last-child{margin-bottom:0}
+.query-row.running{border-color:rgba(74,158,135,0.25);background:rgba(74,158,135,0.07)}
+.query-row.running::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(74,158,135,0.18),transparent);animation:rowSweep 3.2s ease-in-out infinite;animation-play-state:paused}
+@keyframes rowSweep{0%{left:-60%}100%{left:140%}}
+.query-card:hover .query-row.running::after{animation-play-state:running}
 .query-name{font-size:0.8rem;color:rgba(236,234,230,0.7);font-weight:400}
 .query-next{font-size:0.7rem;color:rgba(236,234,230,0.3);font-weight:300}
+.query-next.running-text{color:var(--teal-lt)}
 .query-credits{font-size:0.7rem;color:var(--mauve-lt);font-weight:500}
 .card-divider{height:1px;background:rgba(236,234,230,0.07);margin:1rem 0}
 .card-footer{display:flex;align-items:center;justify-content:space-between}
 .card-footer-label{font-size:0.7rem;color:rgba(236,234,230,0.3)}
 .card-footer-value{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:var(--warm)}
-.hero-visual-badge{position:absolute;bottom:-16px;right:-16px;background:var(--teal);border-radius:12px;padding:0.7rem 1rem;display:flex;align-items:center;gap:8px}
+.hero-visual-badge{position:absolute;bottom:-16px;right:-16px;background:var(--teal);border-radius:12px;padding:0.7rem 1rem;display:flex;align-items:center;gap:8px;animation:badgePop 0.5s cubic-bezier(0.2,0.8,0.2,1) 0.8s both}
 .hero-visual-badge-text{font-size:0.72rem;font-weight:500;color:var(--white);line-height:1.3}
 .hero-visual-badge-num{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--white)}
+@keyframes badgePop{0%{opacity:0;transform:scale(0.7) translateY(8px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@media(prefers-reduced-motion:reduce){.query-card,.query-card:hover{animation:none}.query-row.running::after{display:none}.hero-visual-badge{animation:none}}
 
 /* ── SECTION BASE ── */
 section{padding:5.5rem 3rem}
@@ -654,9 +672,9 @@ body.annual-mode .pricing-monthly-eq{display:block}
           <span class="query-next">Next: 2:14am</span>
           <span class="query-credits">8 cr</span>
         </div>
-        <div class="query-row">
+        <div class="query-row running">
           <span class="query-name">Toys clearance hunt</span>
-          <span class="query-next">Running...</span>
+          <span class="query-next running-text">Running...</span>
           <span class="query-credits">12 cr</span>
         </div>
         <div class="query-row">
@@ -677,7 +695,7 @@ body.annual-mode .pricing-monthly-eq{display:block}
           </div>
           <div style="text-align:right">
             <div class="card-footer-label">Results found today</div>
-            <div class="card-footer-value" style="color:var(--teal-lt)">2,847</div>
+            <div class="card-footer-value" id="results-counter" style="color:var(--teal-lt)">0</div>
           </div>
         </div>
       </div>
@@ -1195,6 +1213,54 @@ body.annual-mode .pricing-monthly-eq{display:block}
 </footer>
 
 <script>
+// Results counter — counts up to 2,847 once when the card enters view
+(function(){
+  const el = document.getElementById('results-counter');
+  if (!el) return;
+  const target = 2847;
+  let started = false;
+  const io = new IntersectionObserver((entries) => {
+    if (started || !entries[0].isIntersecting) return;
+    started = true;
+    io.disconnect();
+    const duration = 1800;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(ease * target).toLocaleString();
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }, { threshold: 0.5 });
+  io.observe(el);
+})();
+
+// Hero glows — per-glow hover via geometric hit test
+(function(){
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const glows = hero.querySelectorAll('.hero-glow');
+  let raf = null;
+  hero.addEventListener('mousemove', (e) => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      glows.forEach(g => {
+        const r = g.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const threshold = r.width * 0.42;
+        if (Math.hypot(e.clientX - cx, e.clientY - cy) < threshold) g.classList.add('active');
+        else g.classList.remove('active');
+      });
+      raf = null;
+    });
+  });
+  hero.addEventListener('mouseleave', () => {
+    glows.forEach(g => g.classList.remove('active'));
+  });
+})();
+
 // Scroll fade-up animation
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }});
