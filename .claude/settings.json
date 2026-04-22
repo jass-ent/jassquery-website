@@ -4,7 +4,10 @@
       "Bash(grep -r \"privacy\" site/ -l)",
       "Bash(grep -rn \"privacy-policy\\\\|PrivacyPolicy\\\\|privacypolicy\" site/)",
       "Bash(file site/assets/img/og/*.png)",
-      "Bash(identify site/assets/img/og/*.png)"
+      "Bash(identify site/assets/img/og/*.png)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
