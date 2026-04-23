@@ -270,6 +270,48 @@
     .product-section p{font-size:14.5px;margin-bottom:10px}
     .product-section ul{font-size:14.5px;margin-bottom:10px}
 
+    /* subprocessor table */
+    .subproc-table{
+      width:100%;
+      border-collapse:collapse;
+      margin:12px 0 18px;
+      font-size:14px;
+      background:var(--white);
+      border:1px solid var(--border);
+      border-radius:10px;
+      overflow:hidden;
+    }
+    .subproc-table th,
+    .subproc-table td{
+      text-align:left;
+      padding:10px 14px;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+    }
+    .subproc-table th{
+      background:var(--steel-xs);
+      font-family:'Syne',sans-serif;
+      font-weight:700;
+      font-size:11px;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:#3a6378;
+    }
+    .subproc-table tr:last-child td{border-bottom:none}
+    .subproc-table td:first-child{font-weight:600;color:#1a2a3a;white-space:nowrap}
+
+    /* limited-use callout */
+    .limited-use{
+      background:var(--steel-xs);
+      border:1px solid rgba(91,143,168,0.35);
+      border-left:3px solid var(--steel);
+      border-radius:10px;
+      padding:16px 20px;
+      margin:16px 0;
+      font-size:14.5px;
+    }
+    .limited-use .highlight{color:#1a2a3a}
+
     footer{
       margin-top:56px;
       padding-top:28px;
@@ -301,6 +343,8 @@
       .product-pill{margin-left:0}
       .topbar{padding:0.75rem 1.25rem}
       .topbar-brand{font-size:0.85rem}
+      .subproc-table{font-size:13px}
+      .subproc-table th,.subproc-table td{padding:8px 10px}
     }
   </style>
 </head>
@@ -336,34 +380,40 @@
     <h1>Privacy Policy</h1>
     <div class="subtitle">JASS Query and its products</div>
     <div class="dates">
-      <span>Effective Date: February 18, 2026</span>
-      <span>Last Updated: April 14, 2026</span>
+      <span>Effective Date: April 23, 2026</span>
+      <span>Last Updated: April 23, 2026</span>
     </div>
   </header>
 
   <!-- INTRO -->
   <div class="intro">
-    JASS Query is JASS Enterprises' suite of tools for Amazon resellers working with Keepa. This policy describes how we handle your information across <span class="highlight">the JASS Query website</span>, <span class="highlight">QueryVault</span> (our free browser extension), and <span class="highlight">QueryForge</span> (our forthcoming automation service, currently accepting waitlist signups). Our philosophy is simple: collect as little as possible, keep as much as possible on your own device, and never sell or share what we do collect.
+    JASS Query is the suite of tools for Amazon resellers working with Keepa, operated by <span class="highlight">JASS Pet Services LLC d/b/a JASS Enterprises</span> ("JASS Query," "we," "us"). This policy describes how we handle your information across <span class="highlight">the JASS Query website</span>, <span class="highlight">QueryVault</span> (our free browser extension), and <span class="highlight">QueryForge</span> (our Keepa query automation service). Our philosophy is simple: collect only what the product needs, keep as much as possible on your own device or in your own cloud storage, and never sell or rent what we do collect.
   </div>
 
   <!-- 1. OVERVIEW -->
   <h2><span class="num">01</span> What This Policy Covers</h2>
-  <p>This single policy applies to three things:</p>
+  <p>This single policy applies to three surfaces:</p>
   <ul>
-    <li><span class="highlight">The JASS Query website</span> — the marketing pages at this domain, including this page, the product pages, and the waitlist form.</li>
+    <li><span class="highlight">The JASS Query website</span> — the marketing pages at <code>jassquery.com</code>, including this page, the product pages, and any form submissions on them.</li>
     <li><span class="highlight">QueryVault</span> — our free browser extension for saving Keepa Product Finder queries (Chrome and Edge).</li>
-    <li><span class="highlight">QueryForge</span> — a forthcoming automation service. At the time of writing, QueryForge is not yet available. Only its waitlist signup is active. When QueryForge launches as a service, this policy will be updated to describe how it handles account data, API keys, and results.</li>
+    <li><span class="highlight">QueryForge</span> — our SaaS service for scheduling and running Keepa Product Finder queries on your behalf and delivering results to your chosen cloud storage.</li>
   </ul>
+  <p>Where a section applies only to one surface, it is tagged with a colored pill at the top of that section.</p>
 
   <!-- 2. WEBSITE -->
   <h2><span class="num">02</span> The JASS Query Website <span class="product-pill site"><span class="product-pill-dot"></span>Website</span></h2>
   <div class="product-section site">
     <h3>What we collect</h3>
-    <p>Essentially nothing directly. We do not set cookies, we do not run third-party analytics, and we do not embed tracking pixels or advertising scripts. The only information collected by us on the website is what you voluntarily submit to the QueryForge waitlist form (see Section 04 below).</p>
+    <p>Essentially nothing directly. We do not set advertising cookies, we do not run third-party analytics, and we do not embed tracking pixels or advertising scripts. The only information we actively collect on the marketing site is what you voluntarily submit through a form — for example, a waitlist signup or a contact message.</p>
+
     <h3>Hosting and request logs</h3>
-    <p>Our website is hosted by Cloudflare Pages. Cloudflare automatically maintains standard request logs (IP address, timestamp, user agent, requested URL) for security, abuse prevention, and basic traffic statistics. We do not access or analyze these logs for marketing purposes. Cloudflare's handling of this data is governed by <a href="https://www.cloudflare.com/privacypolicy/" class="contact-link" target="_blank" rel="noopener">Cloudflare's privacy policy</a>.</p>
+    <p>Our website is hosted by us on Microsoft Azure (see §08 for location). As part of normal web-server operation we maintain standard request logs (IP address, timestamp, user agent, requested URL) for security, abuse prevention, and basic traffic statistics. We do not access or analyze these logs for marketing purposes, and we do not share them with third parties except where required by law or to defend against an abuse incident.</p>
+
     <h3>Fonts</h3>
-    <p>The site loads web fonts (Syne and DM Sans) from Google Fonts. When you view the site, your browser requests the font files from <code>fonts.googleapis.com</code>. Google may log these requests per its own privacy policy.</p>
+    <p>The site loads web fonts (Syne and DM Sans) from Google Fonts. When you view the site, your browser requests the font files from <code>fonts.googleapis.com</code>. Google may log these requests per its own privacy policy. No other data is sent to Google from the marketing site.</p>
+
+    <h3>Cookies</h3>
+    <p>The marketing site does not set tracking or advertising cookies. It may set a small number of strictly-necessary cookies required to remember your display preferences (for example, light/dark theme). These are stored in your browser only.</p>
   </div>
 
   <!-- 3. QUERYVAULT -->
@@ -374,86 +424,308 @@
       <li>Saved Keepa Product Finder query configurations (form field names and values)</li>
       <li>Query metadata (names, creation/update timestamps, favorite status)</li>
       <li>Extension preferences (license expiration date, UI preferences)</li>
-      <li>If you choose to register for the optional free upgraded tier: your name, email address, and registration timestamp</li>
+      <li>If you choose to register for the optional free upgraded tier: your name and email address, submitted to us for account creation</li>
     </ul>
 
     <h3>What QueryVault does NOT do</h3>
-    <p>QueryVault does <span class="highlight">not</span> collect, store, or transmit your browsing history, cookies, or activity on any website. It runs no analytics, no telemetry, and no usage tracking.</p>
+    <p>QueryVault does <span class="highlight">not</span> collect, store, or transmit your browsing history, cookies, or activity on any website other than Keepa Product Finder pages that you actively interact with. It runs no analytics, no telemetry, and no usage tracking.</p>
 
     <h3>External network requests</h3>
-    <p>QueryVault makes exactly one type of external network request: if you choose to register for the free upgraded tier, your name and email address are transmitted via HTTPS to Web3Forms (<code>web3forms.com</code>), a form handling service, to record your registration. This is the only external network request the extension makes. This data is not sold or shared with any third party.</p>
-    <p>During license activation (comped or internal access only), an email address is entered to validate a license key. This email is used solely for cryptographic validation within the browser and is immediately discarded. It is never saved, stored, or transmitted anywhere.</p>
+    <p>QueryVault is local-first. The only outbound network requests the extension makes are:</p>
+    <ul>
+      <li>If you choose to register for the free upgraded tier, your name and email address are transmitted via HTTPS to <span class="highlight">Web3Forms</span> (<code>web3forms.com</code>), a form-handling service, which delivers the submission to our inbox so we can record your registration. Web3Forms acts solely as a delivery service; the data is not used by Web3Forms for advertising and is retained according to <a href="https://web3forms.com/privacy" class="contact-link" target="_blank" rel="noopener">Web3Forms' privacy policy</a>. This is the only third party that receives data from QueryVault.</li>
+      <li>If you are signed in with a paid or registered account, the extension may periodically verify your license status with our servers.</li>
+      <li>During license activation (comped or internal access only), an email address is entered to validate a license key. This email is used solely for cryptographic validation within the browser and is immediately discarded — it is never saved, stored, or transmitted anywhere.</li>
+      <li>Interactions you initiate with Keepa (for example, running a saved query) go directly from your browser to Keepa, as if you had filled out the form manually.</li>
+    </ul>
+    <p>We do not sell or rent any information transmitted to us, and we do not share it with third parties for advertising.</p>
 
     <h3>How the stored data is used</h3>
     <p>Your saved queries are used exclusively to:</p>
     <ul>
       <li>Store your Keepa Product Finder search configurations on your device</li>
-      <li>Restore saved configurations when you load a query</li>
-      <li>Sync your favorite query references across devices (via Chrome Sync)</li>
+      <li>Restore saved configurations when you load a query on a Keepa page</li>
+      <li>Optionally sync favorite query <em>references</em> across your own devices via Chrome Sync</li>
     </ul>
 
     <h3>Storage technology</h3>
     <p>Query definitions are stored locally in your browser using the browser's built-in Extension Storage API (<code>chrome.storage.local</code> and <code>chrome.storage.sync</code>). Chrome Sync data (favorite query references only — not full query data) is handled by Google's Chrome Sync infrastructure and is subject to Google's privacy practices.</p>
+
+    <div class="limited-use">
+      <p><span class="highlight">Chrome Web Store Limited Use disclosure.</span> QueryVault's use of information received from Google APIs adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" class="contact-link" target="_blank" rel="noopener">Chrome Web Store User Data Policy</a>, including the Limited Use requirements. We do not transfer or sell user data to third parties for advertising, analytics, or unrelated purposes; do not use user data to determine creditworthiness or for lending; and do not allow humans to read user data except as necessary for security, to comply with applicable law, for operations where we have user consent, or where data has been aggregated and de-identified.</p>
+    </div>
   </div>
 
-  <!-- 4. QUERYFORGE WAITLIST -->
-  <h2><span class="num">04</span> QueryForge Waitlist <span class="product-pill forge"><span class="product-pill-dot"></span>QueryForge</span></h2>
+  <!-- 4. QUERYFORGE -->
+  <h2><span class="num">04</span> QueryForge (SaaS Service) <span class="product-pill forge"><span class="product-pill-dot"></span>QueryForge</span></h2>
   <div class="product-section forge">
-    <h3>What we collect</h3>
-    <p>If you sign up for the QueryForge waitlist (on the JASS Query home page or the QueryForge product page), we collect your name and email address. That's the entire waitlist data set.</p>
-    <h3>How it's collected and stored</h3>
-    <p>The waitlist form transmits your submission via HTTPS directly to Web3Forms (<code>web3forms.com</code>), a form handling service that delivers submissions to our inbox. Web3Forms acts as a delivery service; your data is not used by Web3Forms for advertising and is retained according to <a href="https://web3forms.com/privacy" class="contact-link" target="_blank" rel="noopener">Web3Forms' privacy policy</a>.</p>
-    <h3>How it's used</h3>
-    <p>We use waitlist data only to notify you when QueryForge launches and, occasionally, to send substantive updates about its development. We do not sell this list. We do not rent this list. We do not share this list with any third party for any purpose. You can request removal at any time by emailing the contact address in Section 11.</p>
-    <h3>QueryForge as a service (future)</h3>
-    <p>QueryForge is not yet operating as a service. When it launches, it will collect additional data necessary to provide the service (for example, account credentials, Keepa API keys you choose to provide, scheduled job history, and results). This policy will be updated before QueryForge's launch to describe that data handling in detail, and the "Last Updated" date below will reflect the change.</p>
+    <h3>What QueryForge does</h3>
+    <p>QueryForge is a subscription service that runs Keepa Product Finder queries on a schedule you define and delivers the resulting CSV files to a cloud storage location <em>you</em> own and control (Google Drive, Microsoft OneDrive, or Azure Blob Storage). Your account, queries, and run history are hosted by us in Microsoft Azure.</p>
+
+    <h3>Account and authentication data</h3>
+    <p>When you create a QueryForge account, we collect:</p>
+    <ul>
+      <li><span class="highlight">Identity.</span> Your name, email address, and a unique user identifier supplied by our identity provider (Microsoft Entra External ID). Entra supports sign-in via Google, Amazon, or email/password — the details of that sign-in flow are governed by your chosen provider and by Microsoft.</li>
+      <li><span class="highlight">Account metadata.</span> A generated account ID, your subscription tier, billing status, and a small set of preferences (for example, notification settings).</li>
+    </ul>
+    <p>We do not receive or store your identity-provider password. We never see your Google/Amazon/Microsoft account password.</p>
+
+    <h3>Query and run data</h3>
+    <ul>
+      <li><span class="highlight">Query definitions.</span> The Keepa Product Finder parameters you save (the same form-field values you could fill out manually on Keepa).</li>
+      <li><span class="highlight">Schedules.</span> The cadence and timing you assign to each query.</li>
+      <li><span class="highlight">Run history.</span> A record of each scheduled execution: timestamps, result counts, status, and any errors encountered. This is retained to show you your history and to support credit accounting.</li>
+    </ul>
+    <p>We do <span class="highlight">not</span> retain a copy of your result CSVs on our servers once they have been delivered to your cloud storage. The authoritative copy of your results lives in your storage, not ours. Delivery logs contain metadata (file name, row count, delivery status) but not row-level content.</p>
+
+    <h3>Keepa API credentials (BYOK tiers)</h3>
+    <p>If you are on a "bring-your-own-key" (BYOK) tier, you provide your own Keepa API key. The key is stored encrypted at rest in Microsoft Azure Key Vault. It is used only to execute the queries <em>you</em> scheduled, and is decrypted in memory only at the moment a run executes. We never display the key back to you in plaintext after you submit it, and we never share it with any third party.</p>
+    <p>If you are on a bundled-credits tier, we use our own Keepa credentials to run your queries and deduct credits from your subscription allowance.</p>
+
+    <h3>Results-storage integration (Google Drive, OneDrive, Azure Blob)</h3>
+    <p>You configure <span class="highlight">exactly one</span> results-storage channel:</p>
+    <ul>
+      <li><span class="highlight">Google Drive.</span> You authorize QueryForge via Google OAuth using the <code>drive.file</code> scope. This scope is per-file: QueryForge can only create files in, and manage files in, a folder you specifically choose through Google's picker. It cannot see or access any other file in your Drive. We store the OAuth refresh token encrypted at rest in Azure Key Vault. We use the access this grants solely to write result CSVs to the folder you selected and to read back metadata about the files we wrote (for example, to confirm a file exists). See §05 for our detailed Google user-data handling disclosures.</li>
+      <li><span class="highlight">Microsoft OneDrive.</span> You authorize QueryForge via Microsoft OAuth. The OAuth refresh token is stored encrypted at rest in Azure Key Vault. We use the access solely to write result CSVs to the folder you selected.</li>
+      <li><span class="highlight">Azure Blob Storage (customer-owned container).</span> You supply a Shared Access Signature (SAS) URL that points at a container in <em>your</em> Azure subscription. We store the SAS URL encrypted at rest in Azure Key Vault and use it only to write result CSVs to that container. We do not receive any credentials for your Azure account beyond that SAS URL, and the SAS URL is scoped to the permissions you granted when you generated it.</li>
+    </ul>
+    <p>In all three cases, you can disconnect the integration at any time from the QueryForge portal. Disconnecting revokes our stored credentials immediately on our side; you should also revoke the grant at the provider (Google Account permissions, Microsoft account permissions, or by rotating the SAS) to be fully thorough. Disconnecting does not delete CSVs that have already been delivered to your storage — those are yours and remain yours.</p>
+
+    <h3>Billing data</h3>
+    <p>Paid subscriptions are processed by Stripe. When you enter payment information, it is submitted <span class="highlight">directly to Stripe</span> from your browser; we do not receive or store credit card numbers, CVV codes, or bank account numbers. We receive and store only the billing metadata Stripe returns to us: your customer ID, subscription ID, plan, status, and a token representing your payment method (used only to charge renewals through Stripe). Stripe's handling of your payment information is governed by <a href="https://stripe.com/privacy" class="contact-link" target="_blank" rel="noopener">Stripe's privacy policy</a>.</p>
+
+    <h3>Transactional email</h3>
+    <p>We send transactional email (account confirmations, run-completion notices, billing receipts, and similar) through Resend. Resend receives your email address and the contents of the message in order to deliver it. We do not use Resend, or any other channel, to send marketing email to QueryForge customers unless you have separately opted in.</p>
+
+    <h3>Diagnostics and logs</h3>
+    <p>We maintain operational logs in Azure Application Insights and related Azure services to monitor the health of QueryForge and to debug issues. These logs may include your account ID, request paths, response codes, and error messages, but do not contain row-level query results or your Keepa API key. Operational logs are retained on a rolling 90-day window unless a longer retention is required to investigate a specific incident.</p>
+    <!-- LAWYER REVIEW: Confirm 90-day log retention is what we actually configure in Azure; this should match whatever the final App Insights retention setting is before going live. -->
   </div>
 
-  <!-- 5. THIRD PARTY -->
-  <h2><span class="num">05</span> Third-Party Sharing</h2>
-  <p>We do not sell, trade, or share your data with third parties for advertising or commercial purposes. The only third parties that receive any data from our products and website are:</p>
+  <!-- 5. GOOGLE USER DATA -->
+  <h2><span class="num">05</span> Google User Data (QueryForge + QueryVault) <span class="product-pill forge"><span class="product-pill-dot"></span>QueryForge</span></h2>
+  <div class="product-section forge">
+    <h3>What Google data we access</h3>
+    <p>QueryForge accesses Google user data only when you explicitly connect your Google Drive as your results-storage channel. When you do, you authorize QueryForge via Google OAuth using the <code>drive.file</code> scope. This is a per-file scope: QueryForge receives access only to files it creates in the folder you pick through Google's Drive Picker, plus the folder itself. We cannot see, download, or modify any other file in your Drive.</p>
+
+    <h3>How we use it</h3>
+    <ul>
+      <li>To write CSV result files for your scheduled queries into the folder you selected.</li>
+      <li>To read back metadata about files we have written (for example, to confirm a file was created successfully, to display file details in your run history, or to update a file we previously wrote).</li>
+      <li>To list, rename, or delete files <em>within the folder we write to</em>, if you ask us to do so through the QueryForge portal.</li>
+    </ul>
+    <p>We do not use Google user data for any purpose other than providing the user-facing features you asked for.</p>
+
+    <h3>How we store it</h3>
+    <p>The OAuth refresh token that lets us write to your Drive folder is stored encrypted at rest in Microsoft Azure Key Vault. Access to it is restricted to the QueryForge service workers that execute your scheduled queries. We do not copy or cache Drive file contents on our systems beyond what is strictly necessary to produce and upload the result CSV.</p>
+
+    <h3>How we share it</h3>
+    <p>We do not transfer Google user data to any third party, except as necessary to provide the QueryForge feature you requested (for example, the Azure infrastructure that runs the service), to comply with applicable law or legal process, or with your explicit consent.</p>
+
+    <h3>How you remove it</h3>
+    <p>You can disconnect QueryForge from your Google account at any time by (a) removing the integration from the QueryForge portal, which deletes our stored refresh token, and/or (b) revoking QueryForge's access from your <a href="https://myaccount.google.com/permissions" class="contact-link" target="_blank" rel="noopener">Google Account permissions page</a>. Revoking either way stops any further access. CSVs we have already delivered to your Drive folder remain in <em>your</em> Drive under your control — they are your files.</p>
+
+    <div class="limited-use">
+      <p><span class="highlight">Google API Services User Data Policy — Limited Use disclosure.</span> QueryForge's use of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" class="contact-link" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+      <p>Specifically, we affirm that QueryForge does <span class="highlight">not</span>:</p>
+      <ul>
+        <li>transfer Google user data to third parties, except as necessary to provide or improve user-facing features of QueryForge that are prominent in the product's user interface, to comply with applicable law, or as part of a merger, acquisition, or sale of assets with appropriate notice to users;</li>
+        <li>use Google user data for serving advertisements, including retargeting, personalized, or interest-based advertising;</li>
+        <li>use Google user data to determine creditworthiness or for lending purposes;</li>
+        <li>allow humans to read Google user data, except (i) with your explicit affirmative consent for specific messages, (ii) as necessary for security purposes (such as investigating abuse), (iii) to comply with applicable law, or (iv) where the data has been aggregated and de-identified for internal operations.</li>
+      </ul>
+    </div>
+    <!-- LAWYER REVIEW: This Limited Use block should match the current Google API Services User Data Policy verbatim-style language at launch. Re-check https://developers.google.com/terms/api-services-user-data-policy before we submit the Google OAuth app for verification. -->
+  </div>
+
+  <!-- 6. MICROSOFT USER DATA -->
+  <h2><span class="num">06</span> Microsoft User Data (Sign-in and OneDrive) <span class="product-pill forge"><span class="product-pill-dot"></span>QueryForge</span></h2>
+  <div class="product-section forge">
+    <h3>What Microsoft data we access</h3>
+    <p>QueryForge uses Microsoft services in two distinct places, and it is important to keep them separate:</p>
+    <ul>
+      <li><span class="highlight">Sign-in (always).</span> We authenticate every QueryForge user through Microsoft Entra External ID, our identity provider. When you sign in, Microsoft shares a minimum profile (your name, email, and a unique identifier) and issues us a short-lived token. This is not OneDrive access — it only confirms who you are. Entra External ID supports sign-in using Google, Amazon, or email/password; your choice of method is governed by the provider you pick plus Microsoft.</li>
+      <li><span class="highlight">OneDrive results storage (only if you opt in).</span> If you choose OneDrive as your results-storage channel, you additionally authorize QueryForge via Microsoft OAuth against Microsoft Graph. We request only the scopes needed to read and write files within the folder you designate for QueryForge output.</li>
+    </ul>
+
+    <h3>How we use it</h3>
+    <ul>
+      <li><span class="highlight">Sign-in data</span> is used to create and authenticate your QueryForge Account, to show your name and email in the portal, to associate runs and billing with you, and to send you transactional email.</li>
+      <li><span class="highlight">OneDrive access</span> is used solely to write result CSVs to the folder you designate, to read back metadata about files we have written (for example, to confirm a file exists), and to list, rename, or delete files within that folder when you ask us to from the portal.</li>
+    </ul>
+    <p>We do not use Microsoft data for advertising, for training machine-learning models, or for any purpose other than providing the user-facing features of QueryForge.</p>
+
+    <h3>How we store it</h3>
+    <p>The OAuth refresh token that lets us write to your OneDrive folder is stored encrypted at rest in Microsoft Azure Key Vault. Sign-in claims (name, email, identity-provider ID) are stored in your QueryForge account record in Azure Cosmos DB. We do not cache OneDrive file contents on our systems beyond what is strictly necessary to produce and upload a result CSV.</p>
+
+    <h3>How we share it</h3>
+    <p>We do not transfer Microsoft user data to any third party, except as necessary to provide the QueryForge feature you requested (for example, the Azure infrastructure that runs the service), to comply with applicable law or legal process, or with your explicit consent. Sharing Microsoft user data for advertising, resale, or unrelated analytics is not allowed and we do not do it.</p>
+
+    <h3>How you remove it</h3>
+    <p>You can disconnect QueryForge from your Microsoft account at any time by (a) removing the OneDrive integration from the QueryForge portal, which deletes our stored refresh token, and/or (b) revoking QueryForge's access from your <a href="https://myaccount.microsoft.com/" class="contact-link" target="_blank" rel="noopener">Microsoft Account</a> or, for Entra work/school accounts, your organization's admin "My Apps" page. Revoking either way stops any further access. CSVs we have already delivered to your OneDrive remain in <em>your</em> OneDrive under your control — they are your files. If you delete your QueryForge Account, your sign-in record and any stored tokens are deleted as described in §11.</p>
+
+    <h3>Publisher identity and consent</h3>
+    <p>QueryForge's Microsoft Entra application is registered under a publisher domain we control (<code>jassquery.com</code>). The consent screen Microsoft shows when you first authorize QueryForge identifies us as the publisher and links to this Privacy Policy and to our <a href="terms-of-service.html" class="contact-link">Terms of Service</a>, so you can review how we handle your data before granting access.</p>
+    <!-- LAWYER REVIEW: We assume we will complete Microsoft Publisher Verification (Microsoft AI Cloud Partner Program) before launch. If verification is still pending at launch, remove or soften the "publisher identity" paragraph. Also — if we ever enroll in the Microsoft 365 App Compliance Program (Publisher Attestation), the answers we give in Partner Center must match this policy exactly; keep them in lockstep. -->
+  </div>
+
+  <!-- 7. LEGAL BASIS -->
+  <h2><span class="num">07</span> Legal Basis for Processing (GDPR)</h2>
+  <p>If you are located in the European Economic Area, the United Kingdom, or Switzerland, we rely on the following legal bases under the GDPR / UK GDPR:</p>
   <ul>
-    <li><span class="highlight">Web3Forms</span> — receives name and email submissions from the QueryVault optional-registration flow and the QueryForge waitlist form, solely to deliver those submissions to us.</li>
-    <li><span class="highlight">Cloudflare</span> — hosts the website and maintains standard request logs as described in Section 02.</li>
-    <li><span class="highlight">Google Fonts</span> — serves the web fonts used on the website.</li>
-    <li><span class="highlight">Google Chrome Sync</span> — syncs QueryVault favorite references across your own devices when you are signed into Chrome Sync. This data never reaches us.</li>
+    <li><span class="highlight">Contract.</span> Most processing we do (running your queries, storing your account, delivering your CSVs, billing you) is necessary to perform the subscription contract you enter into with us.</li>
+    <li><span class="highlight">Legitimate interest.</span> Operational logging, fraud and abuse prevention, and securing the service rely on our legitimate interest in running a safe and reliable product, balanced against your privacy interests.</li>
+    <li><span class="highlight">Consent.</span> If we ever ask you to receive marketing communications, or otherwise process data where consent is required, we rely on your consent, and you may withdraw it at any time.</li>
+    <li><span class="highlight">Legal obligation.</span> Where we are required to retain information for tax, accounting, or regulatory purposes.</li>
   </ul>
-  <p>We have no analytics services, no advertising networks, and no tracking scripts anywhere in our products or on our website.</p>
 
-  <!-- 6. YOUR RIGHTS -->
-  <h2><span class="num">06</span> Your Rights and Control</h2>
-  <p>You have full control over your data:</p>
+  <!-- 8. SUBPROCESSORS -->
+  <h2><span class="num">08</span> Subprocessors and Third-Party Services</h2>
+  <p>We do not sell or rent your personal information. We use the following subprocessors to operate JASS Query, QueryVault, and QueryForge. Each has signed (or operates under) a data processing agreement or equivalent contractual terms where applicable.</p>
+  <table class="subproc-table" aria-label="Subprocessors">
+    <thead>
+      <tr>
+        <th>Subprocessor</th>
+        <th>Purpose</th>
+        <th>Data category</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Microsoft Azure</td>
+        <td>Hosting, storage, compute, Key Vault, logging (QueryForge)</td>
+        <td>All QueryForge account, query, run, credential, and log data</td>
+        <td>United States</td>
+      </tr>
+      <tr>
+        <td>Microsoft Entra External ID</td>
+        <td>Identity provider and authentication (QueryForge)</td>
+        <td>Name, email, identity-provider ID, tokens</td>
+        <td>United States</td>
+      </tr>
+      <tr>
+        <td>Stripe</td>
+        <td>Subscription billing and payments (QueryForge)</td>
+        <td>Name, email, billing address, payment method (held by Stripe; not by us)</td>
+        <td>United States</td>
+      </tr>
+      <tr>
+        <td>Resend</td>
+        <td>Transactional email delivery</td>
+        <td>Email address, message contents</td>
+        <td>United States</td>
+      </tr>
+      <tr>
+        <td>Keepa GmbH</td>
+        <td>Executes the Product Finder queries you scheduled</td>
+        <td>Query parameters and (on bundled-credit tiers) our own Keepa API key</td>
+        <td>Germany</td>
+      </tr>
+      <tr>
+        <td>Google (Drive + OAuth)</td>
+        <td>Delivers result CSVs to your Drive if you connect Google Drive; also powers Google Fonts on the website</td>
+        <td>OAuth tokens; file metadata and contents we write to your folder</td>
+        <td>United States</td>
+      </tr>
+      <tr>
+        <td>Microsoft (OneDrive + OAuth)</td>
+        <td>Delivers result CSVs to your OneDrive if you connect OneDrive</td>
+        <td>OAuth tokens; file metadata and contents we write to your folder</td>
+        <td>United States</td>
+      </tr>
+      <tr>
+        <td>Web3Forms</td>
+        <td>Delivers QueryVault registration submissions (name + email) to our inbox</td>
+        <td>Name, email address</td>
+        <td>United States</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>We will update this list as subprocessors change. Material changes will be reflected in the "Last Updated" date at the top of this page; subscribers on enterprise terms, if any, may also be notified directly.</p>
+  <!-- LAWYER REVIEW: Confirm we have, or will have before launch, a signed DPA / SCCs in place for each subprocessor listed above, especially for EU/UK data subjects. -->
+
+  <!-- 9. INTERNATIONAL TRANSFERS -->
+  <h2><span class="num">09</span> International Data Transfers</h2>
+  <p>JASS Query is operated from the United States and the primary QueryForge infrastructure runs in Microsoft Azure US regions. If you access our products from outside the United States, you acknowledge that your information is transferred to and processed in the United States, and that U.S. law may apply to it. Where required for transfers of personal data out of the European Economic Area, the United Kingdom, or Switzerland, we rely on the European Commission's Standard Contractual Clauses, the UK International Data Transfer Addendum, or equivalent transfer mechanisms with our subprocessors.</p>
+  <!-- LAWYER REVIEW: If we expect to market to EU customers, consider whether we need an EU representative under GDPR Art. 27, and whether to publish their contact here. -->
+
+  <!-- 10. YOUR RIGHTS -->
+  <h2><span class="num">10</span> Your Rights</h2>
+  <p>Depending on where you live, you have some or all of the following rights regarding your personal information:</p>
   <ul>
-    <li>View all saved queries directly in the QueryVault side panel</li>
-    <li>Delete any or all saved queries at any time</li>
-    <li>Uninstall QueryVault to remove all stored data from your browser</li>
-    <li>Deactivate your QueryVault license at any time from the Settings page</li>
-    <li>Request removal from the QueryForge waitlist at any time by emailing the contact address below</li>
+    <li><span class="highlight">Access.</span> Ask what personal information we hold about you and receive a copy.</li>
+    <li><span class="highlight">Correction.</span> Ask us to correct inaccurate or incomplete information.</li>
+    <li><span class="highlight">Deletion.</span> Ask us to delete your personal information (subject to legal retention obligations).</li>
+    <li><span class="highlight">Portability.</span> Receive your personal information in a structured, machine-readable format.</li>
+    <li><span class="highlight">Restriction or objection.</span> Restrict or object to certain processing (GDPR/UK GDPR).</li>
+    <li><span class="highlight">Opt out of sale or sharing.</span> Direct us not to "sell" or "share" your personal information under the California Consumer Privacy Act / California Privacy Rights Act (CCPA/CPRA). We do not sell or share your personal information as those terms are defined under CCPA/CPRA, and we have not done so in the preceding twelve months. You may still make this request.</li>
+    <li><span class="highlight">Limit use of sensitive personal information.</span> Direct us to limit our use of sensitive personal information to what is necessary to provide the service (CCPA/CPRA).</li>
+    <li><span class="highlight">Non-discrimination.</span> We will not deny service, charge a different price, or provide a different quality of service because you exercised any of these rights.</li>
+    <li><span class="highlight">Withdraw consent.</span> Where we rely on consent, you may withdraw it at any time without affecting the lawfulness of prior processing.</li>
+    <li><span class="highlight">Complaint.</span> Lodge a complaint with your local data protection authority (for example, your EU member-state supervisory authority, the UK ICO, or the California Attorney General).</li>
+  </ul>
+  <p>To exercise any of these rights, email <a href="mailto:privacy@jassquery.com" class="contact-link">privacy@jassquery.com</a>. We will respond within the timeframes required by applicable law (for example, within 30 days under GDPR, or 45 days under CCPA, with extensions only as the law permits). We may need to verify your identity before acting on a request — typically by confirming control of the email address tied to your account.</p>
+  <p>Authorized agents may submit CCPA/CPRA requests on your behalf with written permission that we are allowed to verify.</p>
+
+  <!-- 11. DATA RETENTION -->
+  <h2><span class="num">11</span> Data Retention</h2>
+  <p>We keep information only as long as we need it for the purpose it was collected for, or as required by law. In practice:</p>
+  <ul>
+    <li><span class="highlight">QueryVault local data.</span> Persists in your browser until you delete it or uninstall the extension. We have no copy and cannot remotely access or delete it. If you opted into the registered tier, the name/email you submitted through QueryVault is retained in our inbox and by Web3Forms per <a href="https://web3forms.com/privacy" class="contact-link" target="_blank" rel="noopener">Web3Forms' retention policy</a>, plus whatever we keep in our own records to contact you about your registration, until you ask us to delete it.</li>
+    <li><span class="highlight">QueryForge account data.</span> Retained while your account is active and for up to 90 days after cancellation so you can reactivate. After that, account metadata, query definitions, and integration credentials are deleted or anonymized, except where we need to keep specific records for billing, tax, or legal purposes.</li>
+    <li><span class="highlight">QueryForge run history.</span> Retained for the life of the account, subject to reasonable storage limits per tier. You can delete individual run records from the portal.</li>
+    <li><span class="highlight">Result CSVs.</span> We do not retain copies on our servers after delivery. The copies in your cloud storage are controlled by you.</li>
+    <li><span class="highlight">Keepa API keys and OAuth tokens.</span> Retained in Azure Key Vault until you disconnect the integration or delete your account, at which point they are deleted (subject to the vault's soft-delete period).</li>
+    <li><span class="highlight">Operational logs.</span> Typically retained for up to 90 days, longer only where needed to investigate a specific incident.</li>
+    <li><span class="highlight">Billing records.</span> Retained for at least seven (7) years to meet U.S. tax and accounting obligations, regardless of account closure.</li>
+    <li><span class="highlight">Marketing signup data.</span> Retained until you ask us to remove it or the list is retired.</li>
   </ul>
 
-  <!-- 7. RETENTION -->
-  <h2><span class="num">07</span> Data Retention</h2>
-  <p>QueryVault query data and preferences persist in your browser until you delete them or uninstall the extension — we have no copy and cannot access or remove them remotely. Name and email addresses submitted through QueryVault registration or the QueryForge waitlist are retained in our inbox and by Web3Forms according to <a href="https://web3forms.com/privacy" class="contact-link" target="_blank" rel="noopener">Web3Forms' privacy policy</a>, plus whatever we keep in our own records to contact you at launch or with updates you've explicitly signed up for.</p>
+  <!-- 12. SECURITY -->
+  <h2><span class="num">12</span> Security</h2>
+  <p>We take the security of your information seriously, and in particular, of the OAuth tokens, SAS URLs, and Keepa API keys you entrust to us. We apply the following measures:</p>
+  <ul>
+    <li>All traffic to and from our services is encrypted in transit using TLS 1.2 or higher.</li>
+    <li>Secrets (OAuth tokens, SAS URLs, Keepa API keys, webhook signing secrets) are stored encrypted at rest in Microsoft Azure Key Vault. Application code fetches them at the moment they are needed and does not write them to logs.</li>
+    <li>Application data (accounts, queries, run history) is stored in Azure Cosmos DB and Azure Table/Blob Storage, encrypted at rest with Microsoft-managed keys.</li>
+    <li>Access to production systems is restricted to authorized personnel and authenticated via Microsoft Entra with multi-factor authentication.</li>
+    <li>We log security-relevant events and monitor them for anomalies.</li>
+  </ul>
+  <p>No system is perfectly secure. If we learn of a personal-data breach that affects you, we will notify you as soon as reasonably possible and in any event within the timeframes required by applicable law (for example, within 72 hours of awareness where GDPR applies).</p>
 
-  <!-- 8. CHILDREN -->
-  <h2><span class="num">08</span> Children's Privacy</h2>
-  <p>Our products and website are designed for Amazon resellers running a business. We do not knowingly collect information from children under 13.</p>
+  <!-- 13. THIRD-PARTY PAGES & LINKS -->
+  <h2><span class="num">13</span> Third-Party Sites and Integrations</h2>
+  <p>Our products and website may link to third-party sites (for example, Keepa, Stripe's billing portal, or the Google and Microsoft account pages). We are not responsible for the privacy practices of those third parties. Once you leave our site or enter a third-party integration flow, that third party's privacy policy applies.</p>
 
-  <!-- 9. CHANGES -->
-  <h2><span class="num">09</span> Changes to This Policy</h2>
-  <p>We may update this policy from time to time — most notably when QueryForge launches as a service and we need to describe its data handling. Changes will be reflected in the "Last Updated" date at the top of this page. Continued use of our products or website after changes constitutes acceptance of the updated policy.</p>
+  <!-- 14. CHILDREN -->
+  <h2><span class="num">14</span> Children's Privacy</h2>
+  <p>Our products and website are designed for Amazon resellers running a business. They are not directed to children. We do not knowingly collect personal information from children under 13 (or under the equivalent age in your jurisdiction — for example, 16 in parts of the EU). If you believe we have inadvertently collected information from a child, contact <a href="mailto:privacy@jassquery.com" class="contact-link">privacy@jassquery.com</a> and we will delete it.</p>
 
-  <!-- 10. JURISDICTION -->
-  <h2><span class="num">10</span> Jurisdiction</h2>
-  <p>JASS Query is operated by JASS Enterprises, a United States business. This policy is written to comply with applicable U.S. privacy laws. If you are accessing our products or website from outside the United States, you acknowledge that any information you provide is transmitted to and processed in the United States.</p>
+  <!-- 15. DO NOT TRACK -->
+  <h2><span class="num">15</span> "Do Not Track" and Global Privacy Control</h2>
+  <p>Because we do not engage in cross-context behavioral advertising and do not sell or share personal information for advertising purposes, we do not respond differently to browser Do-Not-Track signals. Where required, we honor the Global Privacy Control (GPC) signal as an opt-out request for California consumers.</p>
 
-  <!-- 11. CONTACT -->
-  <h2><span class="num">11</span> Contact</h2>
-  <p>If you have questions about this privacy policy, or you want to request removal of your information, please contact us at: <a href="mailto:help@jassquery.com" class="contact-link">help@jassquery.com</a></p>
+  <!-- 16. CHANGES -->
+  <h2><span class="num">16</span> Changes to This Policy</h2>
+  <p>We may update this policy from time to time — for example, when we add or change a subprocessor, launch a new feature that handles data differently, or adapt to new legal requirements. Changes will be reflected in the "Last Updated" date at the top of this page. Material changes will be highlighted or emailed to account holders. Continued use of our products or website after the effective date of a change constitutes acceptance of the updated policy.</p>
+
+  <!-- 17. JURISDICTION -->
+  <h2><span class="num">17</span> Jurisdiction</h2>
+  <p>JASS Query is operated by JASS Pet Services LLC d/b/a JASS Enterprises, a limited liability company organized in the United States. This policy is written to comply with applicable U.S. privacy laws and, where relevant, with the GDPR / UK GDPR. If you are accessing our products or website from outside the United States, you acknowledge that any information you provide is transmitted to and processed in the United States.</p>
+
+  <!-- 18. CONTACT -->
+  <h2><span class="num">18</span> Contact</h2>
+  <p>For privacy questions, data-access or deletion requests, or to exercise any of the rights described in §10:</p>
+  <ul>
+    <li>Email (privacy): <a href="mailto:privacy@jassquery.com" class="contact-link">privacy@jassquery.com</a></li>
+    <li>Email (general support, as a fallback): <a href="mailto:help@jassquery.com" class="contact-link">help@jassquery.com</a></li>
+  </ul>
+  <!-- LAWYER REVIEW: Consider whether a physical mailing address is required (CCPA requires at least two methods for submitting requests, and a toll-free number or physical address is common). If we want to keep this digital-only, confirm the email+web-form-style path satisfies that requirement. -->
 
   <footer>
     <img src="assets/img/jassent-detailed.580.png" alt="JASS Enterprises" width="40" height="40">
-    &copy; 2026 JASS Enterprises · Built for Keepa power users
+    &copy; 2026 JASS Pet Services LLC d/b/a JASS Enterprises · Built for Keepa power users
   </footer>
 
 </div>
