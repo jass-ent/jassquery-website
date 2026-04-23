@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — JASS Query</title>
+  <meta name="description" content="Terms of Service for JASS Query, QueryVault, and QueryForge — the rules for using our website, browser extension, and Keepa query automation service.">
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="JASS Query">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://jassquery.com/terms-of-service.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JASS Query">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://jassquery.com/terms-of-service.html">
+  <meta property="og:title" content="Terms of Service — JASS Query">
+  <meta property="og:description" content="Terms of Service for JASS Query, QueryVault, and QueryForge.">
+  <meta property="og:image" content="https://jassquery.com/assets/img/og/og-jassquery.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="JASS Query">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Terms of Service — JASS Query">
+  <meta name="twitter:description" content="Terms of Service for JASS Query, QueryVault, and QueryForge.">
+  <meta name="twitter:image" content="https://jassquery.com/assets/img/og/og-jassquery.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --ink:#2a2a2a;
+      --stone:#d4d1cc;
+      --warm:#eceae6;
+      --white:#fff;
+      --steel:#5b8fa8;
+      --steel-mid:#7aaec4;
+      --steel-lt:#a4ccd9;
+      --steel-xs:#e4eef3;
+      --teal:#4a9e87;
+      --teal-lt:#9fd4c4;
+      --mauve:#8e6e8a;
+      --mauve-lt:#c4aac0;
+      --text:#2c3e50;
+      --text-muted:#52748e;
+      --border:#e2e6ea;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      line-height:1.7;
+      color:var(--text);
+      background:#f8f9fa;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* ── TOP NAV / BACK ── */
+    .topbar{
+      background:var(--ink);
+      padding:0.9rem 2rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .topbar-back{
+      display:inline-flex;align-items:center;gap:8px;
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+      color:rgba(164,204,217,0.75);text-decoration:none;
+      padding:8px 14px 8px 12px;border-radius:8px;
+      border:1px solid rgba(91,143,168,0.3);
+      background:rgba(91,143,168,0.08);
+      transition:all 0.2s;
+    }
+    .topbar-back:hover{
+      color:var(--steel-lt);
+      background:rgba(91,143,168,0.18);
+      border-color:rgba(91,143,168,0.55);
+      transform:translateX(-2px);
+    }
+    .topbar-back svg{width:13px;height:13px;transition:transform 0.2s}
+    .topbar-back:hover svg{transform:translateX(-2px)}
+    .topbar-brand{
+      font-family:'Syne',sans-serif;font-weight:800;
+      font-size:0.95rem;letter-spacing:0.02em;
+    }
+    .topbar-brand .j{color:var(--warm)}
+    .topbar-brand .q{color:var(--steel-mid)}
+
+    /* ── CONTAINER ── */
+    .container{
+      max-width:760px;
+      margin:0 auto;
+      padding:56px 24px 72px;
+    }
+
+    /* ── HEADER / TRIO ── */
+    header{
+      text-align:center;
+      margin-bottom:40px;
+      padding-bottom:32px;
+      border-bottom:2px solid var(--border);
+    }
+    .brand-trio{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:1.5rem;
+      margin-bottom:1.75rem;
+      flex-wrap:wrap;
+    }
+    .brand-trio-item{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:0.5rem;
+    }
+    .brand-trio-item img{
+      display:block;
+    }
+    .brand-trio-item.vault img{width:72px;height:72px}
+    .brand-trio-item.forge img{width:72px;height:72px}
+    .brand-trio-item.master img{width:108px;height:108px}
+    .brand-trio-label{
+      font-family:'Syne',sans-serif;
+      font-size:0.62rem;
+      font-weight:700;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+    }
+    .brand-trio-item.vault .brand-trio-label{color:var(--teal)}
+    .brand-trio-item.master .brand-trio-label{color:var(--steel)}
+    .brand-trio-item.forge .brand-trio-label{color:var(--mauve)}
+    .brand-trio-connector{
+      width:24px;height:1px;background:var(--border);
+      align-self:center;margin-top:-0.5rem;
+    }
+
+    h1{
+      font-family:'Syne',sans-serif;font-weight:800;
+      font-size:32px;
+      color:#1a2a3a;
+      letter-spacing:-0.01em;
+      margin-bottom:6px;
+    }
+    .subtitle{
+      font-size:15px;
+      color:var(--text-muted);
+      font-weight:500;
+    }
+    .dates{
+      margin-top:18px;
+      font-size:12px;
+      color:#8a9bae;
+      letter-spacing:0.04em;
+    }
+    .dates span{display:block}
+
+    /* ── CONTENT ── */
+    .intro{
+      font-size:15px;
+      color:#4a5568;
+      margin-bottom:36px;
+      padding:20px 24px;
+      background:var(--white);
+      border-radius:10px;
+      border:1px solid var(--border);
+      border-left:3px solid var(--steel);
+    }
+
+    h2{
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:19px;
+      color:#1a2a3a;
+      margin-top:36px;
+      margin-bottom:14px;
+      display:flex;
+      align-items:baseline;
+      gap:12px;
+    }
+    h2 .num{
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:0.16em;
+      color:var(--steel);
+      font-family:'Syne',sans-serif;
+    }
+
+    /* section-scoped product pills */
+    .product-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-family:'Syne',sans-serif;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      padding:4px 10px;
+      border-radius:20px;
+      margin-left:auto;
+      vertical-align:middle;
+    }
+    .product-pill.vault{background:rgba(74,158,135,0.12);color:#2e7a5f;border:1px solid rgba(74,158,135,0.35)}
+    .product-pill.forge{background:rgba(142,110,138,0.12);color:#6a4e66;border:1px solid rgba(142,110,138,0.35)}
+    .product-pill.site{background:rgba(91,143,168,0.12);color:#3a6378;border:1px solid rgba(91,143,168,0.35)}
+    .product-pill-dot{width:5px;height:5px;border-radius:50%}
+    .product-pill.vault .product-pill-dot{background:var(--teal)}
+    .product-pill.forge .product-pill-dot{background:var(--mauve)}
+    .product-pill.site .product-pill-dot{background:var(--steel)}
+
+    p{
+      font-size:15px;
+      color:#4a5568;
+      margin-bottom:14px;
+    }
+    ul{
+      margin:8px 0 14px 22px;
+      font-size:15px;
+      color:#4a5568;
+    }
+    ul li{margin-bottom:7px}
+    .highlight{
+      font-weight:600;
+      color:#1a2a3a;
+    }
+    code{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:0.9em;
+      background:#f0f3f5;
+      padding:1px 6px;
+      border-radius:4px;
+      color:#3a6378;
+    }
+    .contact-link{
+      color:var(--steel);
+      text-decoration:none;
+      font-weight:500;
+      border-bottom:1px solid rgba(91,143,168,0.3);
+      transition:border-color 0.2s;
+    }
+    .contact-link:hover{border-bottom-color:var(--steel)}
+
+    /* per-section product wrappers */
+    .product-section{
+      background:var(--white);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:1.5rem 1.75rem;
+      margin:1rem 0 1.5rem;
+    }
+    .product-section.vault{border-left:3px solid var(--teal)}
+    .product-section.forge{border-left:3px solid var(--mauve)}
+    .product-section.site{border-left:3px solid var(--steel)}
+    .product-section h3{
+      font-family:'Syne',sans-serif;font-weight:700;
+      font-size:15px;
+      color:#1a2a3a;
+      margin:1rem 0 0.5rem;
+    }
+    .product-section h3:first-child{margin-top:0}
+    .product-section p{font-size:14.5px;margin-bottom:10px}
+    .product-section ul{font-size:14.5px;margin-bottom:10px}
+
+    /* emphasis blocks used for AS-IS / LIABILITY etc. */
+    .legal-emphasis{
+      background:#fffaf1;
+      border:1px solid #f0d9a8;
+      border-left:3px solid #c89a4a;
+      border-radius:10px;
+      padding:16px 20px;
+      margin:16px 0;
+      font-size:14.5px;
+    }
+    .legal-emphasis p{margin-bottom:8px}
+    .legal-emphasis p:last-child{margin-bottom:0}
+    .legal-caps{
+      font-family:'Syne',sans-serif;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:0.14em;
+      color:#8a5e20;
+      text-transform:uppercase;
+      display:block;
+      margin-bottom:6px;
+    }
+
+    footer{
+      margin-top:56px;
+      padding-top:28px;
+      border-top:1px solid var(--border);
+      text-align:center;
+      font-size:13px;
+      color:#8a9bae;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    footer img{opacity:0.6;transition:opacity 0.2s ease}
+    footer:hover img{opacity:0.9}
+    footer a{
+      color:var(--steel);
+      text-decoration:none;
+    }
+    footer a:hover{text-decoration:underline}
+
+    @media (max-width:600px){
+      .container{padding:40px 18px 56px}
+      h1{font-size:26px}
+      .brand-trio{gap:1rem}
+      .brand-trio-item.master img{width:88px;height:88px}
+      .brand-trio-item.vault img,.brand-trio-item.forge img{width:56px;height:56px}
+      h2{flex-wrap:wrap}
+      .product-pill{margin-left:0}
+      .topbar{padding:0.75rem 1.25rem}
+      .topbar-brand{font-size:0.85rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="topbar">
+  <a class="topbar-back" href="index.html" aria-label="Back to JASS Query">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    JASS&nbsp;Query
+  </a>
+  <span class="topbar-brand"><span class="j">JASS</span>&nbsp;<span class="q">Query</span></span>
+</div>
+
+<div class="container">
+
+  <!-- HEADER with trio -->
+  <header>
+    <div class="brand-trio" aria-label="JASS Query family">
+      <div class="brand-trio-item vault">
+        <img src="assets/img/queryvault-detailed.svg" alt="QueryVault">
+        <div class="brand-trio-label">QueryVault</div>
+      </div>
+      <div class="brand-trio-item master">
+        <img src="assets/img/jassquery.detailed.png" alt="JASS Query">
+        <div class="brand-trio-label">JASS Query</div>
+      </div>
+      <div class="brand-trio-item forge">
+        <img src="assets/img/queryforge-detailed.svg" alt="QueryForge">
+        <div class="brand-trio-label">QueryForge</div>
+      </div>
+    </div>
+    <h1>Terms of Service</h1>
+    <div class="subtitle">JASS Query and its products</div>
+    <div class="dates">
+      <span>Effective Date: April 23, 2026</span>
+      <span>Last Updated: April 23, 2026</span>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <div class="intro">
+    These Terms of Service ("Terms") are a legal agreement between you and <span class="highlight">JASS Pet Services LLC d/b/a JASS Enterprises</span> ("JASS Query," "we," "us") governing your use of our website, our browser extension QueryVault, and our subscription service QueryForge (together, the "Services"). By creating an account, installing an extension, or otherwise using the Services, you agree to these Terms. If you do not agree, do not use the Services. Our <a href="privacy-policy.html" class="contact-link">Privacy Policy</a> is incorporated by reference.
+  </div>
+
+  <!-- 1. DEFINITIONS -->
+  <h2><span class="num">01</span> Definitions</h2>
+  <ul>
+    <li><span class="highlight">"Account"</span> — a QueryForge account you register and control.</li>
+    <li><span class="highlight">"Customer Data"</span> — content you submit, upload, configure, or generate through the Services, including query definitions, schedules, API keys you provide, OAuth tokens you grant, and result CSVs delivered to your storage.</li>
+    <li><span class="highlight">"Keepa"</span> — Keepa GmbH, the third-party provider of the Keepa Product Finder and the Keepa API.</li>
+    <li><span class="highlight">"QueryVault"</span> — our browser extension for Chrome and Edge that saves Keepa Product Finder queries locally.</li>
+    <li><span class="highlight">"QueryForge"</span> — our subscription service that executes Keepa Product Finder queries on a schedule and delivers results to your chosen cloud storage.</li>
+    <li><span class="highlight">"Subscription"</span> — a paid plan to use QueryForge, billed through Stripe.</li>
+    <li><span class="highlight">"BYOK"</span> — "bring your own key," a tier in which you supply your own Keepa API key rather than using our bundled credits.</li>
+  </ul>
+
+  <!-- 2. ACCEPTANCE & ELIGIBILITY -->
+  <h2><span class="num">02</span> Acceptance and Eligibility</h2>
+  <p>To use the Services, you must be at least 18 years old (or the age of majority in your jurisdiction if higher) and capable of entering into a binding contract. If you use the Services on behalf of a company, you represent that you have authority to bind that company to these Terms, and "you" refers to both you and that entity.</p>
+  <p>You agree to provide accurate and current information when registering, and to keep your account credentials secure. You are responsible for all activity that occurs under your Account. Notify us promptly at <a href="mailto:help@jassquery.com" class="contact-link">help@jassquery.com</a> if you suspect unauthorized use.</p>
+
+  <!-- 3. THE SERVICES -->
+  <h2><span class="num">03</span> The Services <span class="product-pill forge"><span class="product-pill-dot"></span>QueryForge</span></h2>
+  <div class="product-section forge">
+    <h3>What QueryForge does</h3>
+    <p>QueryForge is a subscription service that runs Keepa Product Finder queries on a schedule you configure and delivers the results as CSV files to a cloud storage location <em>you</em> own (Google Drive, OneDrive, or Azure Blob). You configure exactly one results-storage channel.</p>
+
+    <h3>Subscription tiers</h3>
+    <p>QueryForge is offered in tiers, including a free BYOK tier (where you use your own Keepa API key) and paid tiers that include bundled Keepa credits and higher usage limits. The features, limits, and prices of each tier are described on our website or in the QueryForge portal and may change from time to time. We will give reasonable notice of material changes to tiers or prices; changes to your existing subscription take effect on your next renewal.</p>
+
+    <h3>Credits and overage</h3>
+    <p>Paid tiers include a monthly allowance of Keepa credits (or equivalent unit). If your queries would consume more credits than you have available, we may pause further runs, reduce result volume, or notify you, depending on your tier and configuration. Unused credits expire at the end of each billing cycle unless we say otherwise in writing.</p>
+
+    <h3>Extension and website</h3>
+    <p>QueryVault is provided free of charge, with an optional free registered tier that gives you additional features in exchange for providing your name and email address. The JASS Query website provides information about the Services.</p>
+  </div>
+
+  <!-- 4. YOUR ACCOUNT AND CONTENT -->
+  <h2><span class="num">04</span> Your Account and Customer Data</h2>
+  <p>As between you and us, <span class="highlight">you own your Customer Data</span>. You grant us a limited, non-exclusive, worldwide, royalty-free license to host, copy, transmit, display, and otherwise use your Customer Data solely to operate the Services and provide them to you, including executing the queries you schedule, delivering results to your storage, maintaining backups, and generating run history for your portal. We do not claim ownership of your query definitions, your results, or any file we deliver to your cloud storage.</p>
+  <p>You represent that you have all rights needed to provide your Customer Data to us and to grant us the license in this section, and that your use of the Services does not violate any agreement you have with Keepa, Google, Microsoft, or any other third party.</p>
+
+  <!-- 5. BILLING -->
+  <h2><span class="num">05</span> Billing, Renewal, and Refunds <span class="product-pill forge"><span class="product-pill-dot"></span>QueryForge</span></h2>
+  <div class="product-section forge">
+    <h3>Payment processor</h3>
+    <p>Paid subscriptions are processed by Stripe. By subscribing, you authorize us (through Stripe) to charge your payment method for the applicable fees, including recurring fees at the start of each billing cycle. You agree to the Stripe terms and privacy policy that govern that processing.</p>
+
+    <h3>Billing cycle and auto-renewal</h3>
+    <p>Subscriptions renew automatically at the end of each billing cycle (monthly or annual, as selected) for the same term and at the then-current price, unless you cancel before the renewal date. You can cancel anytime from the QueryForge portal; cancellation takes effect at the end of the current billing period, and you retain access through the end of the period.</p>
+
+    <h3>Taxes</h3>
+    <p>Fees are exclusive of applicable taxes. Where we are required to collect tax on your subscription, the tax amount will be added to your charge.</p>
+
+    <h3>Refunds</h3>
+    <p>Except where required by law, fees are non-refundable. We may, at our discretion, issue prorated refunds for downgrades or service failures we cause. Promotional pricing is applied via specific program codes and may carry additional terms.</p>
+
+    <h3>Past-due accounts</h3>
+    <p>If a charge fails, we may retry, pause or suspend your Account, and eventually terminate the Account for non-payment. We will provide reasonable notice before termination for non-payment.</p>
+  </div>
+
+  <!-- 6. ACCEPTABLE USE -->
+  <h2><span class="num">06</span> Acceptable Use</h2>
+  <p>You agree not to use the Services to:</p>
+  <ul>
+    <li>violate any law or third-party right, or infringe any intellectual property right;</li>
+    <li>violate the terms of service or acceptable-use policies of any third party whose service you access through QueryForge, including but not limited to <a href="https://keepa.com/#!discuss/t/terms-of-use/5" class="contact-link" target="_blank" rel="noopener">Keepa</a>, Amazon, Google, and Microsoft;</li>
+    <li>circumvent rate limits, quotas, or authentication protections of the Services or of any third-party API they rely on, including by creating multiple accounts to exceed tier limits;</li>
+    <li>resell, sublicense, or make the Services available to third parties as a disguised multi-tenant service, or operate a service that delivers Keepa query results to users other than you and individuals in your organization, without our written permission;</li>
+    <li>reverse engineer, decompile, or attempt to derive the source code of the Services, except to the extent such restriction is prohibited by applicable law;</li>
+    <li>upload malware or use the Services to distribute malicious content;</li>
+    <li>probe, scan, or test the vulnerability of the Services without our prior written permission, or interfere with the integrity, performance, or availability of the Services;</li>
+    <li>use the Services to build a competing product, or to benchmark against us for publication without our prior written consent;</li>
+    <li>use automated means to extract data from our website or portal other than through the documented features;</li>
+    <li>harvest personally identifiable information about anyone other than yourself, or use the Services to harass, defame, or otherwise harm any person.</li>
+  </ul>
+  <p>We may suspend or limit your use of the Services if we reasonably believe you are in breach of this section.</p>
+
+  <!-- 7. THIRD-PARTY SERVICES -->
+  <h2><span class="num">07</span> Third-Party Services (Keepa, Google, Microsoft, Stripe)</h2>
+  <p>QueryForge depends on third-party services that are not controlled by us. Your use of those third-party services through QueryForge is subject to <em>their</em> terms, in addition to ours.</p>
+
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a2a3a;margin:18px 0 6px;">Keepa</h3>
+  <p>The Keepa Product Finder and Keepa API are provided by Keepa GmbH. QueryForge executes queries <em>through</em> Keepa on your behalf.</p>
+  <ul>
+    <li><span class="highlight">On BYOK tiers</span>, you provide your own Keepa API key. You represent that your use of Keepa through QueryForge complies with Keepa's own terms, and you remain solely responsible for your Keepa subscription, its credit balance, and any usage limits Keepa applies.</li>
+    <li><span class="highlight">On bundled-credit tiers</span>, we use our own Keepa credentials to fulfill your queries. You agree to abide by any Keepa usage rules we pass through to you (for example, rate limits, result caps, or prohibited use cases), and you agree that we may throttle or decline a query if we reasonably believe it would breach Keepa's terms or put our Keepa account at risk.</li>
+  </ul>
+  <p>Keepa's availability, result accuracy, and pricing are outside our control. We make no warranty regarding Keepa's service and are not liable for Keepa's acts, omissions, outages, pricing changes, or termination of access.</p>
+
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a2a3a;margin:18px 0 6px;">Google and Microsoft (results storage and authentication)</h3>
+  <p>If you connect Google Drive or OneDrive as your results-storage channel, or sign in through Google, Amazon, or Microsoft, your relationship with those providers is governed by their own terms and privacy policies. You are responsible for the state of your own Drive/OneDrive account, including available space and any retention, sharing, or deletion settings you apply.</p>
+
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a2a3a;margin:18px 0 6px;">Azure Blob (customer-owned storage)</h3>
+  <p>If you use a customer-owned Azure Blob container as your results-storage channel, you are responsible for the security and configuration of that container and for maintaining the SAS URL you provide. You agree that we may stop delivering results if your SAS URL expires, is revoked, or no longer grants the permissions we need.</p>
+
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a2a3a;margin:18px 0 6px;">Stripe</h3>
+  <p>Stripe handles payment processing. You agree to Stripe's terms and privacy policy as a condition of subscribing. We do not store your card number.</p>
+
+  <!-- 8. INTELLECTUAL PROPERTY -->
+  <h2><span class="num">08</span> Intellectual Property</h2>
+  <p>We own all right, title, and interest in and to the Services, including the source code of QueryForge and QueryVault, the JASS Query and related marks, the website, the user interface, and any documentation. These Terms grant you a limited, revocable, non-exclusive, non-transferable, non-sublicensable license to use the Services during your subscription term (for QueryForge) or while the extension is installed (for QueryVault), solely for the purpose of using the Services as intended.</p>
+  <p>Feedback you voluntarily submit about the Services may be used by us without restriction or compensation. You retain ownership of your Customer Data as described in §04.</p>
+
+  <!-- 9. SERVICE AVAILABILITY -->
+  <h2><span class="num">09</span> Service Availability</h2>
+  <div class="legal-emphasis">
+    <span class="legal-caps">No SLA — commercially reasonable effort</span>
+    <p>We will use <span class="highlight">commercially reasonable efforts</span> to keep the Services available and performing well, but we do not commit to a specific uptime target, response time, or result-delivery deadline. We do not offer a service-level agreement under these Terms. If we offer SLA commitments in the future, they will apply only to the specific tier or order form in which they are described.</p>
+    <p>We may introduce, change, or remove features; schedule or take unscheduled maintenance; or temporarily suspend all or part of the Services for upgrades, security, or operational reasons. Where practical, we will give notice in the portal or by email.</p>
+    <p>Third-party services that QueryForge depends on (notably Keepa, Google, Microsoft, Stripe, and Azure) can also cause interruptions that are outside our control.</p>
+  </div>
+
+  <!-- 10. SUSPENSION & TERMINATION -->
+  <h2><span class="num">10</span> Suspension and Termination</h2>
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a2a3a;margin:14px 0 6px;">By you</h3>
+  <p>You may stop using the Services at any time. For QueryForge, you can cancel your subscription from the portal; cancellation prevents future renewal charges but does not refund the current period except as stated in §05. You may disconnect integrations (Google Drive, OneDrive, Azure Blob, Keepa BYOK) at any time, and you may delete your Account; account deletion removes your data as described in the Privacy Policy.</p>
+
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a2a3a;margin:14px 0 6px;">By us</h3>
+  <p>We may suspend or terminate your access to all or part of the Services, with or without notice, if:</p>
+  <ul>
+    <li>you materially breach these Terms (including §06 Acceptable Use);</li>
+    <li>your Account is past due;</li>
+    <li>continued service would, in our reasonable judgment, violate law, a third-party's terms (including Keepa's), or put us or other customers at risk;</li>
+    <li>we discontinue the Services or a tier.</li>
+  </ul>
+  <p>Where practical, we will provide advance notice and a chance to cure. On termination, your right to use the Services ends immediately. Sections that by their nature should survive termination will survive, including §04 (license), §08 (IP), §11–§13 (disclaimers, liability, indemnification), and §14–§18 (governing law, disputes, general).</p>
+
+  <!-- 11. DISCLAIMERS -->
+  <h2><span class="num">11</span> Disclaimers of Warranties</h2>
+  <div class="legal-emphasis">
+    <span class="legal-caps">As-is / as-available</span>
+    <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SERVICES AND ALL CONTENT, DATA, AND RESULTS PROVIDED THROUGH THEM ARE PROVIDED <span class="highlight">"AS IS"</span> AND <span class="highlight">"AS AVAILABLE,"</span> WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.</p>
+    <p>WE DO NOT WARRANT THAT THE SERVICES WILL BE UNINTERRUPTED, ERROR-FREE, SECURE, OR FREE OF HARMFUL COMPONENTS, OR THAT ANY DATA DELIVERED THROUGH THEM (INCLUDING KEEPA QUERY RESULTS) WILL BE ACCURATE, COMPLETE, TIMELY, OR SUITABLE FOR YOUR PURPOSES. YOU ARE SOLELY RESPONSIBLE FOR ANY BUSINESS DECISIONS YOU MAKE BASED ON DATA DELIVERED THROUGH THE SERVICES.</p>
+    <p>SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES, SO SOME OF THESE EXCLUSIONS MAY NOT APPLY TO YOU.</p>
+  </div>
+
+  <!-- 12. LIABILITY -->
+  <h2><span class="num">12</span> Limitation of Liability</h2>
+  <div class="legal-emphasis">
+    <span class="legal-caps">Liability cap</span>
+    <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL WE, OUR OFFICERS, MEMBERS, EMPLOYEES, OR AGENTS BE LIABLE TO YOU FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST REVENUE, LOST BUSINESS OPPORTUNITY, LOST DATA, OR THE COST OF SUBSTITUTE GOODS OR SERVICES, WHETHER IN CONTRACT, TORT, STRICT LIABILITY, OR ANY OTHER LEGAL THEORY, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+    <p>OUR TOTAL AGGREGATE LIABILITY TO YOU ARISING OUT OF OR RELATING TO THE SERVICES AND THESE TERMS WILL NOT EXCEED THE GREATER OF (A) THE AMOUNTS YOU ACTUALLY PAID US FOR THE SERVICES IN THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO LIABILITY, OR (B) ONE HUNDRED U.S. DOLLARS (US$100).</p>
+    <p>THE LIMITATIONS IN THIS SECTION APPLY TO THE FULLEST EXTENT PERMITTED BY LAW. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF CERTAIN DAMAGES, SO SOME LIMITATIONS MAY NOT APPLY TO YOU.</p>
+  </div>
+  <!-- LAWYER REVIEW: Confirm the US$100 / 12-months-of-fees cap is appropriate. For a solo-founder SaaS at sub-$100/mo tiers this is standard, but a lawyer should confirm enforceability under CO and whether we want a floor higher than $100 for enterprise-style deals later. -->
+
+  <!-- 13. INDEMNIFICATION -->
+  <h2><span class="num">13</span> Indemnification</h2>
+  <p>You agree to defend, indemnify, and hold harmless JASS Pet Services LLC, its members, officers, employees, contractors, and agents from and against any claims, damages, liabilities, losses, costs, and expenses (including reasonable attorneys' fees) arising out of or related to: (a) your Customer Data; (b) your use of the Services in violation of these Terms or of applicable law; (c) your violation of any third party's rights, including intellectual property rights or Keepa's terms; or (d) your gross negligence or willful misconduct. We will give you prompt notice of any such claim and reasonable cooperation in the defense, and you will not settle any claim that imposes obligations on us without our prior written consent.</p>
+
+  <!-- 14. GOVERNING LAW -->
+  <h2><span class="num">14</span> Governing Law and Venue</h2>
+  <p>These Terms and any dispute arising out of or related to them or the Services are governed by the laws of the <span class="highlight">State of Colorado, USA</span>, without regard to its conflict-of-laws rules. The United Nations Convention on Contracts for the International Sale of Goods does not apply.</p>
+  <p>Subject to §15, the exclusive venue for any action arising out of or related to these Terms is the state or federal courts located in Denver County, Colorado, and you and we consent to the personal jurisdiction of those courts.</p>
+  <!-- LAWYER REVIEW: We picked Denver County as the default venue; if Robert operates from a different Colorado county, swap in his home county (e.g., Boulder, Arapahoe, El Paso) so it's convenient to defend in. -->
+
+  <!-- 15. DISPUTE RESOLUTION -->
+  <h2><span class="num">15</span> Dispute Resolution</h2>
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a2a3a;margin:14px 0 6px;">Informal resolution first</h3>
+  <p>Before filing a claim, you agree to contact us at <a href="mailto:help@jassquery.com" class="contact-link">help@jassquery.com</a> with a written description of the dispute and to give us thirty (30) days to resolve it informally. Most disputes can be resolved this way.</p>
+
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a2a3a;margin:14px 0 6px;">Small claims carve-out</h3>
+  <p>Either of us may bring an individual claim in small-claims court in Colorado if the claim qualifies.</p>
+
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a2a3a;margin:14px 0 6px;">Class-action waiver</h3>
+  <p>To the extent permitted by law, you and we each agree that disputes will be resolved <span class="highlight">only on an individual basis</span> and not as part of a class, collective, or representative action. If this waiver is held unenforceable as to a particular claim, that claim will proceed in court, and the remainder of this section will remain in force.</p>
+
+  <h3 style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#1a2a3a;margin:14px 0 6px;">Time limit</h3>
+  <p>Any claim arising out of the Services or these Terms must be filed within one (1) year after the claim arose, except where applicable law prohibits a shorter limitations period.</p>
+  <!-- LAWYER REVIEW: A lawyer should decide whether we want mandatory binding arbitration (e.g., AAA Consumer Rules) here. Arbitration is standard in US SaaS TOS, but it requires some care on notice and opt-out mechanics, and on how it interacts with the class-action waiver. I've drafted the informal-then-court path for now; swap in arbitration if the lawyer prefers. -->
+
+  <!-- 16. CHANGES -->
+  <h2><span class="num">16</span> Changes to These Terms</h2>
+  <p>We may update these Terms from time to time. If a change is material, we will provide reasonable advance notice by posting the revised Terms on the website with a new "Last Updated" date and, for QueryForge subscribers, by email or in-portal notice. Your continued use of the Services after the effective date constitutes acceptance. If you do not agree to the changes, stop using the Services and, if you are a paid subscriber, cancel your subscription.</p>
+
+  <!-- 17. NOTICES -->
+  <h2><span class="num">17</span> Notices</h2>
+  <p>We may send you notices about the Services by email (to the address associated with your Account), by posting in the QueryForge portal, or by posting on our website. You consent to receive these notices electronically. Legal notices to us must be sent to <a href="mailto:help@jassquery.com" class="contact-link">help@jassquery.com</a>, with a copy mailed to our registered business address on file with the Colorado Secretary of State.</p>
+  <!-- LAWYER REVIEW: If Robert wants a specific physical mailing address printed here (required in some contexts for DMCA agent registration etc.), insert it. Otherwise the "registered business address on file with the Secretary of State" phrasing keeps it accurate without updating the HTML every time we move. -->
+
+  <!-- 18. GENERAL -->
+  <h2><span class="num">18</span> General</h2>
+  <ul>
+    <li><span class="highlight">Entire agreement.</span> These Terms, together with the Privacy Policy and any order form or tier-specific terms we provide, are the entire agreement between you and us about the Services and supersede any prior agreement on the same subject.</li>
+    <li><span class="highlight">Severability.</span> If any provision of these Terms is held unenforceable, the remaining provisions will remain in full force, and the unenforceable provision will be reformed only to the extent necessary to make it enforceable.</li>
+    <li><span class="highlight">No waiver.</span> Our failure to enforce any right or provision is not a waiver of that right or provision.</li>
+    <li><span class="highlight">Assignment.</span> You may not assign or transfer these Terms without our prior written consent. We may assign these Terms in connection with a merger, acquisition, reorganization, or sale of assets, or to any affiliate, with notice to you.</li>
+    <li><span class="highlight">Independent contractors.</span> The parties are independent contractors. These Terms do not create a partnership, joint venture, agency, or employment relationship.</li>
+    <li><span class="highlight">Force majeure.</span> Neither party is liable for failure to perform caused by events beyond its reasonable control (for example, acts of God, war, riot, network or utility outages, failures of third-party services such as Azure, Keepa, Google, Microsoft, or Stripe, or government action).</li>
+    <li><span class="highlight">Export; sanctions.</span> You represent that you are not located in, and will not use the Services from, a country subject to U.S. embargo, and that you are not listed on any U.S. government list of prohibited or restricted parties.</li>
+    <li><span class="highlight">U.S. government users.</span> If you are a U.S. government entity, the Services are "commercial items" as defined in 48 C.F.R. §2.101, licensed with the same rights as all other customers, per 48 C.F.R. §12.212 and §227.7202.</li>
+    <li><span class="highlight">Headings.</span> Section headings are for convenience only and do not affect interpretation.</li>
+  </ul>
+
+  <!-- 19. CONTACT -->
+  <h2><span class="num">19</span> Contact</h2>
+  <p>Questions about these Terms? Reach us at:</p>
+  <ul>
+    <li>General: <a href="mailto:help@jassquery.com" class="contact-link">help@jassquery.com</a></li>
+    <li>Privacy: <a href="mailto:privacy@jassquery.com" class="contact-link">privacy@jassquery.com</a></li>
+  </ul>
+
+  <footer>
+    <img src="assets/img/jassent-detailed.580.png" alt="JASS Enterprises" width="40" height="40">
+    &copy; 2026 JASS Pet Services LLC d/b/a JASS Enterprises · Built for Keepa power users
+  </footer>
+
+</div>
+</body>
+</html>
