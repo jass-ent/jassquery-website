@@ -1,3 +1,8 @@
-/chrome    https://chromewebstore.google.com/detail/jass-keepa-queryvault/bamoopkicdgjcjomhoimhlanonbbmoop    302
-/edge      https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp    302
-/install   /chrome                                                                                                    302
+/chrome       https://chromewebstore.google.com/detail/jass-keepa-queryvault/bamoopkicdgjcjomhoimhlanonbbmoop    302
+/edge         https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp    302
+/install      /chrome                                                                                                    302
+
+/queryvault   /queryvault.html                                                                                           301
+/vault        /queryvault.html                                                                                           301
+/queryforge   /queryforge.html                                                                                           301
+/forge        /queryforge.html                                                                                           301
