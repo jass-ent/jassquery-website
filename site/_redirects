@@ -2,10 +2,8 @@
 /edge         https://microsoftedge.microsoft.com/addons/detail/jass-keepa-queryvault/cdfljlinpcfmeoipnekbpejbhpdllddp    302
 /install      /chrome                                                                                                    302
 
-/queryvault   /queryvault.html                                                                                           301
 /vault        /queryvault.html                                                                                           301
 /v            /queryvault.html                                                                                           301
-/queryforge   /queryforge.html                                                                                           301
 /forge        /queryforge.html                                                                                           301
 /f            /queryforge.html                                                                                           301
 
