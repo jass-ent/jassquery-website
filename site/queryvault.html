@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QueryVault — Your Keepa Queries Are Business Assets</title>
-  <meta name="description" content="Save, organize, and instantly restore your Keepa Product Finder queries. Free Chrome extension for Amazon sellers who treat their searches like the assets they are." />
+  <title>QueryVault — Keepa's Save Button. Screenshots Don't Restore.</title>
+  <meta name="description" content="Keepa's Save Button. Screenshots don't restore — QueryVault does. Save, organize, and instantly restore your Keepa Product Finder queries. Free Chrome and Edge extension for Amazon sellers." />
   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="shortcut icon" href="favicon.ico" />
@@ -20,17 +20,17 @@
   <meta property="og:site_name" content="JASS Query" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:url" content="https://jassquery.com/queryvault.html" />
-  <meta property="og:title" content="QueryVault — Your Keepa Queries Are Business Assets" />
-  <meta property="og:description" content="Save, organize, and instantly restore your Keepa Product Finder queries. Free Chrome and Edge extension for Amazon online arbitrage and wholesale sellers who treat their searches like the assets they are." />
+  <meta property="og:title" content="QueryVault — Keepa's Save Button" />
+  <meta property="og:description" content="Screenshots don't restore — QueryVault does. Save, organize, and instantly restore your Keepa Product Finder queries. Free Chrome and Edge extension for Amazon online arbitrage and wholesale sellers." />
   <meta property="og:image" content="https://jassquery.com/assets/img/og/og-queryvault.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="QueryVault — Your Keepa Queries Are Business Assets" />
+  <meta property="og:image:alt" content="QueryVault — Keepa's Save Button" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="QueryVault — Save Your Keepa Product Finder Queries" />
-  <meta name="twitter:description" content="Free Chrome and Edge extension for Amazon sellers. Save, organize, and restore Keepa queries in one click." />
+  <meta name="twitter:title" content="QueryVault — Keepa's Save Button" />
+  <meta name="twitter:description" content="Screenshots don't restore — QueryVault does. Free Chrome and Edge extension for Amazon sellers. Save, organize, and restore Keepa queries in one click." />
   <meta name="twitter:image" content="https://jassquery.com/assets/img/og/og-queryvault.png" />
 
   <!-- Structured data -->
@@ -211,11 +211,21 @@
       background: rgba(74,158,135,0.12);
       border: 1px solid rgba(74,158,135,0.25);
       color: var(--teal-pale);
-      font-size: 0.78rem; font-weight: 500;
-      padding: 0.35rem 1rem; border-radius: 999px;
-      margin-bottom: 1.8rem;
-      letter-spacing: 0.08em; text-transform: uppercase;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      padding: 0.4rem 1.1rem; border-radius: 999px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
     }
+    .hero-hook {
+      position: relative; z-index: 1;
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+      letter-spacing: 0.02em;
+      color: var(--teal-pale);
+      margin-bottom: 1.25rem;
+    }
+    .hero-hook .accent { color: var(--teal-core); }
     .hero h1 {
       position: relative; z-index: 1;
       font-family: 'Syne', sans-serif; font-weight: 800;
@@ -654,14 +664,15 @@
       from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .hero-cocoon, .hero-tagline, .hero h1, .hero .sub, .hero-actions {
+    .hero-cocoon, .hero-tagline, .hero-hook, .hero h1, .hero .sub, .hero-actions {
       animation: fadeUp 0.7s ease both;
     }
     .hero-cocoon  { animation-delay: 0.05s; }
     .hero-tagline { animation-delay: 0.15s; }
-    .hero h1      { animation-delay: 0.25s; }
-    .hero .sub    { animation-delay: 0.38s; }
-    .hero-actions { animation-delay: 0.5s; }
+    .hero-hook    { animation-delay: 0.22s; }
+    .hero h1      { animation-delay: 0.32s; }
+    .hero .sub    { animation-delay: 0.45s; }
+    .hero-actions { animation-delay: 0.58s; }
 
     /* ── SCROLL FADE-UPS ── */
     .fade-up {
@@ -936,7 +947,9 @@
     <circle cx="256" cy="200" r="3" fill="#eceae6" opacity="0.3"></circle>
   </svg>
 
-  <div class="hero-tagline">Your queries are business assets</div>
+  <div class="hero-tagline">Keepa's Save Button</div>
+
+  <div class="hero-hook">Screenshots don't <span class="accent">restore.</span></div>
 
   <h1>Stop <em>rebuilding.</em><br/>Start <em>protecting</em> your searches.</h1>
 
@@ -996,8 +1009,8 @@
         <div class="pain-card fade-up" style="transition-delay:0.2s">
           <span class="pain-icon">&#128240;</span>
           <div>
-            <strong>Screenshots aren't a strategy</strong>
-            <p>If your "backup" is a screenshot or a sticky note, you're one browser crash away from starting over.</p>
+            <strong>Screenshots don't restore</strong>
+            <p>A screenshot of your filters is a souvenir, not a backup. You can look at it — you can't load it back into Keepa with a click.</p>
           </div>
         </div>
       </div>
