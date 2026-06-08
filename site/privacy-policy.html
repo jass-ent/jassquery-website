@@ -499,7 +499,6 @@
 
     <h3>Diagnostics and logs</h3>
     <p>We maintain operational logs in Azure Application Insights and related Azure services to monitor the health of QueryForge and to debug issues. These logs may include your account ID, request paths, response codes, and error messages, but do not contain row-level query results or your Keepa API key. Operational logs are retained on a rolling 90-day window unless a longer retention is required to investigate a specific incident.</p>
-    <!-- LAWYER REVIEW: Confirm 90-day log retention is what we actually configure in Azure; this should match whatever the final App Insights retention setting is before going live. -->
   </div>
 
   <!-- 5. GOOGLE USER DATA -->
@@ -535,7 +534,6 @@
         <li>allow humans to read Google user data, except (i) with your explicit affirmative consent for specific messages, (ii) as necessary for security purposes (such as investigating abuse), (iii) to comply with applicable law, or (iv) where the data has been aggregated and de-identified for internal operations.</li>
       </ul>
     </div>
-    <!-- LAWYER REVIEW: This Limited Use block should match the current Google API Services User Data Policy verbatim-style language at launch. Re-check https://developers.google.com/terms/api-services-user-data-policy before we submit the Google OAuth app for verification. -->
   </div>
 
   <!-- 6. MICROSOFT USER DATA -->
@@ -566,7 +564,6 @@
 
     <h3>Publisher identity and consent</h3>
     <p>QueryForge's Microsoft Entra application is registered under a publisher domain we control (<code>jassquery.com</code>). The consent screen Microsoft shows when you first authorize QueryForge identifies us as the publisher and links to this Privacy Policy and to our <a href="terms-of-service.html" class="contact-link">Terms of Service</a>, so you can review how we handle your data before granting access.</p>
-    <!-- LAWYER REVIEW: We assume we will complete Microsoft Publisher Verification (Microsoft AI Cloud Partner Program) before launch. If verification is still pending at launch, remove or soften the "publisher identity" paragraph. Also — if we ever enroll in the Microsoft 365 App Compliance Program (Publisher Attestation), the answers we give in Partner Center must match this policy exactly; keep them in lockstep. -->
   </div>
 
   <!-- 7. LEGAL BASIS -->
@@ -643,12 +640,10 @@
     </tbody>
   </table>
   <p>We will update this list as subprocessors change. Material changes will be reflected in the "Last Updated" date at the top of this page; subscribers on enterprise terms, if any, may also be notified directly.</p>
-  <!-- LAWYER REVIEW: Confirm we have, or will have before launch, a signed DPA / SCCs in place for each subprocessor listed above, especially for EU/UK data subjects. -->
 
   <!-- 9. INTERNATIONAL TRANSFERS -->
   <h2><span class="num">09</span> International Data Transfers</h2>
   <p>JASS Query is operated from the United States and the primary QueryForge infrastructure runs in Microsoft Azure US regions. If you access our products from outside the United States, you acknowledge that your information is transferred to and processed in the United States, and that U.S. law may apply to it. Where required for transfers of personal data out of the European Economic Area, the United Kingdom, or Switzerland, we rely on the European Commission's Standard Contractual Clauses, the UK International Data Transfer Addendum, or equivalent transfer mechanisms with our subprocessors.</p>
-  <!-- LAWYER REVIEW: If we expect to market to EU customers, consider whether we need an EU representative under GDPR Art. 27, and whether to publish their contact here. -->
 
   <!-- 10. YOUR RIGHTS -->
   <h2><span class="num">10</span> Your Rights</h2>
@@ -721,7 +716,6 @@
     <li>Email (privacy): <a href="mailto:privacy@jassquery.com" class="contact-link">privacy@jassquery.com</a></li>
     <li>Email (general support, as a fallback): <a href="mailto:help@jassquery.com" class="contact-link">help@jassquery.com</a></li>
   </ul>
-  <!-- LAWYER REVIEW: Consider whether a physical mailing address is required (CCPA requires at least two methods for submitting requests, and a toll-free number or physical address is common). If we want to keep this digital-only, confirm the email+web-form-style path satisfies that requirement. -->
 
   <footer>
     <img src="assets/img/jassquery.detailed.png" alt="JASS Query" width="40" height="40">
