@@ -39,14 +39,23 @@ Resolve each before QueryForge go-live. Check the box when a lawyer (or you) has
 ## Terms of service (`site/terms-of-service.html`) — still has inline comments
 
 Not part of the privacy-policy ticket, but flagged for the same treatment later. Four
-`<!-- LAWYER REVIEW -->` comments remain inline in the ToS:
+The inline comments have been removed from the ToS; their substance is tracked here.
 
 - [ ] Liability cap (US$100 / 12-months-of-fees) — confirm appropriateness and enforceability under CO.
-- [ ] Venue county — currently Denver County; swap to Robert's operating county if different.
+- [x] **Venue — RESOLVED 2026-06-08.** Removed the county. §14 now names "the State of Colorado, USA"
+  as the venue (no specific county). The LLC is Colorado-registered, so the state is the governing
+  venue; binding it to a county was unnecessary and potentially inaccurate.
 - [ ] Arbitration — decide whether to use mandatory binding arbitration (AAA Consumer Rules) vs. the
   drafted informal-then-court path; mind class-action-waiver interaction.
-- [ ] DMCA / physical address — insert a specific address if needed, or keep the "registered business
-  address on file with the Secretary of State" phrasing.
+- [x] **Physical address — RESOLVED 2026-06-08. No physical address needed.** Researched all three
+  drivers: (1) Google OAuth verification does not require a physical address — it requires privacy-policy
+  disclosure, domain verification, and consent-screen branding only. (2) Microsoft publisher verification
+  verifies the publisher domain, not an address. (3) CCPA has an online-business exception — a business
+  operating exclusively online with a direct consumer relationship need only provide an email address for
+  requests (no toll-free number, no mailing address). The policy already provides two emails (privacy@,
+  help@). ToS §17's "registered business address on file with the Colorado Secretary of State" phrasing
+  stays as-is. The ONLY future scenario needing a printed street address is formal DMCA-agent registration
+  with the U.S. Copyright Office — optional, not a launch/Google/Microsoft requirement.
 
 ## Google OAuth verification submission (ticket 2026-04-19-infra-001, area 5)
 
