@@ -7,7 +7,21 @@
       "Bash(identify site/assets/img/og/*.png)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git checkout *)",
+      "Bash(git merge *)",
+      "Bash(git branch *)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless --disable-gpu --hide-scrollbars --window-size=1440,900 --screenshot=\"d:/JASS Query/Website/_hero_preview.png\" --default-background-color=00000000 \"file:///d:/JASS%20Query/Website/site/queryforge.html\")",
+      "Bash(ls -la \"_hero_preview.png\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --hide-scrollbars --window-size=1440,1000 --virtual-time-budget=4000 --screenshot=\"d:/JASS Query/Website/_hero_preview.png\" \"file:///d:/JASS%20Query/Website/site/queryforge.html\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --hide-scrollbars --window-size=390,844 --virtual-time-budget=4000 --screenshot=\"d:/JASS Query/Website/_hero_mobile.png\" \"file:///d:/JASS%20Query/Website/site/queryforge.html\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --hide-scrollbars --window-size=390,1400 --virtual-time-budget=4000 --screenshot=\"d:/JASS Query/Website/_hero_mobile.png\" \"file:///d:/JASS%20Query/Website/site/queryforge.html\")",
+      "Bash(curl -s \"https://jassquery.com/queryforge.html?cb=$\\(git rev-parse --short HEAD\\)\")",
+      "Bash(curl -s -o /tmp/live_qf.html -w \"HTTP %{http_code}, %{size_download} bytes\\\\n\" \"https://jassquery.com/queryforge.html\")",
+      "Read(//tmp/**)",
+      "Bash(curl -sL -o /tmp/live_qf.html -w \"final HTTP %{http_code}, %{size_download} bytes, url=%{url_effective}\\\\n\" \"https://jassquery.com/queryforge.html\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --no-sandbox --hide-scrollbars --window-size=1440,1000 --virtual-time-budget=5000 --screenshot=\"d:/JASS Query/Website/_hero_preview.png\" \"file:///d:/JASS%20Query/Website/site/queryforge.html\")",
+      "Bash(rm -f _hero_preview.png _hero_mobile.png)"
     ]
   }
 }
