@@ -381,7 +381,7 @@
     <div class="subtitle">JASS Query and its products</div>
     <div class="dates">
       <span>Effective Date: April 23, 2026</span>
-      <span>Last Updated: May 26, 2026</span>
+      <span>Last Updated: June 25, 2026</span>
     </div>
   </header>
 
@@ -404,10 +404,10 @@
   <h2><span class="num">02</span> The JASS Query Website <span class="product-pill site"><span class="product-pill-dot"></span>Website</span></h2>
   <div class="product-section site">
     <h3>What we collect</h3>
-    <p>Essentially nothing directly. We do not set advertising cookies, we do not run third-party analytics, and we do not embed tracking pixels or advertising scripts. The only information we actively collect on the marketing site is what you voluntarily submit through a form — for example, a waitlist signup or a contact message.</p>
+    <p>Essentially nothing directly. We do not set advertising cookies, we do not run third-party analytics, and we do not embed tracking pixels or advertising scripts. The only information we actively collect on the marketing site is what you voluntarily submit through a form — for example, a product signup or a contact message.</p>
 
     <h3>Hosting and request logs</h3>
-    <p>Our website is hosted by us on Microsoft Azure (see §08 for location). As part of normal web-server operation we maintain standard request logs (IP address, timestamp, user agent, requested URL) for security, abuse prevention, and basic traffic statistics. We do not access or analyze these logs for marketing purposes, and we do not share them with third parties except where required by law or to defend against an abuse incident.</p>
+    <p>Our website is hosted by us on Microsoft Azure (see §09 for location). As part of normal web-server operation we maintain standard request logs (IP address, timestamp, user agent, requested URL) for security, abuse prevention, and basic traffic statistics. We do not access or analyze these logs for marketing purposes, and we do not share them with third parties except where required by law or to defend against an abuse incident.</p>
 
     <h3>Fonts</h3>
     <p>The site loads web fonts (Syne and DM Sans) from Google Fonts. When you view the site, your browser requests the font files from <code>fonts.googleapis.com</code>. Google may log these requests per its own privacy policy. No other data is sent to Google from the marketing site.</p>
@@ -433,7 +433,7 @@
     <h3>External network requests</h3>
     <p>QueryVault is local-first. The only outbound network requests the extension makes are:</p>
     <ul>
-      <li>If you choose to register for the free upgraded tier, your name and email address are transmitted via HTTPS to <span class="highlight">Web3Forms</span> (<code>web3forms.com</code>), a form-handling service, which delivers the submission to our inbox so we can record your registration. Web3Forms acts solely as a delivery service; the data is not used by Web3Forms for advertising and is retained according to <a href="https://web3forms.com/privacy" class="contact-link" target="_blank" rel="noopener">Web3Forms' privacy policy</a>. This is the only third party that receives data from QueryVault.</li>
+      <li>If you choose to register for the free upgraded tier, your name and email address are transmitted via HTTPS <span class="highlight">directly to our own servers</span> and stored in our backend system, hosted on Microsoft Azure and subject to the same security measures described in this policy. We use this information to create and recognize your registration and to contact you about the products you registered for. The data is not handed to any third-party form or delivery service.</li>
       <li>If you are signed in with a paid or registered account, the extension may periodically verify your license status with our servers.</li>
       <li>During license activation (comped or internal access only), an email address is entered to validate a license key. This email is used solely for cryptographic validation within the browser and is immediately discarded — it is never saved, stored, or transmitted anywhere.</li>
       <li>Interactions you initiate with Keepa (for example, running a saved query) go directly from your browser to Keepa, as if you had filled out the form manually.</li>
@@ -445,11 +445,10 @@
     <ul>
       <li>Store your Keepa Product Finder search configurations on your device</li>
       <li>Restore saved configurations when you load a query on a Keepa page</li>
-      <li>Optionally sync favorite query <em>references</em> across your own devices via Chrome Sync</li>
     </ul>
 
     <h3>Storage technology</h3>
-    <p>Query definitions are stored locally in your browser using the browser's built-in Extension Storage API (<code>chrome.storage.local</code> and <code>chrome.storage.sync</code>). Chrome Sync data (favorite query references only — not full query data) is handled by Google's Chrome Sync infrastructure and is subject to Google's privacy practices.</p>
+    <p>Query definitions are stored locally in your browser using the browser's built-in Extension Storage API (<code>chrome.storage.local</code>). This data stays on your device; QueryVault does not write it to Chrome Sync or any other cross-device storage.</p>
 
     <div class="limited-use">
       <p><span class="highlight">Chrome Web Store Limited Use disclosure.</span> QueryVault's use of information received from Google APIs adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use" class="contact-link" target="_blank" rel="noopener">Chrome Web Store User Data Policy</a>, including the Limited Use requirements. We do not transfer or sell user data to third parties for advertising, analytics, or unrelated purposes; do not use user data to determine creditworthiness or for lending; and do not allow humans to read user data except as necessary for security, to comply with applicable law, for operations where we have user consent, or where data has been aggregated and de-identified.</p>
@@ -495,7 +494,7 @@
     <p>Paid subscriptions are processed by Stripe. When you enter payment information, it is submitted <span class="highlight">directly to Stripe</span> from your browser; we do not receive or store credit card numbers, CVV codes, or bank account numbers. We receive and store only the billing metadata Stripe returns to us: your customer ID, subscription ID, plan, status, and a token representing your payment method (used only to charge renewals through Stripe). Stripe's handling of your payment information is governed by <a href="https://stripe.com/privacy" class="contact-link" target="_blank" rel="noopener">Stripe's privacy policy</a>.</p>
 
     <h3>Transactional email</h3>
-    <p>We send transactional email (account confirmations, run-completion notices, billing receipts, and similar) through Resend. Resend receives your email address and the contents of the message in order to deliver it. We do not use Resend, or any other channel, to send marketing email to QueryForge customers unless you have separately opted in.</p>
+    <p>We send transactional email (account confirmations, run-completion notices, billing receipts, and similar) through Resend. Resend receives your email address and the contents of the message in order to deliver it. Resend is used for transactional email only; any marketing email is governed by the <span class="highlight">Communications and Marketing</span> section below (§07) and always carries an opt-out.</p>
 
     <h3>Diagnostics and logs</h3>
     <p>We maintain operational logs in Azure Application Insights and related Azure services to monitor the health of QueryForge and to debug issues. These logs may include your account ID, request paths, response codes, and error messages, but do not contain row-level query results or your Keepa API key. Operational logs are retained on a rolling 90-day window unless a longer retention is required to investigate a specific incident.</p>
@@ -560,14 +559,23 @@
     <p>We do not transfer Microsoft user data to any third party, except as necessary to provide the QueryForge feature you requested (for example, the Azure infrastructure that runs the service), to comply with applicable law or legal process, or with your explicit consent. Sharing Microsoft user data for advertising, resale, or unrelated analytics is not allowed and we do not do it.</p>
 
     <h3>How you remove it</h3>
-    <p>You can disconnect QueryForge from your Microsoft account at any time by (a) removing the OneDrive integration from the QueryForge portal, which deletes our stored refresh token, and/or (b) revoking QueryForge's access from your <a href="https://myaccount.microsoft.com/" class="contact-link" target="_blank" rel="noopener">Microsoft Account</a> or, for Entra work/school accounts, your organization's admin "My Apps" page. Revoking either way stops any further access. CSVs we have already delivered to your OneDrive remain in <em>your</em> OneDrive under your control — they are your files. If you delete your QueryForge Account, your sign-in record and any stored tokens are deleted as described in §11.</p>
+    <p>You can disconnect QueryForge from your Microsoft account at any time by (a) removing the OneDrive integration from the QueryForge portal, which deletes our stored refresh token, and/or (b) revoking QueryForge's access from your <a href="https://myaccount.microsoft.com/" class="contact-link" target="_blank" rel="noopener">Microsoft Account</a> or, for Entra work/school accounts, your organization's admin "My Apps" page. Revoking either way stops any further access. CSVs we have already delivered to your OneDrive remain in <em>your</em> OneDrive under your control — they are your files. If you delete your QueryForge Account, your sign-in record and any stored tokens are deleted as described in §12.</p>
 
     <h3>Publisher identity and consent</h3>
     <p>QueryForge's Microsoft Entra application is registered under a publisher domain we control (<code>jassquery.com</code>). The consent screen Microsoft shows when you first authorize QueryForge identifies us as the publisher and links to this Privacy Policy and to our <a href="terms-of-service.html" class="contact-link">Terms of Service</a>, so you can review how we handle your data before granting access.</p>
   </div>
 
-  <!-- 7. LEGAL BASIS -->
-  <h2><span class="num">07</span> Legal Basis for Processing (GDPR)</h2>
+  <!-- 7. COMMUNICATIONS & MARKETING -->
+  <h2><span class="num">07</span> Communications and Marketing</h2>
+  <p>When you give us your contact details — by registering for a QueryVault tier, joining a list, creating a QueryForge account, or contacting us — we use them to operate the Services and to stay in touch with you about JASS Query.</p>
+  <ul>
+    <li><span class="highlight">Service (transactional) messages.</span> We send messages you need in order to use the Services: account confirmations, security and account notices, run-completion notices, billing receipts, and policy or service-change notices. These are not promotional, and you cannot opt out of them while you have an active registration or account, because they are part of the Service.</li>
+    <li><span class="highlight">Product and marketing messages.</span> We may also contact you about updates and new features, upgrades, and <span class="highlight">our own</span> complementary products and services that relate to the ones you registered for or use. We do not send third-party advertising, and we do not market other companies' products to you — every marketing message is from JASS Query, about JASS Query. You can <span class="highlight">opt out at any time</span> using the unsubscribe link in any such message or by emailing <a href="mailto:privacy@jassquery.com" class="contact-link">privacy@jassquery.com</a>, and we will stop sending marketing email promptly. Opting out of marketing does not stop the service messages above.</li>
+  </ul>
+  <p>Where the law requires consent for marketing email (for example, in parts of the European Economic Area and the United Kingdom), we rely on your consent or on the "soft opt-in" available for our own similar products, and you may withdraw consent at any time.</p>
+
+  <!-- 8. LEGAL BASIS -->
+  <h2><span class="num">08</span> Legal Basis for Processing (GDPR)</h2>
   <p>If you are located in the European Economic Area, the United Kingdom, or Switzerland, we rely on the following legal bases under the GDPR / UK GDPR:</p>
   <ul>
     <li><span class="highlight">Contract.</span> Most processing we do (running your queries, storing your account, delivering your CSVs, billing you) is necessary to perform the subscription contract you enter into with us.</li>
@@ -576,8 +584,8 @@
     <li><span class="highlight">Legal obligation.</span> Where we are required to retain information for tax, accounting, or regulatory purposes.</li>
   </ul>
 
-  <!-- 8. SUBPROCESSORS -->
-  <h2><span class="num">08</span> Subprocessors and Third-Party Services</h2>
+  <!-- 9. SUBPROCESSORS -->
+  <h2><span class="num">09</span> Subprocessors and Third-Party Services</h2>
   <p>We do not sell or rent your personal information. We use the following subprocessors to operate JASS Query, QueryVault, and QueryForge. Each has signed (or operates under) a data processing agreement or equivalent contractual terms where applicable.</p>
   <table class="subproc-table" aria-label="Subprocessors">
     <thead>
@@ -631,22 +639,16 @@
         <td>OAuth tokens; file metadata and contents we write to your folder</td>
         <td>United States</td>
       </tr>
-      <tr>
-        <td>Web3Forms</td>
-        <td>Delivers QueryVault registration submissions (name + email) to our inbox</td>
-        <td>Name, email address</td>
-        <td>United States</td>
-      </tr>
     </tbody>
   </table>
   <p>We will update this list as subprocessors change. Material changes will be reflected in the "Last Updated" date at the top of this page; subscribers on enterprise terms, if any, may also be notified directly.</p>
 
-  <!-- 9. INTERNATIONAL TRANSFERS -->
-  <h2><span class="num">09</span> International Data Transfers</h2>
+  <!-- 10. INTERNATIONAL TRANSFERS -->
+  <h2><span class="num">10</span> International Data Transfers</h2>
   <p>JASS Query is operated from the United States and the primary QueryForge infrastructure runs in Microsoft Azure US regions. If you access our products from outside the United States, you acknowledge that your information is transferred to and processed in the United States, and that U.S. law may apply to it. Where required for transfers of personal data out of the European Economic Area, the United Kingdom, or Switzerland, we rely on the European Commission's Standard Contractual Clauses, the UK International Data Transfer Addendum, or equivalent transfer mechanisms with our subprocessors.</p>
 
-  <!-- 10. YOUR RIGHTS -->
-  <h2><span class="num">10</span> Your Rights</h2>
+  <!-- 11. YOUR RIGHTS -->
+  <h2><span class="num">11</span> Your Rights</h2>
   <p>Depending on where you live, you have some or all of the following rights regarding your personal information:</p>
   <ul>
     <li><span class="highlight">Access.</span> Ask what personal information we hold about you and receive a copy.</li>
@@ -663,11 +665,11 @@
   <p>To exercise any of these rights, email <a href="mailto:privacy@jassquery.com" class="contact-link">privacy@jassquery.com</a>. We will respond within the timeframes required by applicable law (for example, within 30 days under GDPR, or 45 days under CCPA, with extensions only as the law permits). We may need to verify your identity before acting on a request — typically by confirming control of the email address tied to your account.</p>
   <p>Authorized agents may submit CCPA/CPRA requests on your behalf with written permission that we are allowed to verify.</p>
 
-  <!-- 11. DATA RETENTION -->
-  <h2><span class="num">11</span> Data Retention</h2>
+  <!-- 12. DATA RETENTION -->
+  <h2><span class="num">12</span> Data Retention</h2>
   <p>We keep information only as long as we need it for the purpose it was collected for, or as required by law. In practice:</p>
   <ul>
-    <li><span class="highlight">QueryVault local data.</span> Persists in your browser until you delete it or uninstall the extension. We have no copy and cannot remotely access or delete it. If you opted into the registered tier, the name/email you submitted through QueryVault is retained in our inbox and by Web3Forms per <a href="https://web3forms.com/privacy" class="contact-link" target="_blank" rel="noopener">Web3Forms' retention policy</a>, plus whatever we keep in our own records to contact you about your registration, until you ask us to delete it.</li>
+    <li><span class="highlight">QueryVault local data.</span> Persists in your browser until you delete it or uninstall the extension. We have no copy and cannot remotely access or delete it. If you opted into the registered tier, the name/email you submitted through QueryVault is retained in our backend system so we can recognize your registration and contact you about the products you registered for, until you ask us to delete it.</li>
     <li><span class="highlight">QueryForge account data.</span> Retained while your account is active and for up to 90 days after cancellation so you can reactivate without losing your query history. After that window, your account is archived. Archived account data — including your account metadata, query definitions, schedules, run history, and integration credentials — is retained until you submit a deletion request to <a href="mailto:privacy@jassquery.com" class="contact-link">privacy@jassquery.com</a>. We will delete or anonymize your archived data within 30 days of receiving a completed request, except where we are required to retain specific records for billing, tax, or legal purposes. There is no self-service account-deletion button in the current version of the product; the portal surfaces a <span class="highlight">Request Data Deletion</span> link that opens a support email to that address.</li>
     <li><span class="highlight">QueryForge run history.</span> Retained for the life of the account, subject to reasonable storage limits per tier. You can delete individual run records from the portal.</li>
     <li><span class="highlight">Result CSVs.</span> We do not retain copies on our servers after delivery. The copies in your cloud storage are controlled by you.</li>
@@ -677,8 +679,8 @@
     <li><span class="highlight">Marketing signup data.</span> Retained until you ask us to remove it or the list is retired.</li>
   </ul>
 
-  <!-- 12. SECURITY -->
-  <h2><span class="num">12</span> Security</h2>
+  <!-- 13. SECURITY -->
+  <h2><span class="num">13</span> Security</h2>
   <p>We take the security of your information seriously, and in particular, of the OAuth tokens, SAS URLs, and Keepa API keys you entrust to us. We apply the following measures:</p>
   <ul>
     <li>All traffic to and from our services is encrypted in transit using TLS 1.2 or higher.</li>
@@ -689,29 +691,29 @@
   </ul>
   <p>No system is perfectly secure. If we learn of a personal-data breach that affects you, we will notify you as soon as reasonably possible and in any event within the timeframes required by applicable law (for example, within 72 hours of awareness where GDPR applies).</p>
 
-  <!-- 13. THIRD-PARTY PAGES & LINKS -->
-  <h2><span class="num">13</span> Third-Party Sites and Integrations</h2>
+  <!-- 14. THIRD-PARTY PAGES & LINKS -->
+  <h2><span class="num">14</span> Third-Party Sites and Integrations</h2>
   <p>Our products and website may link to third-party sites (for example, Keepa, Stripe's billing portal, or the Google and Microsoft account pages). We are not responsible for the privacy practices of those third parties. Once you leave our site or enter a third-party integration flow, that third party's privacy policy applies.</p>
 
-  <!-- 14. CHILDREN -->
-  <h2><span class="num">14</span> Children's Privacy</h2>
+  <!-- 15. CHILDREN -->
+  <h2><span class="num">15</span> Children's Privacy</h2>
   <p>Our products and website are designed for Amazon resellers running a business. They are not directed to children. We do not knowingly collect personal information from children under 13 (or under the equivalent age in your jurisdiction — for example, 16 in parts of the EU). If you believe we have inadvertently collected information from a child, contact <a href="mailto:privacy@jassquery.com" class="contact-link">privacy@jassquery.com</a> and we will delete it.</p>
 
-  <!-- 15. DO NOT TRACK -->
-  <h2><span class="num">15</span> "Do Not Track" and Global Privacy Control</h2>
+  <!-- 16. DO NOT TRACK -->
+  <h2><span class="num">16</span> "Do Not Track" and Global Privacy Control</h2>
   <p>Because we do not engage in cross-context behavioral advertising and do not sell or share personal information for advertising purposes, we do not respond differently to browser Do-Not-Track signals. Where required, we honor the Global Privacy Control (GPC) signal as an opt-out request for California consumers.</p>
 
-  <!-- 16. CHANGES -->
-  <h2><span class="num">16</span> Changes to This Policy</h2>
+  <!-- 17. CHANGES -->
+  <h2><span class="num">17</span> Changes to This Policy</h2>
   <p>We may update this policy from time to time — for example, when we add or change a subprocessor, launch a new feature that handles data differently, or adapt to new legal requirements. Changes will be reflected in the "Last Updated" date at the top of this page. Material changes will be highlighted or emailed to account holders. Continued use of our products or website after the effective date of a change constitutes acceptance of the updated policy.</p>
 
-  <!-- 17. JURISDICTION -->
-  <h2><span class="num">17</span> Jurisdiction</h2>
+  <!-- 18. JURISDICTION -->
+  <h2><span class="num">18</span> Jurisdiction</h2>
   <p>JASS Query is operated by JASS Pet Services LLC d/b/a JASS Query, a limited liability company organized in the United States. This policy is written to comply with applicable U.S. privacy laws and, where relevant, with the GDPR / UK GDPR. If you are accessing our products or website from outside the United States, you acknowledge that any information you provide is transmitted to and processed in the United States.</p>
 
-  <!-- 18. CONTACT -->
-  <h2><span class="num">18</span> Contact</h2>
-  <p>For privacy questions, data-access or deletion requests, or to exercise any of the rights described in §10:</p>
+  <!-- 19. CONTACT -->
+  <h2><span class="num">19</span> Contact</h2>
+  <p>For privacy questions, data-access or deletion requests, or to exercise any of the rights described in §11:</p>
   <ul>
     <li>Email (privacy): <a href="mailto:privacy@jassquery.com" class="contact-link">privacy@jassquery.com</a></li>
     <li>Email (general support, as a fallback): <a href="mailto:help@jassquery.com" class="contact-link">help@jassquery.com</a></li>

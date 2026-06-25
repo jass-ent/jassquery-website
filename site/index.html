@@ -256,20 +256,20 @@ main,nav,footer,section{position:relative;z-index:1}
 .product-card.vault .product-name .b{color:var(--teal-mid)}
 .product-card.forge .product-name .a{color:var(--warm)}
 .product-card.forge .product-name .b{color:var(--mauve-mid)}
-.product-tagline{font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(236,234,230,0.7);margin-bottom:1.5rem;position:relative;z-index:1}
+.product-tagline{font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(236,234,230,0.7);margin-bottom:1.25rem;position:relative;z-index:1}
 
-.product-pitch{font-size:0.98rem;font-weight:300;color:rgba(236,234,230,0.7);line-height:1.7;margin-bottom:1.5rem;position:relative;z-index:1}
+.product-pitch{font-size:0.98rem;font-weight:300;color:rgba(236,234,230,0.7);line-height:1.7;margin-bottom:1.25rem;position:relative;z-index:1}
 .product-pitch strong{color:var(--warm);font-weight:500}
 
-.product-features{list-style:none;display:flex;flex-direction:column;gap:0.55rem;margin-bottom:1rem;position:relative;z-index:1}
+.product-features{list-style:none;display:flex;flex-direction:column;gap:0.45rem;margin-bottom:1rem;position:relative;z-index:1}
 .product-feature{display:flex;align-items:flex-start;gap:10px;font-size:0.85rem;font-weight:400;color:rgba(236,234,230,0.8);line-height:1.5}
 .product-feature-check{flex-shrink:0;font-size:0.9rem;margin-top:1px}
 .product-card.vault .product-feature-check{color:var(--teal-mid)}
 .product-card.forge .product-feature-check{color:var(--mauve-mid)}
 
-.product-card-divider{height:1px;background:rgba(236,234,230,0.08);margin:0 2rem}
-.product-card-bottom{padding:1.5rem 2rem 2rem;margin-top:auto;display:flex;flex-direction:column;gap:0.85rem}
-.product-card-cta{display:flex;flex-direction:column;gap:0.6rem;min-height:230px;justify-content:flex-start}
+.product-card-divider{height:1px;background:rgba(236,234,230,0.08);margin:0 2rem;margin-top:auto}
+.product-card-bottom{padding:1.5rem 2rem 2rem;display:flex;flex-direction:column;gap:0.85rem}
+.product-card-cta{display:flex;flex-direction:column;gap:0.6rem;justify-content:flex-start}
 .product-reassure{margin-top:0.35rem;padding:0.8rem 1rem 0.8rem 1.1rem;border-radius:10px;background:rgba(74,158,135,0.09);border-left:3px solid var(--teal);font-size:0.78rem;font-weight:400;color:rgba(236,234,230,0.72);line-height:1.55;display:flex;align-items:flex-start;gap:0.7rem;text-align:left}
 .product-reassure-icon{flex-shrink:0;font-size:1.05rem;line-height:1.3;margin-top:1px}
 .product-reassure strong{color:var(--teal-lt);font-weight:600}
@@ -306,17 +306,6 @@ main,nav,footer,section{position:relative;z-index:1}
 .product-card.forge .product-learn:hover .product-learn-arrow{background:var(--mauve);color:var(--warm)}
 .product-learn:hover .product-learn-arrow svg{transform:translateX(3px)}
 
-/* inline waitlist (forge tile) */
-.tile-waitlist{display:flex;flex-direction:column;gap:0.55rem}
-.tile-waitlist-input{width:100%;background:rgba(236,234,230,0.06);border:1px solid rgba(236,234,230,0.14);border-radius:10px;padding:12px 15px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:var(--warm);outline:none;transition:border-color 0.2s,background 0.2s}
-.tile-waitlist-input::placeholder{color:rgba(236,234,230,0.55)}
-.tile-waitlist-input:focus{border-color:var(--mauve-mid);background:rgba(236,234,230,0.09)}
-.tile-waitlist-btn{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;padding:14px 20px;border-radius:10px;background:var(--mauve);color:var(--warm);border:none;cursor:pointer;transition:background 0.2s,transform 0.15s;display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%}
-.tile-waitlist-btn:hover:not(:disabled){background:var(--mauve-mid);transform:translateY(-1px)}
-.tile-waitlist-btn:disabled{opacity:0.6;cursor:not-allowed}
-.tile-waitlist-btn svg{width:16px;height:16px}
-.tile-waitlist-success{display:none;padding:1rem 1.25rem;background:rgba(74,158,135,0.12);border:1px solid rgba(74,158,135,0.35);border-radius:10px;color:var(--teal-lt);font-size:0.88rem;font-weight:400;text-align:center;line-height:1.5}
-.tile-waitlist-fine{font-size:0.7rem;font-weight:400;color:rgba(236,234,230,0.6);text-align:center;line-height:1.5;margin-top:0.15rem}
 
 .product-status{display:inline-flex;align-items:center;gap:7px;font-size:0.72rem;font-weight:400;color:rgba(236,234,230,0.7);margin-bottom:0.5rem}
 .product-status-dot{width:7px;height:7px;border-radius:50%}
@@ -484,7 +473,7 @@ main,nav,footer,section{position:relative;z-index:1}
         <a class="constel-node constel-forge" href="queryforge.html" aria-label="Explore QueryForge">
           <div class="constel-node-label">Automate</div>
           <div class="constel-node-name">QueryForge</div>
-          <div class="constel-node-desc">Automation · Coming soon</div>
+          <div class="constel-node-desc">Automation · Scheduled</div>
         </a>
         <span class="constel-dot v"></span>
         <span class="constel-dot f"></span>
@@ -570,7 +559,7 @@ main,nav,footer,section{position:relative;z-index:1}
               <div class="product-tagline">Your queries are assets</div>
               <div class="product-status">
                 <span class="product-status-dot"></span>
-                Live now on Chrome &amp; Edge
+                Keepa's Save Button
               </div>
             </div>
             <div class="product-card-logo" aria-hidden="true">
@@ -629,13 +618,13 @@ main,nav,footer,section{position:relative;z-index:1}
             <div class="product-card-header-text">
               <div class="product-tag">
                 <span class="product-tag-dot"></span>
-                Automation SaaS · Coming Soon
+                Automation SaaS · Live
               </div>
               <div class="product-name"><span class="a">Query</span><span class="b">Forge</span></div>
               <div class="product-tagline">Queries that run themselves</div>
               <div class="product-status">
                 <span class="product-status-dot"></span>
-                Waitlist open · launching soon
+                Keepa's Schedule Button
               </div>
             </div>
             <div class="product-card-logo" aria-hidden="true">
@@ -648,35 +637,35 @@ main,nav,footer,section{position:relative;z-index:1}
             clicks, no missed opportunities</strong> — just results delivered while you sleep.
           </p>
           <ul class="product-features">
-            <li class="product-feature"><span class="product-feature-check">✓</span>Scheduled Product Finder runs — daily, weekly, or on-demand</li>
-            <li class="product-feature"><span class="product-feature-check">✓</span>Competitor catalog analysis and BSR-drop alerts</li>
-            <li class="product-feature"><span class="product-feature-check">✓</span>Bring your own Keepa key — no per-query limits</li>
-            <li class="product-feature"><span class="product-feature-check">✓</span>Fresh results delivered to your inbox</li>
+            <li class="product-feature"><span class="product-feature-check">✓</span>Scheduled Product Finder runs — daily, weekly or custom</li>
+            <li class="product-feature"><span class="product-feature-check">✓</span>Competitor catalog analysis by Store ID</li>
+            <li class="product-feature"><span class="product-feature-check">✓</span>Try it free with your own Keepa key — no commitment</li>
+            <li class="product-feature"><span class="product-feature-check">✓</span>Run Now — jump any query to the front of the queue</li>
+            <li class="product-feature"><span class="product-feature-check">✓</span>Pin time-sensitive queries to a specific hour</li>
+            <li class="product-feature"><span class="product-feature-check">✓</span>Built for bulk — your credit balance is the only ceiling</li>
+            <li class="product-feature"><span class="product-feature-check">✓</span>Fresh results delivered to your own cloud storage</li>
           </ul>
         </div>
         <div class="product-card-divider"></div>
         <div class="product-card-bottom">
           <div class="product-card-cta">
-          <div class="product-cta-label">Join the waitlist — be first when it launches</div>
-          <form class="tile-waitlist" id="forge-waitlist-form">
-            <input type="hidden" name="access_key" value="ecef95c9-5429-480f-a3e0-ff2425003a47">
-            <input type="hidden" name="subject" value="New QueryForge Waitlist Signup">
-            <input type="hidden" name="from_name" value="QueryForge Waitlist">
-            <input class="tile-waitlist-input" type="text" name="name" placeholder="Your name" required>
-            <input class="tile-waitlist-input" type="email" name="email" placeholder="Your email" required>
-            <button class="tile-waitlist-btn" type="submit">
-              Notify me at launch
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </button>
-            <div class="tile-waitlist-fine">No spam. Launch updates only. Unsubscribe anytime.</div>
-          </form>
-          <div class="tile-waitlist-success" id="forge-waitlist-success">✓ You're on the list — we'll reach out when QueryForge launches.</div>
+            <div class="product-cta-label">Schedule today — results tomorrow</div>
+            <div class="btn-product-stack">
+              <a class="btn-product mauve btn-product-full" href="https://app.jassquery.com/signup?tier=T2" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                Sign up now
+              </a>
+            </div>
+            <div class="product-reassure" style="background:rgba(142,110,138,0.09);border-left-color:var(--mauve)">
+              <span class="product-reassure-icon" aria-hidden="true">🌙</span>
+              <span><strong style="color:var(--mauve-lt)">Set it once, then forget it.</strong> Your queries run on a schedule and the results land in your own cloud storage — fresh data waiting while you sleep.</span>
+            </div>
           </div>
           <a class="product-learn" href="queryforge.html">
             <span class="product-learn-text">
               <span class="product-learn-kicker">Want the full story?</span>
               <span class="product-learn-title">Explore QueryForge in depth</span>
-              <span class="product-learn-sub">How it works, pricing, roadmap &amp; FAQ</span>
+              <span class="product-learn-sub">How it works, pricing, features &amp; FAQ</span>
             </span>
             <span class="product-learn-arrow">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -729,7 +718,7 @@ main,nav,footer,section{position:relative;z-index:1}
   <div class="cta-inner">
     <h2>Better Keepa workflows,<br><em>starting today.</em></h2>
     <p>
-      QueryVault is free and live right now. QueryForge is opening its waitlist.
+      QueryVault is free and live right now. QueryForge automates the queries you save.
       Pick your starting point — or take both. No leaving this page required.
     </p>
 
@@ -739,7 +728,7 @@ main,nav,footer,section{position:relative;z-index:1}
       <div class="cta-col vault">
         <div class="cta-col-tag">
           <span class="cta-col-tag-dot"></span>
-          Live now · Free
+          Free · Chrome &amp; Edge
         </div>
         <div class="cta-col-title">Install QueryVault</div>
         <div class="cta-col-sub">Save and restore your Keepa queries in under 10 seconds. No account, no sign-up.</div>
@@ -763,23 +752,15 @@ main,nav,footer,section{position:relative;z-index:1}
       <div class="cta-col forge">
         <div class="cta-col-tag">
           <span class="cta-col-tag-dot"></span>
-          Waitlist · Opening soon
+          Scheduled Keepa automation
         </div>
-        <div class="cta-col-title">Join the QueryForge waitlist</div>
-        <div class="cta-col-sub">Be the first to know when automated Keepa queries go live. No spam, launch updates only.</div>
+        <div class="cta-col-title">Automate with QueryForge</div>
+        <div class="cta-col-sub">Put your saved Keepa queries on a schedule and wake up to fresh data. Try it with your own Keepa key, or pick a plan with credits included.</div>
         <div class="cta-col-actions">
-          <form class="tile-waitlist" id="forge-waitlist-form-cta">
-            <input type="hidden" name="access_key" value="ecef95c9-5429-480f-a3e0-ff2425003a47">
-            <input type="hidden" name="subject" value="New QueryForge Waitlist Signup (Final CTA)">
-            <input type="hidden" name="from_name" value="QueryForge Waitlist">
-            <input class="tile-waitlist-input" type="text" name="name" placeholder="Your name" required>
-            <input class="tile-waitlist-input" type="email" name="email" placeholder="Your email" required>
-            <button class="tile-waitlist-btn" type="submit">
-              Notify me at launch
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </button>
-          </form>
-          <div class="tile-waitlist-success" id="forge-waitlist-success-cta">✓ You're on the list — we'll reach out when QueryForge launches.</div>
+          <a class="btn-product mauve btn-product-full" href="https://app.jassquery.com/signup?tier=T2" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            Sign up now
+          </a>
         </div>
       </div>
 
@@ -860,32 +841,6 @@ document.querySelectorAll('.product-card').forEach(card => {
   });
 });
 
-// Forge waitlist — web3forms async submit (handles both the product-tile form and the final CTA form)
-function wireWaitlist(formId, successId) {
-  const form = document.getElementById(formId);
-  if (!form) return;
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('.tile-waitlist-btn');
-    const original = btn.innerHTML;
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
-      const json = await res.json();
-      if (json.success) {
-        this.style.display = 'none';
-        document.getElementById(successId).style.display = 'block';
-      } else {
-        btn.innerHTML = original; btn.disabled = false;
-      }
-    } catch {
-      btn.innerHTML = original; btn.disabled = false;
-    }
-  });
-}
-wireWaitlist('forge-waitlist-form', 'forge-waitlist-success');
-wireWaitlist('forge-waitlist-form-cta', 'forge-waitlist-success-cta');
 </script>
 
 </body>
