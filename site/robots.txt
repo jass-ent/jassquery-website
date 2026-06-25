@@ -1,5 +1,71 @@
+# jassquery.com — we welcome search engines and AI crawlers.
+# Our marketing content is open for indexing, answering, and training.
+
+# Default: everyone is allowed everywhere (except the soft-404 page).
 User-agent: *
 Allow: /
 Disallow: /404.html
+
+# ── Search engines ──
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ── AI / LLM crawlers — explicitly welcome (indexing, answering, and training) ──
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google AI (Gemini / Vertex) training
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence training
+User-agent: Applebot-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Common Crawl (feeds many open models)
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Amazon AI
+User-agent: Amazonbot
+Allow: /
+
+# ByteDance / TikTok
+User-agent: Bytespider
+Allow: /
 
 Sitemap: https://jassquery.com/sitemap.xml
